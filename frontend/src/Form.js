@@ -1,9 +1,14 @@
 import React, {useState} from 'react';
 
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+
 function Form(props) {  
    
    var numIngredients = 1;
    var numSteps = 1;
+   var numCards = 1;
    
    const [recipe, setrecipe] = useState(
       {  
@@ -61,6 +66,28 @@ function Form(props) {
       container.appendChild(but)
   
   } 
+
+  function addCardIng(){
+   numCards ++;
+   var container = document.getElementById("cGroup");
+   //    var card = container.cloneNode(true)
+   //    container.appendChild(card);
+
+   let card = document.createElement('div');
+   card.className = 'card';
+
+   let cardBody = document.createElement('Card.Body');
+   cardBody.className = 'card-body';
+
+   let title = document.createElement('Card.Title');
+   title.innerText = "generated";
+   title.className = 'card-title';
+
+
+   cardBody.appendChild(title);
+   card.appendChild(cardBody);
+   container.appendChild(card);
+  }
 
  function addIngredient(){
    // Generate a dynamic number of inputs
@@ -149,6 +176,40 @@ function handleChange(event) {
         id="totalTime"
         value={recipe.totalTime}
         onChange={handleChange} />
+
+<CardGroup id="cGroup">
+<Card style={{ width: '18rem' }} id= "cIng">
+      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+      <Card.Body>
+        <Card.Title>Ingredient 1</Card.Title>
+        <label htmlFor="ingredient">Name</label>
+        <input
+        type="text"
+        name="ingredient1"
+        id="ingredient1"
+        value={recipe.ingredients}
+        onChange={handleChange} />
+
+<label htmlFor="ingredient">Size</label>
+        <input
+        type="text"
+        name="size1"
+        id="size1"
+        value={recipe.ingredients}
+        onChange={handleChange} />
+
+<label htmlFor="ingredient">Substitute</label>
+        <input
+        type="text"
+        name="sub1"
+        id="sub1"
+        value={recipe.ingredients}
+        onChange={handleChange} />
+        
+        <Button variant="primary" onClick={addCardIng}>Add Another Ingredient</Button>
+      </Card.Body>
+    </Card>
+    </CardGroup>
 
 <label htmlFor="ingredient">Ingredients 1</label>
      <div id ="food">

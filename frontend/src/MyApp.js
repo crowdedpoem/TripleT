@@ -89,7 +89,7 @@ function MyApp() {
 	<div className="container">
       <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">RecipeBuddy</Navbar.Brand>
+        <Navbar.Brand href="/">RecipeBuddy</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -118,11 +118,12 @@ function Home() {
      <>
        <main>
          <h2>Welcome to the homepage!</h2>
-         <p>You can do this, I believe in you.</p>
+         <p>Here are some interesting recipes to check out</p>
 
       <CardGroup>
          <Card style={{ width: '18rem' }}>
       {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+      {/* <Card.Header as="h5">HEADER</Card.Header> */}
       <Card.Body>
         <Card.Title>Recipe 1</Card.Title>
         <Card.Subtitle>Total Time: 45</Card.Subtitle>
@@ -169,7 +170,7 @@ function Home() {
          {/* <Table characterData={characters} removeCharacter={removeOneCharacter} /> */}
        </main>
        <nav>
-         <Link to="/inputRecipe">About</Link>
+         {/* <Link to="/inputRecipe">About</Link> */}
        </nav>
      </>
    );
