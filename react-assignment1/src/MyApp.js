@@ -2,7 +2,17 @@ import Table from './Table';
 import Form from './Form';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
+import {Routes, Route, Link} from 'react-router-dom';
 
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function MyApp() {
@@ -77,13 +87,107 @@ function MyApp() {
 
    return (
 	<div className="container">
+      <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">RecipeBuddy</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/inputRecipe">Add a recipe</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="inputRecipe" element={<InputRecipe />} />
+      </Routes>
 		
-	  <Table characterData={characters} removeCharacter={removeOneCharacter} />
 	  
-	  <Form handleSubmit={updateList} />
+	  
 	</div>
   );
 
+
+
+
+function Home() {
+   return (
+     <>
+       <main>
+         <h2>Welcome to the homepage!</h2>
+         <p>You can do this, I believe in you.</p>
+
+      <CardGroup>
+         <Card style={{ width: '18rem' }}>
+      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+      <Card.Body>
+        <Card.Title>Recipe 1</Card.Title>
+        <Card.Subtitle>Total Time: 45</Card.Subtitle>
+        <Card.Subtitle>Cost per Serving: $2.50</Card.Subtitle>
+        <Card.Text>
+          Easy to make recipe, full of carbs
+        </Card.Text>
+        
+        <Button variant="primary">See Recipe</Button>
+      </Card.Body>
+    </Card>
+
+
+    <Card style={{ width: '18rem' }}>
+      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+      <Card.Body>
+        <Card.Title>Recipe 2</Card.Title>
+        <Card.Subtitle>Total Time: 30</Card.Subtitle>
+        <Card.Subtitle>Cost per Serving: $2.50</Card.Subtitle>
+        <Card.Text>
+          Easy to make recipe, full of carbs
+        </Card.Text>
+        
+        <Button variant="primary">See Recipe</Button>
+      </Card.Body>
+    </Card>
+
+    <Card style={{ width: '18rem' }}>
+      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+      <Card.Body>
+        <Card.Title>Recipe 3</Card.Title>
+        <Card.Subtitle>Total Time: 60</Card.Subtitle>
+        <Card.Subtitle>Cost per Serving: $2.50</Card.Subtitle>
+        <Card.Text>
+          Easy to make recipe, full of carbs
+        </Card.Text>
+        
+        <Button variant="primary">See Recipe</Button>
+      </Card.Body>
+    </Card>
+
+    </CardGroup>
+
+         {/* <Table characterData={characters} removeCharacter={removeOneCharacter} /> */}
+       </main>
+       <nav>
+         <Link to="/inputRecipe">About</Link>
+       </nav>
+     </>
+   );
+ }
+
+ function InputRecipe() {
+   return (
+     <>
+       <main>
+         <h2>Input Recipe</h2>
+         <Form handleSubmit={updateList} />
+       </main>
+       <nav>
+         <Link to="/">Home</Link>
+       </nav>
+     </>
+   );
+ }
 }
 
 export default MyApp;
