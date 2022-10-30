@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 
-function Form(props) {   
+function Form(props) {  
+   
+   var numIngredients = 1;
+   var numSteps = 1;
+   
    const [recipe, setrecipe] = useState(
       {  
          title: '',
@@ -8,7 +12,7 @@ function Form(props) {
          totalTime: '',
          activeTime: '',
          cookTime: '',
-         ingredients: [String],
+         ingredients: [],
          steps: []
       }
    );
@@ -21,39 +25,81 @@ function Form(props) {
     setrecipe({name: '', size: ''});
   }
 
-//  function addIngredient(){
-//    // Generate a dynamic number of inputs
-//    var number = 1
-//    // Get the element where the inputs will be added to
-//    var container = document.getElementById("food");
-//    var but = container.lastChild
-//    container.removeChild(container.lastChild);
+  function addStep(){
+   // Generate a dynamic number of inputs
+   numSteps ++;
+   // Get the element where the inputs will be added to
+   var container = document.getElementById("steps");
+   var but = container.lastChild
+   container.removeChild(container.lastChild);
+
+      // Append a node with a random text
+      // container.appendChild(document.createTextNode("Member " + (i+1)));
+      var lab = document.createElement("label");
+      lab.innerHTML = "Step " + numSteps
+      
+      container.appendChild(lab)
+      
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "Step" + numSteps;
+      input.id = "Step" + numSteps;
+      input.value = recipe.ingredients
+      input.onChange = {handleChange}
+
+      // type="text"
+      //   name="ingredient"
+      //   id="ingredient"
+      //   value={recipe.ingredients}
+      //   onChange={handleChange}
 
 
-//    let i = 0
-//       // Append a node with a random text
-//       container.appendChild(document.createTextNode("Member " + (i+1)));
-//       // Create an <input> element, set its type and name attributes
-//       var input = document.createElement("input");
-//       input.type = "text";
-//       input.name = "member" + i;
-//       input.id = "ingredient"
-//       input.value = recipe.ingredients
-//       input.onChange = {handleChange}
-
-//       // type="text"
-//       //   name="ingredient"
-//       //   id="ingredient"
-//       //   value={recipe.ingredients}
-//       //   onChange={handleChange}
-
-
-//       container.appendChild(input);
-//       // Append a line break 
-//       container.appendChild(document.createElement("br"));
-//       container.appendChild(but)
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+      container.appendChild(but)
   
-//   } 
+  } 
+
+ function addIngredient(){
+   // Generate a dynamic number of inputs
+   numIngredients ++;
+   // Get the element where the inputs will be added to
+   var container = document.getElementById("food");
+   var but = container.lastChild
+   container.removeChild(container.lastChild);
+
+
+   
+      // Append a node with a random text
+      // container.appendChild(document.createTextNode("Member " + (i+1)));
+      var lab = document.createElement("label");
+      lab.innerHTML = "Ingredient " + numIngredients
+      
+      container.appendChild(lab)
+      
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "Ingredient" + numIngredients;
+      input.id = "ingredient" + numIngredients;
+      input.value = recipe.ingredients
+      input.onChange = {handleChange}
+
+      // type="text"
+      //   name="ingredient"
+      //   id="ingredient"
+      //   value={recipe.ingredients}
+      //   onChange={handleChange}
+
+
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+      container.appendChild(but)
+  
+  } 
 
 
 
@@ -104,7 +150,7 @@ function handleChange(event) {
         value={recipe.totalTime}
         onChange={handleChange} />
 
-<label htmlFor="ingredient">Ingredients</label>
+<label htmlFor="ingredient">Ingredients 1</label>
      <div id ="food">
       <input
         type="text"
@@ -112,20 +158,22 @@ function handleChange(event) {
         id="ingredient"
         value={recipe.ingredients}
         onChange={handleChange} />
-        {/* <input type="button" value="addIngredient" onClick={addIngredient} /> */}
+        <input type="button" value="Add Ingredient" onClick={addIngredient} />
       </div>
 
-
-
-
-
-      <label htmlFor="size">Size</label>
+      <div id = "steps">
+      <label htmlFor="step">Step 1</label>
       <input
         type="text"
-        name="size"
-        id="size"
+        name="step"
+        id="step"
         value={recipe.job}
         onChange={handleChange} />
+        <input type="button" value="Add Step" onClick={addStep} />
+        </div>
+        
+        <br></br>
+        
         <input type="button" value="Submit" onClick={submitForm} />
     </form>
 ); 
