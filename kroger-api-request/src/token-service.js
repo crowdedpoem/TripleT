@@ -3,27 +3,20 @@
 // const clientSecret = 'qobUrIXuiNyByGowVqP8ZHNJzL-R8PPlZWzDcX7Q';
 // const redirectUrl = process.env.REDIRECT_URL;
 
-// Get token by authorization code (getByAuth)
-// async function getByAuth(code) {
-//   const body = `grant_type=authorization_code&code=${encodeURIComponent(
-//     code
-//   )}&redirect_uri=${encodeURIComponent(redirectUrl)}`;
-//   return await get(body);
-// }
+// require('dotenv').config();
+const clientId = process.env.CLIENT_ID;
+const cliendSecret = process.env.CLIENT_SECRET;
+const OAUTH2_BASE_URL = process.env.OAUTH2_BASE_URL;
+const API_BASE_URL = process.env.API_BASE_URL;
 
-// Get access token using refresh token
-// async function getByRefresh(refreshToken) {
-//     const body =
-//       `grant_type=refresh_token&` +
-//       `refresh_token=${encodeURIComponent(refreshToken)}`;
-//     return await get(body);
-//   }
+
+
   
   async function get(body) {
     // ClientId and ClientSecret (stored in .env file)
-    const encoded = 'cmVjaXBlYnVkZHktNzhlYTBkOGQ3MTNhMTM5N2M2MmFmNDFkMjU2ZjIyNDcyMDQ0ODc0ODE4Mzg1NTg0Njk3OnFvYlVySVh1aU55QnlHb3dWcVA4WkhOSnpMLVI4UFBsWld6RGNYN1E='
+    const encoded = clientId + ":" + cliendSecret;
     // ClientId and clientSecret must be encoded
-    const authorization = "Basic " + encoded;
+    const authorization = "Basic " + Buffer.from(encoded, 'base64');
     // Build token URL
     // Base URL (https://api.kroger.com)
     // Version/Endpoint (/v1/token)
@@ -47,4 +40,5 @@
     return await tokenResponse.json();
 }
 
-exports.get = get;
+const _get = get;
+export { _get as get };

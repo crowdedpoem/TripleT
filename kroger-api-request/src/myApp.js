@@ -16,12 +16,13 @@ function App() {
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // got access token
       let tokenBody = 'grant_type=client_credentials&scope=product.compact';
       let res = await tokenFunction.get(tokenBody);
       accessToken = res.access_token;
-    //   console.log(accessToken);
+      // get product detail
       let productRes = await productFunction.getProducts(item, accessToken);
-      console.log(productRes);
+      // console.log(productRes);
       let price = productRes.data[0].items[0].price.regular;
       let unit =  productRes.data[0].items[0].size;
 
