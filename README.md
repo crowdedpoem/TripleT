@@ -7,7 +7,7 @@ Code linter/ style checker : Prettier
 **Editor integration**
 https://prettier.io/docs/en/editors.html
 
-**Command-line*
+**Command-line**
 If you prefer to use command-line interface, type in the command 
 <code> npm install --save-dev --save-exact prettier </code>
 
