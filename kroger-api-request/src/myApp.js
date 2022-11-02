@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./app.css";
 const tokenFunction = require('./token-service.js');
 const productFunction = require('./product.js');
+const locationFunction = require('./location.js');
 
 
 
@@ -20,8 +21,13 @@ function App() {
       let tokenBody = 'grant_type=client_credentials&scope=product.compact';
       let res = await tokenFunction.get(tokenBody);
       accessToken = res.access_token;
-      // get product detail
-      let productRes = await productFunction.getProducts(item, accessToken);
+
+      // use the token to do location search near the zipcode
+      let locationRes = await locationFunction.getLocations(zipCode, accessToken);
+      let locationId = locationRes.data[0].locationId;
+
+      // ues the token to do product detail search
+      let productRes = await productFunction.getProducts(item, accessToken, locationId);
       // console.log(productRes);
       let price = productRes.data[0].items[0].price.regular;
       let unit =  productRes.data[0].items[0].size;

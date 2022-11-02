@@ -1,7 +1,10 @@
+const API_BASE_URL="https://api.kroger.com"
+
+
 // Product request
-async function getProducts(term, accessToken) {
+async function getProducts(term, accessToken, locationId) {
     // ralphs slo locationid
-    let locationId = 70300656;
+    // let locationId = 70300656;
   
     // Use locationId as filter (if) selected by user
     let searchByLocation = "";
@@ -9,10 +12,10 @@ async function getProducts(term, accessToken) {
       searchByLocation = `filter.locationId=${locationId}&`;
     }
     // Building product URL
-    let apiBaseUrl = 'https://api.kroger.com';
+    // let apiBaseUrl = 'https://api.kroger.com';
     // Version/Endpoint (/v1/products)
     // Query String (?filter.locationId=${locationId}&filter.term=${term})
-    let productsUrl = `${apiBaseUrl}/v1/products?${searchByLocation}filter.term=${term}&filter.limit=1`;
+    let productsUrl = `${API_BASE_URL}/v1/products?${searchByLocation}filter.term=${term}&filter.limit=1`;
   
     // Product request body
     let productsResponse = await fetch(productsUrl, {
