@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import Table from "./table"
+import RecipeCard from "./RecipeCards";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Form from './Form';
+import RecipeProp from "./RecipeProp";
 
 // import Button from "react-bootstrap/Button";
 // // import Card from "react-bootstrap/Card";
@@ -14,47 +16,80 @@ import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function MyApp() {
-  // const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState([]);
 
   const recipes = [
     {
-      title: 'Mac n Cheese',
-      time: 'Total Time: 45',
-      cost: 'Cost per Serving: $2.50',
-      description: 'Easy to make recipe, full of carbs'
+      id: 1,
+      title: "Mac n Cheese",
+      time: "Total Time: 45",
+      cost: "Cost per Serving: $2.50",
+      description: "Easy to make recipe, full of carbs",
     },
     {
-      title: 'Baked Potatoes',
-      time: 'Total Time: 25',
-      cost: 'Cost per Serving: $1.50',
-      description: 'Easy to make recipe, full of carbs'
+      id: 2,
+      title: "Baked Potatoes",
+      time: "Total Time: 25",
+      cost: "Cost per Serving: $1.50",
+      description: "Easy to make recipe, full of carbs",
     },
   ];
+
   return (
     <div className="container">
-      <Table characterData={recipes} />
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand href="/">RecipeBuddy</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/inputRecipe">Add a recipe</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="inputRecipe" element={<InputRecipe />} />
+      </Routes>
     </div>
   );
-  // <div className="container">
-  // {/* <RecipeCard CardData = {populateCard}/> */}
-  // <Table characterData = {characters}/>
-  // </div>
-  /* <div className="card-body">
-    <CardGroup>
-      <Card style={{ width: "18rem" }}>
-        <Card.Body>
-          <Card.Title>Recipe 1</Card.Title>
-          <Card.Subtitle>Total Time: 45</Card.Subtitle>
-          <Card.Subtitle>Cost per Serving: $2.50</Card.Subtitle>
-          <Card.Text>Easy to make recipe, full of carbs</Card.Text>
 
-          <Button variant="primary">See Recipe</Button>
-        </Card.Body>
-      </Card>
-    </CardGroup>
-  </div> */
+  function updateList(person) { 
+    console.log("got to lien 33 of myapp.js")
+    makePostCall(person).then( result => {
+    if (result && result.status === 201){
+       console.log("hello " + result.status)
+       setCharacters([...characters, result.data] );
+    } 
+       
+    });
+ }
+ 
+ async function makePostCall(person){
+  try {
+     const response = await axios.post('http://localhost:5000/food', person);
+     return response;
+  }
+  catch (error) {
+     console.log(error);
+     return false;
+  }
+}
 
-  
+async function makeDeleteCall(id){
+  try{
+     let response = await axios.delete("http://localhost:5000/users/" + id);
+     return response;
+  } catch (error){
+     console.log(error);
+     return false;
+  }
+}
+
+
   // useEffect(() => {
   //   fetchAll().then((result) => {
   //     if (result) setCharacters(result);
@@ -72,41 +107,43 @@ function MyApp() {
   //   }
   // }
 
-  // return (
-  //   <div className="container">
-  //     <Routes>
-  //       <Route path="/" element={<Home />} />
-  //     </Routes>
-  //   </div>
-  // );
 
-  // function Home() {
-  //   return (
-  //     <>
-  //       <h1>Hello!</h1>
-  //       <div className="container">
-  //       {/* <RecipeCard CardData = {populateCard}/> */}
-  //       <Table characterData = {characters}/>
-  //       </div>
-  //       {/* <div className="card-body">
-  //         <CardGroup>
-  //           <Card style={{ width: "18rem" }}>
-  //             <Card.Body>
-  //               <Card.Title>Recipe 1</Card.Title>
-  //               <Card.Subtitle>Total Time: 45</Card.Subtitle>
-  //               <Card.Subtitle>Cost per Serving: $2.50</Card.Subtitle>
-  //               <Card.Text>Easy to make recipe, full of carbs</Card.Text>
 
-  //               <Button variant="primary">See Recipe</Button>
-  //             </Card.Body>
-  //           </Card>
-  //         </CardGroup>
-  //       </div> */}
-  //     </>
-  //   );
-  // }
+  function Home() {
+    return (
+      <div>
+        <main>
+          <h2>Welcome to the homepage!</h2>
+          <p>Here are some interesting recipes to check out</p>
+
+          {/* <Table characterData={characters} removeCharacter={removeOneCharacter} /> */}
+        </main>
+        <nav>{/* <Link to="/inputRecipe">About</Link> */}</nav>
+        <div className="container">
+          <RecipeProp data = {recipes}/>
+          <RecipeCard
+            title="Mac n Cheese"
+            time="Total Time: 45"
+            cost="Cost per Serving: $2.50"
+            description="Easy to make recipe, full of carbs"
+          />
+        </div>
+      </div>
+    );
+    }
+    function InputRecipe() {
+      return (
+        <>
+          <main>
+            <h2>Input Recipe</h2>
+            <Form handleSubmit={updateList} />
+          </main>
+          <nav>
+            <Link to="/">Home</Link>
+          </nav>
+        </>
+      );
+    }
 }
-
-
 
 export default MyApp;

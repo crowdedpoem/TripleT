@@ -1,5 +1,5 @@
 const express = require('express');
-const recipeServices = require("../models/recipe-services");
+const recipeServices = require("./models/recipe-services");
 const app = express();
 const cors = require('cors');
 const port = 5000;
