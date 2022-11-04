@@ -1,45 +1,30 @@
 import React from 'react';
-
-function TableHeader() {
-  return (
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Ingredients</th>
-      </tr>
-    </thead>
-  );
-}
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import CardGroup from "react-bootstrap/CardGroup";
 
 function TableBody (props) {
-  const rows = props.characterData.map((row, index) => {
+    const body = props.characterData.map((row) => {
+      return (
+        <CardGroup>
+        <Card style={{ width: '18rem' }}>
+    <Card.Body>
+        <Card.Title>{body.title}</Card.Title>
+        <Card.Subtitle>{body.time}</Card.Subtitle>
+        <Card.Subtitle>{body.cost}</Card.Subtitle>
+        <Card.Text>{body.description}</Card.Text>
+
+        <Button variant="primary">See Recipe</Button>
+      </Card.Body>
+      </Card>
+      </CardGroup>
+      );
+    });
+  }
+  
+  function Table(props) {
     return (
-      <tr key={index}>
-        <td> {row.id} </td>
-        <td>{row.name}</td>
-        <td>{row.job}</td>
-        <td>
-        <button onClick={() => props.removeCharacter(index)}>Delete</button>
-        </td>
-      </tr>
+        <TableBody populateCard = {props.populateCard} />
     );
-  });
-  return (
-      <tbody>
-         {rows}
-      </tbody>
-   );
-}
-
-function Table(props) {
-  return (
-    <table>
-      <TableHeader />
-      <TableBody characterData={props.characterData} removeCharacter={props.removeCharacter} />
-    </table>
-  );
-}
-
-
-export default Table;
+  }
+  export default Table;
