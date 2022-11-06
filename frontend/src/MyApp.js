@@ -16,7 +16,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function MyApp() {
-	const [characters, setCharacters] = useState([]);
+	// const [characters, setCharacters] = useState([]);
 
    async function makePostCall(person){
       try {
@@ -39,23 +39,22 @@ function MyApp() {
       }
    }
 
-   function updateList(person) { 
-      console.log("got to lien 33 of myapp.js")
-      makePostCall(person).then( result => {
+   function updateList(recipe) { 
+      
+      console.log("here is person object ")
+      console.log(recipe)
+      
+
+      // parse recipe to get all ingredients and add to database
+      // add api here. API gives price and size of ingredient
+
+      makePostCall(recipe).then( result => {
       if (result && result.status === 201){
          console.log("hello " + result.status)
-         setCharacters([...characters, result.data] );
       } 
          
       });
    }
-
-   useEffect(() => {
-      fetchAll().then( result => {
-         if (result)
-            setCharacters(result);
-       });
-   }, [] );
 
    async function fetchAll(){
       try {
@@ -71,15 +70,15 @@ function MyApp() {
 
    function removeOneCharacter (index) {
 
-      makeDeleteCall(characters[index].id).then( result => {
-         if (result && result.status === 204){
-            const updated = characters.filter((character, i) => {
-               return i !== index
-            });
-            setCharacters(updated);
-         }
+      // makeDeleteCall(characters[index].id).then( result => {
+      //    if (result && result.status === 204){
+      //       const updated = characters.filter((character, i) => {
+      //          return i !== index
+      //       });
+      //       setCharacters(updated);
+      //    }
             
-         });
+      //    });
 
 
 

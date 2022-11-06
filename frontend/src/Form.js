@@ -1,156 +1,256 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
-function Form(props) {  
-   
-   var numIngredients = 1;
-   var numSteps = 1;
-   var numCards = 1;
-   
-   const [recipe, setrecipe] = useState(
-      {  
-         title: '',
-         numServings: '',
-         totalTime: '',
-         activeTime: '',
-         cookTime: '',
-         ingredients: [],
-         steps: []
-      }
-   );
+function Form(props) {
+  var numIngredients = 0;
+  var numSteps = 0;
 
-   // user 1 to many recipes 
-   // many recipes to many ingredients
 
-   function submitForm() {
+  const [recipe, setRecipe] = useState({
+    title: "",
+    numServings: "",
+    totalTime: "",
+    activeTime: "",
+    cookTime: "",
+    ingredients: [],
+    steps: [],
+  });
+
+  // user 1 to many recipes
+  // many recipes to many ingredients
+
+  function submitForm() {
     props.handleSubmit(recipe);
-    setrecipe({name: '', size: ''});
+    // setrecipe({title: '', numServings: '',
+    //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
+    // });
   }
 
-  function addStep(){
-   // Generate a dynamic number of inputs
-   numSteps ++;
-   // Get the element where the inputs will be added to
-   var container = document.getElementById("steps");
-   var but = container.lastChild
-   container.removeChild(container.lastChild);
+  function addStep() {
+    // Generate a dynamic number of inputs
+    numSteps++;
+    // Get the element where the inputs will be added to
+    var container = document.getElementById("steps");
+    var but = container.lastChild;
+    container.removeChild(container.lastChild);
 
-      // Append a node with a random text
-      // container.appendChild(document.createTextNode("Member " + (i+1)));
-      var lab = document.createElement("label");
-      lab.innerHTML = "Step " + numSteps
-      
-      container.appendChild(lab)
-      
-      // Create an <input> element, set its type and name attributes
-      var input = document.createElement("input");
-      input.type = "text";
-      input.name = "Step" + numSteps;
-      input.id = "Step" + numSteps;
-      input.value = recipe.ingredients
-      input.onChange = {handleChange}
+    // Append a node with a random text
+    // container.appendChild(document.createTextNode("Member " + (i+1)));
+    var lab = document.createElement("label");
+    lab.innerHTML = "Step " + (numSteps + 1);
 
-      // type="text"
-      //   name="ingredient"
-      //   id="ingredient"
-      //   value={recipe.ingredients}
-      //   onChange={handleChange}
+    container.appendChild(lab);
 
+    // Create an <input> element, set its type and name attributes
+    var input = document.createElement("input");
+    input.type = "text";
+    input.name = "step" + numSteps;
+    input.id = "s" + numSteps;
+    input.onchange = { handleChange };
+    input.addEventListener(
+      "change",
+      function (e) {
+        handleChange(e);
+      },
+      false
+    );
 
-      container.appendChild(input);
-      // Append a line break 
-      container.appendChild(document.createElement("br"));
-      container.appendChild(but)
-  
-  } 
-
-  function addCardIng(){
-   numCards ++;
-   var container = document.getElementById("cGroup");
-   //    var card = container.cloneNode(true)
-   //    container.appendChild(card);
-
-   let card = document.createElement('div');
-   card.className = 'card';
-
-   let cardBody = document.createElement('Card.Body');
-   cardBody.className = 'card-body';
-
-   let title = document.createElement('Card.Title');
-   title.innerText = "generated";
-   title.className = 'card-title';
-
-
-   cardBody.appendChild(title);
-   card.appendChild(cardBody);
-   container.appendChild(card);
+    container.appendChild(input);
+    // Append a line break
+    container.appendChild(document.createElement("br"));
+    container.appendChild(but);
   }
 
- function addIngredient(){
-   // Generate a dynamic number of inputs
-   numIngredients ++;
-   // Get the element where the inputs will be added to
-   var container = document.getElementById("food");
-   var but = container.lastChild
-   container.removeChild(container.lastChild);
+  function addCardIng(event, butID) {
+    console.log("here is event...")
+    console.log(event)
+    console.log("curious what 'document' does")
+    console.log(document)
+    console.log(document.getElementById(butID))
+    let killThis = document.getElementById(butID)
+    let parent = killThis.parentNode
+    parent.removeChild(killThis)
+    numIngredients++;
+    var container = document.getElementById("cards");
+    //    var card = container.cloneNode(true)
+    //    container.appendChild(card);
+
+    let card = document.createElement("div");
+    card.className = "card";
+    card.style = "width: 22rem";
+
+    let cardBody = document.createElement("div");
+    cardBody.className = "card-body";
+
+    let title = document.createElement("div");
+    title.innerText = "Ingredient " + (numIngredients + 1);
+    title.className = "card-title h5";
+
+    let label1 = document.createElement("label");
+    label1.htmlFor = "input" + (numIngredients + 1);
+    label1.innerText = "Name";
+
+    let input = document.createElement("input");
+    input.innerText = "Name";
+    input.type = "text";
+    input.className = "another-name";
+    input.name = "ingredient" + numIngredients;
+    input.value = recipe.ingredients;
+    input.addEventListener(
+      "change",
+      function (e) {
+        handleChange(e);
+      },
+      false
+    );
+
+    let label2 = document.createElement("label");
+    label2.htmlFor = "input" + (numIngredients + 1);
+    label2.innerText = "Size";
+    let row = document.createElement("row");
+    let size = document.createElement("input");
+    size.innerText = "Size";
+    size.type = "text";
+    size.name = "size" + numIngredients;
+    size.addEventListener(
+      "change",
+      function (e) {
+        handleChange(e);
+      },
+      false
+    );
+    let select = document.createElement("select");
+    select.name = "unit" + numIngredients;
 
 
-   
-      // Append a node with a random text
-      // container.appendChild(document.createTextNode("Member " + (i+1)));
-      var lab = document.createElement("label");
-      lab.innerHTML = "Ingredient " + numIngredients
-      
-      container.appendChild(lab)
-      
-      // Create an <input> element, set its type and name attributes
-      var input = document.createElement("input");
-      input.type = "text";
-      input.name = "Ingredient" + numIngredients;
-      input.id = "ingredient" + numIngredients;
-      input.value = recipe.ingredients
-      input.onChange = {handleChange}
+    let option = document.createElement("option");
+    option.innerText = "--Select Unit--"
+    select.appendChild(option)
+    let imperial = ["tsp", "tbsp", "oz", "cup", "pint", "quart", "gallon"];
+    for (let type in imperial) {
+      option = document.createElement("option");
+      option.innerText = imperial[type];
+      option.value = imperial[type];
+      select.appendChild(option);
+    }
 
-      // type="text"
-      //   name="ingredient"
-      //   id="ingredient"
-      //   value={recipe.ingredients}
-      //   onChange={handleChange}
+    row.appendChild(label2);
+    row.appendChild(size);
+    row.appendChild(select);
 
+    let button = document.createElement("Button");
+    button.innerText = "Add Another";
+    button.type = "button";
+    button.id = "button" + numIngredients
+    button.addEventListener(
+      "click",
+      function (e) {
+        addCardIng(e, button.id);
+      },
+      false
+    );
+    button.class = "btn btn-primary";
 
-      container.appendChild(input);
-      // Append a line break 
-      container.appendChild(document.createElement("br"));
-      container.appendChild(but)
-  
-  } 
+    cardBody.appendChild(title);
+    cardBody.appendChild(label1);
+    cardBody.appendChild(input);
+    cardBody.appendChild(row);
+    cardBody.appendChild(button);
+    card.appendChild(cardBody);
+    container.appendChild(card);
+  }
 
-
-
-function handleChange(event) {
+  function handleChange(event) {
     const { name, value } = event.target;
-    if (name === "numServings")
-       setrecipe(
-          {name: recipe['numServings'], numServings: value}
-       );
-    if (name === "title")
-         setrecipe(
-            {name: recipe['title'], title: value }
-         )
-    if (name === "ingredient")
-         setrecipe(
-            {name: recipe['ingredients'], ingredients: [value]}
-         )
-    else
-      setrecipe(
-          {name: value, size: recipe['size']}
-       );   
+    console.log("name is " + name);
+    console.log("value is " + value)
+    if (name === "title") {
+      setRecipe(
+        //  {numServings: recipe['numServings'], title: value }
+        { ...recipe, title: value }
+      );
+    } else if (name === "numServings") {
+      setRecipe({ ...recipe, numServings: value });
+    }
+    if (name.slice(0, 4) == "step") {
+      let spot = name.toString();
+      spot = spot.slice(4);
+      var temp = recipe["steps"];
+      if (temp.length > spot) {
+        temp[spot] = value;
+      } else {
+        temp.push(value);
+      }
+
+      setRecipe(
+        { ...recipe, steps: temp }
+        
+      );
+    } 
+    if(name.slice(0,10) == "ingredient"){
+      let spot = name.slice(10)
+      var temp = recipe['ingredients']
+      if (temp.length > spot) {
+        temp[spot]['name'] = value;
+
+      } else {
+        let another = {
+          name:value,
+          size:"",
+          unit:"",
+        }
+        temp.push(another);
+      }
+
+      setRecipe(
+        { ...recipe, ingredients: temp }
+      );
+      
+    }
+    if (name.slice(0,4) == "size"){
+      let spot = name.slice(4)
+      var temp = recipe['ingredients']
+      if (temp.length > spot) {
+        temp[spot]['size'] = value;
+
+      } else {
+        let another = {
+          name:"",
+          size: value,
+          unit:"",
+        }
+        temp.push(another);
+      }
+      setRecipe(
+        { ...recipe, ingredients: temp }
+      );
+
+    }
+
+    if (name.slice(0,4) == "unit"){
+      let spot = name.slice(4)
+      var temp = recipe['ingredients']
+      if (temp.length > spot) {
+        temp[spot]['unit'] = value;
+
+      } else {
+        let another = {
+          name:"",
+          size: "",
+          unit:value,
+        }
+        temp.push(another);
+      }
+    } 
+    
+    else {
+      console.log("could not find " + name);
+    }
   }
 
-   return (
+  return (
     <form>
       <label htmlFor="title">Title</label>
       <input
@@ -158,60 +258,77 @@ function handleChange(event) {
         name="title"
         id="title"
         value={recipe.title}
-        onChange={handleChange} />
+        onChange={handleChange}
+      />
 
-<label htmlFor="numServings"># of Servings</label>
+      <label htmlFor="numServings"># of Servings</label>
       <input
         type="text"
         name="numServings"
         id="numServings"
         value={recipe.numServings}
-        onChange={handleChange} />
+        onChange={handleChange}
+      />
 
-
-<label htmlFor="totalTime">Total Time</label>
+      {/* <label htmlFor="totalTime">Total Time</label>
       <input
         type="text"
         name="totalTime"
         id="totalTime"
         value={recipe.totalTime}
-        onChange={handleChange} />
+        onChange={handleChange} /> */}
 
-<CardGroup id="cGroup">
-<Card style={{ width: '18rem' }} id= "cIng">
-      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-      <Card.Body>
-        <Card.Title>Ingredient 1</Card.Title>
-        <label htmlFor="ingredient">Name</label>
-        <input
-        type="text"
-        name="ingredient1"
-        id="ingredient1"
-        value={recipe.ingredients}
-        onChange={handleChange} />
+      <div id="cards">
+        <Card style={{ width: "22rem" }} id="cIng">
+          {/* <Card.Img variant="top" src="holder.js/100px180" />  */}
+          <Card.Body>
+            <Card.Title>Ingredient 1</Card.Title>
+            <label htmlFor="ingredient">Name</label>
+            <input
+              type="text"
+              name="ingredient0"
+              id="ingredient0"
+              onChange={handleChange}
+            />
 
-<label htmlFor="ingredient">Size</label>
-        <input
-        type="text"
-        name="size1"
-        id="size1"
-        value={recipe.ingredients}
-        onChange={handleChange} />
-
-<label htmlFor="ingredient">Substitute</label>
+            {/* <label htmlFor="ingredient">Substitute</label>
         <input
         type="text"
         name="sub1"
         id="sub1"
         value={recipe.ingredients}
-        onChange={handleChange} />
-        
-        <Button variant="primary" onClick={addCardIng}>Add Another Ingredient</Button>
-      </Card.Body>
-    </Card>
-    </CardGroup>
+        onChange={handleChange} /> */}
 
-<label htmlFor="ingredient">Ingredients 1</label>
+            <label>Size</label>
+
+            <input
+              type="text"
+              name="size0"
+              id="size0"
+              onChange={handleChange}
+            />
+
+            
+
+
+            <select name="unit0" onChange={handleChange}>
+              <option>--Select Unit--</option>
+              <option value="tsp">teaspoon</option>
+              <option value="tbsp">tablespoon</option>
+              <option value="oz">oz</option>
+              <option value="cup">cup</option>
+              <option value = "pint">pint</option>
+              <option value="quart">quart</option>
+              <option value = "gallon">gallon</option>
+            </select>
+            <Button id="firstBut" variant="primary" onClick={e => addCardIng(e, "firstBut")}>
+              Add Another Ingredient
+            </Button>
+          </Card.Body>
+        </Card>
+      </div>
+
+      {/* <label htmlFor="ingredient">Ingredients 1</label>
      <div id ="food">
       <input
         type="text"
@@ -220,26 +337,18 @@ function handleChange(event) {
         value={recipe.ingredients}
         onChange={handleChange} />
         <input type="button" value="Add Ingredient" onClick={addIngredient} />
-      </div>
+      </div> */}
 
-      <div id = "steps">
-      <label htmlFor="step">Step 1</label>
-      <input
-        type="text"
-        name="step"
-        id="step"
-        value={recipe.job}
-        onChange={handleChange} />
+      <div id="steps">
+        <label htmlFor="step">Step 1</label>
+        <input type="text" name="step0" id="s0" onChange={handleChange} />
         <input type="button" value="Add Step" onClick={addStep} />
-        </div>
-        
-        <br></br>
-        
-        <input type="button" value="Submit" onClick={submitForm} />
+      </div>
+      <br></br>
+
+      <input type="button" value="Submit" onClick={submitForm} />
     </form>
-); 
+  );
 }
-
-
 
 export default Form;
