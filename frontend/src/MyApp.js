@@ -5,8 +5,8 @@ import RecipeCard from "./RecipeCards";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Form from './Form';
-import RecipeProp from "./RecipeProp";
+import Form from "./Form";
+import Recipe from "./RecipeProp";
 
 // import Button from "react-bootstrap/Button";
 // // import Card from "react-bootstrap/Card";
@@ -57,38 +57,35 @@ function MyApp() {
     </div>
   );
 
-  function updateList(person) { 
-    console.log("got to lien 33 of myapp.js")
-    makePostCall(person).then( result => {
-    if (result && result.status === 201){
-       console.log("hello " + result.status)
-       setCharacters([...characters, result.data] );
-    } 
-       
+  function updateList(person) {
+    console.log("got to lien 33 of myapp.js");
+    makePostCall(person).then((result) => {
+      if (result && result.status === 201) {
+        console.log("hello " + result.status);
+        setCharacters([...characters, result.data]);
+      }
     });
- }
- 
- async function makePostCall(person){
-  try {
-     const response = await axios.post('http://localhost:5000/food', person);
-     return response;
   }
-  catch (error) {
-     console.log(error);
-     return false;
-  }
-}
 
-async function makeDeleteCall(id){
-  try{
-     let response = await axios.delete("http://localhost:5000/users/" + id);
-     return response;
-  } catch (error){
-     console.log(error);
-     return false;
+  async function makePostCall(person) {
+    try {
+      const response = await axios.post("http://localhost:5000/food", person);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
-}
 
+  // async function makeDeleteCall(id){
+  //   try{
+  //      let response = await axios.delete("http://localhost:5000/users/" + id);
+  //      return response;
+  //   } catch (error){
+  //      console.log(error);
+  //      return false;
+  //   }
+  // }
 
   // useEffect(() => {
   //   fetchAll().then((result) => {
@@ -96,18 +93,16 @@ async function makeDeleteCall(id){
   //   });
   // }, []);
 
-  // async function fetchAll() {
-  //   try {
-  //     const response = await axios.get("http://localhost:5000/users");
-  //     return response.data.users_list;
-  //   } catch (error) {
-  //     //We're not handling errors. Just logging into the console.
-  //     console.log(error);
-  //     return false;
-  //   }
-  // }
-
-
+  async function fetchAll() {
+    try {
+      const response = await axios.get("http://localhost:5000/users");
+      return response.data.recipes_list;
+    } catch (error) {
+      //We're not handling errors. Just logging into the console.
+      console.log(error);
+      return false;
+    }
+  }
 
   function Home() {
     return (
@@ -120,7 +115,7 @@ async function makeDeleteCall(id){
         </main>
         <nav>{/* <Link to="/inputRecipe">About</Link> */}</nav>
         <div className="container">
-          <RecipeProp data = {recipes}/>
+          <Recipe passdata={recipes[1]} />
           <RecipeCard
             title="Mac n Cheese"
             time="Total Time: 45"
@@ -130,20 +125,20 @@ async function makeDeleteCall(id){
         </div>
       </div>
     );
-    }
-    function InputRecipe() {
-      return (
-        <>
-          <main>
-            <h2>Input Recipe</h2>
-            <Form handleSubmit={updateList} />
-          </main>
-          <nav>
-            <Link to="/">Home</Link>
-          </nav>
-        </>
-      );
-    }
+  }
+  function InputRecipe() {
+    return (
+      <>
+        <main>
+          <h2>Input Recipe</h2>
+          <Form handleSubmit={updateList} />
+        </main>
+        <nav>
+          <Link to="/">Home</Link>
+        </nav>
+      </>
+    );
+  }
 }
 
 export default MyApp;
