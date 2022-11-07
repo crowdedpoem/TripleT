@@ -38,6 +38,7 @@ async function findRecipeById(id) {
 async function addRecipe(recipe) {
   try {
     const recipeToAdd = new recipeModel(recipe);
+    console.log(recipeToAdd);
     const savedRecipe = await recipeToAdd.save();
     return savedRecipe;
   } catch (error) {

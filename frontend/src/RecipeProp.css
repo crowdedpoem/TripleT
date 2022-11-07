@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+  }
+
+.card-title{
+    background-color: rgb(206, 183, 183, .3);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: black;
+
+    
+}
+.card-body{
+    width: 45%;
+    height:25%;
+    border-radius: 20px;
+    background-color: rgb(206, 183, 183, .8);
+
+}
+
+.card-group{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.card{
+    margin-right: 1%;
+           /* Set rules to fill background */
+}
+.food{
+    background-size: cover;
+    background-position: center;
+    border: solid #000;
+    border-width: 30px;
+}
+.container{
+    width: 100%;
+}
+.main-container{
+    width: 100%;
+}
+.cardgroup-container{
+width: 100%;
+}

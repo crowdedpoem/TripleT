@@ -55,9 +55,15 @@ const RecipeSchema = new mongoose.Schema(
                   required: true,
                   trim: true
                 }
-            ]
+            ],
+            urlSource: {
+              type: String,
+              required: false,
+              trim: false
+            }
         },
-    
+    //will need to add user that the recipe belongs to
+    //add in amount of favorites/likes
   { collection: "recipes_list" }
 );
 
