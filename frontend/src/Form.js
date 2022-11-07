@@ -64,10 +64,6 @@ function Form(props) {
   }
 
   function addCardIng(event, butID) {
-    console.log("here is event...")
-    console.log(event)
-    console.log("curious what 'document' does")
-    console.log(document)
     console.log(document.getElementById(butID))
     let killThis = document.getElementById(butID)
     let parent = killThis.parentNode
@@ -123,6 +119,13 @@ function Form(props) {
     );
     let select = document.createElement("select");
     select.name = "unit" + numIngredients;
+    select.addEventListener(
+      "change",
+      function (e) {
+        handleChange(e);
+      },
+      false
+    );
 
 
     let option = document.createElement("option");
@@ -164,8 +167,6 @@ function Form(props) {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    console.log("name is " + name);
-    console.log("value is " + value)
     if (name === "title") {
       setRecipe(
         //  {numServings: recipe['numServings'], title: value }
@@ -174,7 +175,7 @@ function Form(props) {
     } else if (name === "numServings") {
       setRecipe({ ...recipe, numServings: value });
     }
-    if (name.slice(0, 4) == "step") {
+    else if (name.slice(0, 4) == "step") {
       let spot = name.toString();
       spot = spot.slice(4);
       var temp = recipe["steps"];
@@ -189,7 +190,7 @@ function Form(props) {
         
       );
     } 
-    if(name.slice(0,10) == "ingredient"){
+    else if(name.slice(0,10) == "ingredient"){
       let spot = name.slice(10)
       var temp = recipe['ingredients']
       if (temp.length > spot) {
@@ -209,7 +210,7 @@ function Form(props) {
       );
       
     }
-    if (name.slice(0,4) == "size"){
+    else if (name.slice(0,4) == "size"){
       let spot = name.slice(4)
       var temp = recipe['ingredients']
       if (temp.length > spot) {
@@ -229,7 +230,7 @@ function Form(props) {
 
     }
 
-    if (name.slice(0,4) == "unit"){
+    else if (name.slice(0,4) == "unit"){
       let spot = name.slice(4)
       var temp = recipe['ingredients']
       if (temp.length > spot) {
@@ -280,7 +281,6 @@ function Form(props) {
 
       <div id="cards">
         <Card style={{ width: "22rem" }} id="cIng">
-          {/* <Card.Img variant="top" src="holder.js/100px180" />  */}
           <Card.Body>
             <Card.Title>Ingredient 1</Card.Title>
             <label htmlFor="ingredient">Name</label>
@@ -290,14 +290,6 @@ function Form(props) {
               id="ingredient0"
               onChange={handleChange}
             />
-
-            {/* <label htmlFor="ingredient">Substitute</label>
-        <input
-        type="text"
-        name="sub1"
-        id="sub1"
-        value={recipe.ingredients}
-        onChange={handleChange} /> */}
 
             <label>Size</label>
 
