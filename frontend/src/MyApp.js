@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "./Form";
 import RecipePage from "./RecipePage";
-import Recipe from "./RecipeProp";
+import RecipeCard from "./RecipeCard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CardGroup from "react-bootstrap/CardGroup";
 
@@ -59,7 +59,10 @@ function MyApp() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="inputRecipe" element={<InputRecipe />} />
-          <Route path="/page" element={<RecipePage />} />
+          <Route path="/pages/:id" element={<RecipePage />} >
+          </Route>
+    
+            
         </Routes>
       </div>
     );
@@ -101,6 +104,9 @@ function MyApp() {
   // }, []);
 
   function Home() {
+    const recipereturn = fetchByID('6360022e7d2d2db7e6e208f6')
+    if(recipereturn)
+      console.log(recipereturn)
     return (
       <div className="main-container">
         <main>
@@ -109,9 +115,9 @@ function MyApp() {
         </main>
         <div className="cardgroup-container">
           <CardGroup>
-            <Recipe passdata={recipes_list[0]} />
-            <Recipe passdata={recipes_list[1]} />
-            <Recipe passdata={recipes_list[2]} />
+            <RecipeCard passdata={recipes_list[0]} />
+            <RecipeCard passdata={recipes_list[1]} />
+            <RecipeCard passdata={recipes_list[2]} />
           </CardGroup>
         </div>
       </div>
