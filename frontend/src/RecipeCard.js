@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useNavigate } from "react-router-dom";
-import "./RecipeProp.css";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import "./RecipeCard.css";
 // function RecipeProp(props) {
 //     // <TableBody populateCard = {props.populateCard} />
 //     const recipedata = props.passdata.map((recipe) => {
@@ -30,11 +30,10 @@ import "./RecipeProp.css";
 
 // }
 
-function RecipeProp(props) {
+function RecipeCardBody(props) {
   // <TableBody populateCard = {props.populateCard} />
 
   const recipe = props.passdata;
-  console.log(recipe);
   return (
     <>
       <Card.Title>
@@ -54,21 +53,22 @@ function RecipeProp(props) {
   );
 }
 
-function Recipe(props) {
+function RecipeCard(props) {
   const navigate = useNavigate();
   if (props) {
     const url = props.passdata.urlSource;
     return (
       <Card className = "food" style={{ backgroundImage: `url(${url})` }}>
-        <RecipeProp passdata={props.passdata} />
+        <RecipeCardBody passdata={props.passdata} />
         {/* <Button onClick = { () => navigate("/page", {ID : id})} variant="primary"> See Recipe </Button> */}
-        <Button onClick={() => navigate("/page")} variant="primary">
+        <Button onClick={() => navigate(`/pages/${props.passdata._id}`)} variant="primary">
           {" "}
           See Recipe{" "}
         </Button>
       </Card>
+
     );
   }
 }
 
-export default Recipe;
+export default RecipeCard;
