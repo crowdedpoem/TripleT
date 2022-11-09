@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { findByIdAndDelete } = require("./recipe");
-const recipeModel = require("./recipe");
+const RecipeSchema = require("./recipe");
 
 mongoose.set("debug", true);
 
@@ -36,10 +36,14 @@ async function findRecipeById(id) {
 }
 
 async function addRecipe(recipe) {
+  console.log(recipe)
   try {
+    const recipeModel = mongoose.model("Recipe", RecipeSchema);
     const recipeToAdd = new recipeModel(recipe);
+    // recipeToAdd.steps.push(recipe.steps);
     console.log(recipeToAdd);
     const savedRecipe = await recipeToAdd.save();
+    console.log(savedRecipe);
     return savedRecipe;
   } catch (error) {
     console.log(error);

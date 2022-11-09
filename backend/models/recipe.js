@@ -1,72 +1,32 @@
 const mongoose = require("mongoose");
 
+const ingredientSchema = new mongoose.Schema(
+  {
+    name:String,
+    amount:Number,
+    substitute:String
+  }
+);
+const totalTimeSchema = new mongoose.Schema(
+{
+  active:Number,
+    cook:Number  
+}
+);
 const RecipeSchema = new mongoose.Schema(
   {
-
-            title:{
-              type:String,
-              required: true,
-              trim: true
-            },
-            servings:{
-              type:Number,
-              required: true,
-              trim: true
-            },
-            blurb:{
-              type:String,
-              required: true,
-              trim: true
-            },
-            totalTime: {
-                active:{
-                  type:Number,
-                  required: true,
-                  trim: true
-                },
-                cook:{
-                  type:Number,
-                  required: true,
-                  trim: true
-                }
-            },
-            ingredients: [
-              {
-                name: {
-                  type:String,
-                  required: true,
-                  trim: true
-                },
-                amount:{
-                  type:Number,
-                  required: true,
-                  trim: true
-                },
-                substitute: {
-                  type:String,
-                  required: true,
-                  trim: true
-                }
-              }
-            ], //first index, name, amount, 
-            steps: [
-                {
-                  type:String,
-                  required: true,
-                  trim: true
-                }
-            ],
-            urlSource: {
-              type: String,
-              required: false,
-              trim: false
-            }
+            title:String,
+            servings:Number,         
+            blurb:String,
+            totalTime: totalTimeSchema,
+            ingredients: [ingredientSchema], //first index, name, amount, 
+            steps: [String],
+            urlSource: String,
         },
     //will need to add user that the recipe belongs to
     //add in amount of favorites/likes
   { collection: "recipes_list" }
 );
 
-const Recipe = mongoose.model("Recipe", RecipeSchema);
 
-module.exports = Recipe;
+module.exports = RecipeSchema;
