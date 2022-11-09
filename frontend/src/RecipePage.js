@@ -1,14 +1,12 @@
 import React from "react";
 import fetchByID from "./MyApp";
 import Button from "react-bootstrap/Button";
-const RecipePage = (props) => {
- 
-    let id = props.ID;
-    let recipe = fetchByID(id);
-
+import { useParams } from "react-router-dom";
+const RecipePage = () => {
+    const {id} = useParams();
     return(
 
-        <h1>{recipe.title}</h1>
+        <h1>Hi</h1>
         
     )
     
