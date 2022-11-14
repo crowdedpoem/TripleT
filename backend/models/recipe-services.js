@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { findByIdAndDelete } = require("./recipe");
-const RecipeSchema = require("./recipe");
+const recipeModel = require("./recipe");
 
 mongoose.set("debug", true);
 
@@ -27,8 +27,9 @@ async function getRecipe(title, ingredient) {
 
 async function findRecipeById(id) {
   try {
-    console.log(await recipeModel.findById(id))
+    // console.log(await recipeModel.findById(id))
     return await recipeModel.findById(id);
+
   } catch (error) {
     console.log(error);
     return undefined;
@@ -36,14 +37,10 @@ async function findRecipeById(id) {
 }
 
 async function addRecipe(recipe) {
-  console.log(recipe)
   try {
-    const recipeModel = mongoose.model("Recipe", RecipeSchema);
     const recipeToAdd = new recipeModel(recipe);
-    // recipeToAdd.steps.push(recipe.steps);
     console.log(recipeToAdd);
     const savedRecipe = await recipeToAdd.save();
-    console.log(savedRecipe);
     return savedRecipe;
   } catch (error) {
     console.log(error);
@@ -52,7 +49,7 @@ async function addRecipe(recipe) {
 }
 
 async function deleteRecipeById(id) {
-  return await recipeModel.findByIdAndDelete(id);
+  return await recipeModel.findByIdAndDelete(id).then();
 }
 
 async function findRecipeByTitle(title) {
