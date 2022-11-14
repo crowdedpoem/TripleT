@@ -60,6 +60,15 @@ const RecipeSchema = new mongoose.Schema(
               type: String,
               required: false,
               trim: false
+            },
+            cost:{
+              total: Number,
+              perServing: Number
+            },
+            user:{
+              type: String,
+              required: true,
+              trim: true
             }
         },
     //will need to add user that the recipe belongs to
