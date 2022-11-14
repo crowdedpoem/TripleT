@@ -14,6 +14,7 @@ function MyApp() {
   const [recipes_list, setRecipe] = useState([]);
   useEffect(() => {
     fetchAll().then((result) => {
+      console.log(result);
       if (result) setRecipe(result);
     });
   }, []);
@@ -29,16 +30,7 @@ function MyApp() {
     }
   }
 
-  async function fetchByID(id) {
-    try {
-      const response = await axios.get("http://localhost:5000/recipes/" + id);
-      return response.data.recipes_list;
-    } catch (error) {
-      //We're not handling errors. Just logging into the console.
-      console.log(error);
-      return false;
-    }
-  }
+
 
   if (recipes_list.length !== 0) {
     return (
@@ -103,10 +95,16 @@ function MyApp() {
   //   });
   // }, []);
 
+  function populateCards() {
+    const cards = recipes_list.map( (recipe, index) => {
+      console.log(`index : ${index}: ${recipe.title}`)
+      if (index <= 2)
+        return <RecipeCard passdata={recipe} />
+    } );  
+    return cards;
+  }
+
   function Home() {
-    const recipereturn = fetchByID('6360022e7d2d2db7e6e208f6')
-    if(recipereturn)
-      console.log(recipereturn)
     return (
       <div className="main-container">
         <main>
@@ -115,9 +113,10 @@ function MyApp() {
         </main>
         <div className="cardgroup-container">
           <CardGroup>
-            <RecipeCard passdata={recipes_list[0]} />
+            {/* <RecipeCard passdata={recipes_list[0]} />
             <RecipeCard passdata={recipes_list[1]} />
-            <RecipeCard passdata={recipes_list[2]} />
+            <RecipeCard passdata={recipes_list[2]} /> */}
+            {populateCards()}
           </CardGroup>
         </div>
       </div>

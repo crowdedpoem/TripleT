@@ -2,7 +2,7 @@ const express = require('express');
 const recipeServices = require("./models/recipe-services");
 const app = express();
 const cors = require('cors');
-const port = 5001;
+const port = 5000;
 
 
 //TEMPLATE POST REQUEST
@@ -48,7 +48,7 @@ app.get("/recipes/:id", async (req, res) => {
  
  app.post('/recipes', async(req, res) => {
    //id generator 
-
+   console.log(req.body);
    const recipeToAdd = req.body;
    const response = await recipeServices.addRecipe(recipeToAdd);
    if(response === false)
