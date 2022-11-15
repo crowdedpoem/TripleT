@@ -27,8 +27,9 @@ async function getRecipe(title, ingredient) {
 
 async function findRecipeById(id) {
   try {
-    console.log(await recipeModel.findById(id))
+    // console.log(await recipeModel.findById(id))
     return await recipeModel.findById(id);
+
   } catch (error) {
     console.log(error);
     return undefined;
@@ -38,6 +39,7 @@ async function findRecipeById(id) {
 async function addRecipe(recipe) {
   try {
     const recipeToAdd = new recipeModel(recipe);
+    console.log(recipeToAdd);
     const savedRecipe = await recipeToAdd.save();
     return savedRecipe;
   } catch (error) {
@@ -47,7 +49,7 @@ async function addRecipe(recipe) {
 }
 
 async function deleteRecipeById(id) {
-  return await recipeModel.findByIdAndDelete(id);
+  return await recipeModel.findByIdAndDelete(id).then();
 }
 
 async function findRecipeByTitle(title) {
