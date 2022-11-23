@@ -15,7 +15,7 @@ const RecipePage = () => {
   const { id } = useParams();
   const [bookmark, setBookmark] = useState(false);
   const [img, setImg] = useState(bookmarkImg)
-  const[likes, setLikes] = useState(0)
+  const [bookmarkCount, setBookmarkCount] = useState()
   useEffect(() => {
     fetchByID(id).then((result) => {
       if (result) {
@@ -37,15 +37,48 @@ const RecipePage = () => {
       return false;
     }
   }
+  async function incrementBookmarkCount(id){
+    try {
 
+      const response = await axios.put("http://localhost:5000/recipes/" + id, );
+      response.data.recipes_list.bookmarkCount +=1
+      return response.data.recipes_list
+    } catch (error) {
+      //We're not handling errors. Just logging into the console.
+      console.log(error);
+      return false;
+    }
+  }
+  async function decrementBookmarkCount(id){
+    try {
+      const response = await axios.get("http://localhost:5000/recipes/" + id);
+      response.data.recipes_list.bookmarkCount -=1
+      return response.data.recipes_list
+    } catch (error) {
+      //We're not handling errors. Just logging into the console.
+      console.log(error);
+      return false;
+    }
+  }
+
+
+  async function updateRecipe(recipe){
+    try {
+      const response = await axios.put("http://localhost:5000/recipes", recipe);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
   const handleClick = () => {
     setBookmark((current) => !current);
     if (bookmark === false){
-      setLikes((likes) => likes + 1) 
+      // setLikes((likes) => likes + 1) 
       setImg(bookmarkImg2)
     }
     else{
-      setLikes((likes) => likes - 1)
+      // setLikes((likes) => likes - 1)
       setImg(bookmarkImg)
     }
     
