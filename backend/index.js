@@ -1,33 +1,43 @@
-const express = require('express');
-const recipeServices = require("../models/recipe-services");
+import express from 'express';
+import {findRecipeById,  deleteRecipeById, findRecipeByTitle, findRecipeByIngredient, findRecipeByTitleAndIngredient, addRecipe, getRecipe} from './models/recipe-services.js';
 const app = express();
-const cors = require('cors');
-const port = 5000;
-
+import cors from 'cors'
+const port = 5000;  
 
 //TEMPLATE POST REQUEST
 // { 
-//   "title": "macaroni and cheese",
+//   "title": "waffle fries",
 //   "servings": 3,
-//   "blurb": "good food",
+//   "blurb": "crispy fries",
 //   "totalTime":{
-//     "active": 10,
-//     "cook": 20 
+//     "active": 5,
+//     "cook": 15 
 //   },
-//   "ingredient": 
+//   "ingredients": 
 //   [
 //      {
-//      "name": "macaroni",
+//      "name": "potato",
+//      "amount": 2, 
+//      "substitute":"spaghetti"
+//      },
+//      {
+//      "name": "salt",
 //      "amount": 2, 
 //      "substitute":"spaghetti"
 //      }
 //   ],
-//   "step":
+//   "steps":
 //   ["first boil noodle",
 //   "make cheese sauce",
 //   "eat"
 
-//   ]
+//   ],
+//   "urlSource": "https://www.foodandwine.com/thmb/FERhwFz2hJrCkgtDZmkz_rHaCrA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-hot-dogs-in-every-state-FT-BLOG1020-6e025500cefb480ba986b163792ec790.jpg",
+//   "cost":{
+//       "total": 4.67,
+//       "perServing": 0.68
+//   },
+//   "user":"User"
 // }
 
 //Check with https://jsonlint.com/
@@ -38,7 +48,7 @@ app.use(express.json());
 // GET BY RECIPE NAME
 app.get("/recipes/:id", async (req, res) => {
    const id = req.params["id"]; //or req.params.id
-   let result = await recipeServices.findRecipeById(id);
+   let result = await findRecipeById(id);
    if (result === undefined)
      res.status(404).send("Resource not found.");
    else {
@@ -50,7 +60,7 @@ app.get("/recipes/:id", async (req, res) => {
    //id generator 
    console.log(req.body);
    const recipeToAdd = req.body;
-   const response = await recipeServices.addRecipe(recipeToAdd);
+   const response = await addRecipe(recipeToAdd);
    if(response === false)
    {
     res.status(500).end()
@@ -61,9 +71,9 @@ app.get("/recipes/:id", async (req, res) => {
  
  app.delete("/recipes/:id", async(req, res) => {
    const id = req.params["id"];
-   const check = await recipeServices.findRecipeById(id);
+   const check = await findRecipeById(id);
    if (check !== undefined && check.length != 0) {
-     await recipeServices.deleteRecipeById(id);
+     await deleteRecipeById(id);
      res.status(204).end();
    } else {
      res.status(404).end();
@@ -76,16 +86,16 @@ app.get("/recipes/:id", async (req, res) => {
    const title = req.query['title'];
    let result;
    if (title === undefined && ingredient === undefined) {
-      result = await recipeServices.getRecipe(title, ingredient);
+      result = await getRecipe(title, ingredient);
     }
    if (title && !ingredient) {
-      result = await recipeServices.findRecipeByTitle(title);
+      result = await findRecipeByTitle(title);
    }
    if (ingredient && !title) {
-      result = await recipeServices.findRecipeByIngredient(ingredient);
+      result = await findRecipeByIngredient(ingredient);
     } 
     if (title !== undefined && ingredient !== undefined) {
-      await recipeServices.findRecipeByTitleAndIngredient(title, ingredient);
+      await findRecipeByTitleAndIngredient(title, ingredient);
    }
    if (result === undefined || result.length == 0)
        res.status(404).send('Resource not found.');

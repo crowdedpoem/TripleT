@@ -20,7 +20,7 @@ function MyApp() {
 
    async function makePostCall(person){
       try {
-         const response = await axios.post('http://localhost:5000/food', person);
+         const response = await axios.post('http://localhost:5000/recipes', person);
          return response;
       }
       catch (error) {
@@ -68,22 +68,6 @@ function MyApp() {
       }
    }
 
-   function removeOneCharacter (index) {
-
-      // makeDeleteCall(characters[index].id).then( result => {
-      //    if (result && result.status === 204){
-      //       const updated = characters.filter((character, i) => {
-      //          return i !== index
-      //       });
-      //       setCharacters(updated);
-      //    }
-            
-      //    });
-
-
-
-   }
-
    return (
 	<div className="container">
       <Navbar bg="light" expand="lg">
@@ -110,6 +94,10 @@ function MyApp() {
   );
 
 
+  function scrape(){
+    console.log("hello there");
+    test();
+  }
 
 
 function Home() {
