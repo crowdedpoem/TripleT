@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "backend",
   "version": "1.0.0",
   "main": "backend.js",
@@ -12,7 +13,9 @@
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
+    "express": "^4.18.1",
+    "node-fetch": "^2.6.7",
+    "puppeteer": "^19.3.0",
     "mongoose": "^6.7.0"
   },
   "devDependencies": {

@@ -1,32 +1,37 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose'
 
 const RecipeSchema = new mongoose.Schema(
   {
 
             title:{
               type:String,
-              required: true,
+              required: false,
               trim: true
+            },
+            price:{
+              type:String,
+              required:false,
+              trim:true
             },
             servings:{
               type:Number,
-              required: true,
+              required: false,
               trim: true
             },
             blurb:{
               type:String,
-              required: true,
+              required: false,
               trim: true
             },
             totalTime: {
                 active:{
                   type:Number,
-                  required: true,
+                  required: false,
                   trim: true
                 },
                 cook:{
                   type:Number,
-                  required: true,
+                  required: false,
                   trim: true
                 }
             },
@@ -34,17 +39,17 @@ const RecipeSchema = new mongoose.Schema(
               {
                 name: {
                   type:String,
-                  required: true,
+                  required: false,
                   trim: true
                 },
-                amount:{
+                size:{
                   type:Number,
-                  required: true,
+                  required: false,
                   trim: true
                 },
-                substitute: {
+                unit: {
                   type:String,
-                  required: true,
+                  required: false,
                   trim: true
                 }
               }
@@ -77,5 +82,6 @@ const RecipeSchema = new mongoose.Schema(
 );
 
 const Recipe = mongoose.model("Recipe", RecipeSchema);
+// module.exports = Recipe;
+export default Recipe;
 
-module.exports = Recipe;
