@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
@@ -7,23 +6,25 @@ function Form(props) {
   var numIngredients = 0;
   var numSteps = 0;
 
-
   const [recipe, setRecipe] = useState({
     title: "",
-    numServings: "",
-    totalTime: "",
-    activeTime: "",
-    cookTime: "",
+    blurb: "",
+    servings: "",
+    servings: "",
+    price: "",
+    totalTime: {
+      cookTime: "",
+      activeTime: "",
+    },
     ingredients: [],
     steps: [],
   });
 
   // user 1 to many recipes
   // many recipes to many ingredients
-
   function submitForm() {
     props.handleSubmit(recipe);
-    // setrecipe({title: '', numServings: '',
+    // setrecipe({title: '', servings: '',
     //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
     // });
   }
@@ -131,7 +132,8 @@ function Form(props) {
     let option = document.createElement("option");
     option.innerText = "--Select Unit--"
     select.appendChild(option)
-    let imperial = ["tsp", "tbsp", "oz", "cup", "pint", "quart", "gallon"];
+    let imperial = ["tsp", "tbsp", "fl oz", "cup", "pint", "quart", "gallon", "oz", "pound", "ct"];
+    
     for (let type in imperial) {
       option = document.createElement("option");
       option.innerText = imperial[type];
@@ -169,11 +171,18 @@ function Form(props) {
     const { name, value } = event.target;
     if (name === "title") {
       setRecipe(
-        //  {numServings: recipe['numServings'], title: value }
         { ...recipe, title: value }
       );
-    } else if (name === "numServings") {
-      setRecipe({ ...recipe, numServings: value });
+    } else if (name === "servings") {
+      setRecipe({ ...recipe, servings: value });
+    }
+    else if(name == "blurb"){
+      setRecipe(
+        { ...recipe, blurb: value }
+      );
+    }
+    else if(name == "servings"){
+      setRecipe({...recipe, servings: value})
     }
     else if (name.slice(0, 4) == "step") {
       let spot = name.toString();
@@ -187,9 +196,8 @@ function Form(props) {
 
       setRecipe(
         { ...recipe, steps: temp }
-        
       );
-    } 
+    }
     else if(name.slice(0,10) == "ingredient"){
       let spot = name.slice(10)
       var temp = recipe['ingredients']
@@ -208,7 +216,7 @@ function Form(props) {
       setRecipe(
         { ...recipe, ingredients: temp }
       );
-      
+
     }
     else if (name.slice(0,4) == "size"){
       let spot = name.slice(4)
@@ -229,7 +237,6 @@ function Form(props) {
       );
 
     }
-
     else if (name.slice(0,4) == "unit"){
       let spot = name.slice(4)
       var temp = recipe['ingredients']
@@ -244,8 +251,21 @@ function Form(props) {
         }
         temp.push(another);
       }
-    } 
-    
+    }
+    else if (name == "activeTime"){
+      let temp = recipe
+      temp.totalTime.activeTime = value
+      setRecipe(
+        temp
+      );
+    }
+    else if(name == "cookTime"){
+      let temp = recipe
+      temp.totalTime.cookTime = value
+      setRecipe(
+        temp
+      );
+    }
     else {
       console.log("could not find " + name);
     }
@@ -262,22 +282,39 @@ function Form(props) {
         onChange={handleChange}
       />
 
-      <label htmlFor="numServings"># of Servings</label>
+      <label htmlFor="blurb">Blurb</label>
       <input
         type="text"
-        name="numServings"
-        id="numServings"
-        value={recipe.numServings}
+        name="blurb"
+        id="blurb"
+        value={recipe.blurb}
         onChange={handleChange}
       />
 
-      {/* <label htmlFor="totalTime">Total Time</label>
+      <label htmlFor="servings"># of Servings</label>
       <input
         type="text"
-        name="totalTime"
-        id="totalTime"
-        value={recipe.totalTime}
-        onChange={handleChange} /> */}
+        name="servings"
+        id="servings"
+        value={recipe.servings}
+        onChange={handleChange}
+      />
+
+      <label htmlFor="cookTime">Cook Time</label>
+      <input
+        type="text"
+        name="cookTime"
+        id="cookTime"
+        value={recipe.cookTime}
+        onChange={handleChange} />
+
+      <label htmlFor="activeTime">Active Time</label>
+      <input
+        type="text"
+        name="activeTime"
+        id="activeTime"
+        value={recipe.activeTime}
+        onChange={handleChange} />
 
       <div id="cards">
         <Card style={{ width: "22rem" }} id="cIng">
@@ -291,8 +328,7 @@ function Form(props) {
               onChange={handleChange}
             />
 
-            <label>Size</label>
-
+            <label>Size</label> 
             <input
               type="text"
               name="size0"
@@ -300,18 +336,18 @@ function Form(props) {
               onChange={handleChange}
             />
 
-            
-
-
             <select name="unit0" onChange={handleChange}>
               <option>--Select Unit--</option>
               <option value="tsp">teaspoon</option>
               <option value="tbsp">tablespoon</option>
-              <option value="oz">oz</option>
+              <option value="fl oz">fl oz</option>
               <option value="cup">cup</option>
               <option value = "pint">pint</option>
               <option value="quart">quart</option>
               <option value = "gallon">gallon</option>
+              <option value = "oz">oz</option>
+              <option value = "lb">pounds</option>
+              <option value = "ct">count</option>
             </select>
             <Button id="firstBut" variant="primary" onClick={e => addCardIng(e, "firstBut")}>
               Add Another Ingredient
@@ -319,17 +355,6 @@ function Form(props) {
           </Card.Body>
         </Card>
       </div>
-
-      {/* <label htmlFor="ingredient">Ingredients 1</label>
-     <div id ="food">
-      <input
-        type="text"
-        name="ingredient"
-        id="ingredient"
-        value={recipe.ingredients}
-        onChange={handleChange} />
-        <input type="button" value="Add Ingredient" onClick={addIngredient} />
-      </div> */}
 
       <div id="steps">
         <label htmlFor="step">Step 1</label>

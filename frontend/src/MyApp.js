@@ -18,43 +18,70 @@ function MyApp() {
     });
   }, []);
 
-  async function fetchAll() {
-    try {
-      const response = await axios.get("http://localhost:5000/recipes");
-      return response.data.recipes_list;
-    } catch (error) {
-      //We're not handling errors. Just logging into the console.
-      console.log(error);
-      return false;
-    }
-  }
+   async function makePostCall(person){
+      try {
+         const response = await axios.post('http://localhost:5000/recipes', person);
+         return response;
+      }
+      catch (error) {
+         console.log(error);
+         return false;
+      }
+   }
 
-  async function fetchByID(id) {
-    try {
-      const response = await axios.get("http://localhost:5000/recipes/" + id);
-      return response.data.recipes_list;
-    } catch (error) {
-      //We're not handling errors. Just logging into the console.
-      console.log(error);
-      return false;
-    }
-  }
+   async function makeDeleteCall(id){
+      try{
+         let response = await axios.delete("http://localhost:5000/users/" + id);
+         return response;
+      } catch (error){
+         console.log(error);
+         return false;
+      }
+   }
 
-  if (recipes_list.length !== 0) {
-    return (
-      <div className="container">
-        <Navbar bg="light" expand="lg">
-          <Container>
-            <Navbar.Brand href="/">RecipeBuddy</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/inputRecipe">Add a recipe</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+   function updateList(recipe) { 
+      
+      console.log("here is person object ")
+      console.log(recipe)
+      
+
+      // parse recipe to get all ingredients and add to database
+      // add api here. API gives price and size of ingredient
+
+      makePostCall(recipe).then( result => {
+      if (result && result.status === 201){
+         console.log("hello " + result.status)
+      } 
+         
+      });
+   }
+
+   async function fetchAll(){
+      try {
+         const response = await axios.get('http://localhost:5000/users');
+         return response.data.users_list;     
+      }
+      catch (error){
+         //We're not handling errors. Just logging into the console.
+         console.log(error); 
+         return false;         
+      }
+   }
+
+   return (
+	<div className="container">
+      <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="/">RecipeBuddy</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/inputRecipe">Add a recipe</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -96,15 +123,10 @@ function MyApp() {
     return cards;
   }
 
-  // async function makeDeleteCall(id){
-  //   try{
-  //      let response = await axios.delete("http://localhost:5000/users/" + id);
-  //      return response;
-  //   } catch (error){
-  //      console.log(error);
-  //      return false;
-  //   }
-  // }
+  function scrape(){
+    console.log("hello there");
+    test();
+  }
 
   // useEffect(() => {
   //   fetchAll().then((result) => {
@@ -144,6 +166,6 @@ function MyApp() {
       </>
     );
   }
-}
+
 
 export default MyApp;
