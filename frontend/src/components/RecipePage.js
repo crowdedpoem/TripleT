@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./RecipePage.css";
 import bookmarkImg from "../images/pngegg.png";
-import bookmarkImg2 from "../images/Project (20221116020253).png"
+import bookmarkImg2 from "../images/Project (20221116020253).png";
 
 const RecipePage = () => {
   const [recipe, setRecipe] = useState([]);
@@ -14,22 +14,25 @@ const RecipePage = () => {
   const [time, setTime] = useState([]);
   const { id } = useParams();
   const [bookmark, setBookmark] = useState(false);
-  const [img, setImg] = useState(bookmarkImg)
-  const [bookmarkCount, setBookmarkCount] = useState()
+  const [img, setImg] = useState(bookmarkImg);
+  const [bookmarkCount, setBookmarkCount] = useState();
 
-  
-  useEffect(() => {
-    fetchByID(id).then((result) => {
-      if (result) {
-        setRecipe(result);
-        setIngredient(result.ingredients);
-        setSteps(result.steps);
-        setCost(result.cost);
-        setTime(result.totalTime);
-        setBookmarkCount(result.bookmarkCount)
-      }
-    });
-  }, [], id);
+  useEffect(
+    () => {
+      fetchByID(id).then((result) => {
+        if (result) {
+          setRecipe(result);
+          setIngredient(result.ingredients);
+          setSteps(result.steps);
+          setCost(result.cost);
+          setTime(result.totalTime);
+          setBookmarkCount(result.bookmarkCount);
+        }
+      });
+    },
+    [],
+    id
+  );
   async function fetchByID(id) {
     try {
       const response = await axios.get("http://localhost:5000/recipes/" + id);
@@ -41,18 +44,20 @@ const RecipePage = () => {
     }
   }
 
+  const bookmarkBody = (count) => {
+    return {
+      bookmarkCount: { count },
+    };
+  };
 
-  const bookmarkBody = (count)=>{
-    return ({
-      "bookmarkCount":{count}
-    })
-  }
-
-  async function updateBookmark(number){
+  async function updateBookmark(number) {
     try {
-      console.log(bookmarkBody(number))
-      const response = await axios.put("http://localhost:5000/recipes" + id, bookmarkBody(number));
-      
+      console.log(bookmarkBody(number));
+      const response = await axios.put(
+        "http://localhost:5000/recipes" + id,
+        bookmarkBody(number)
+      );
+
       return response;
     } catch (error) {
       console.log(error);
@@ -61,24 +66,22 @@ const RecipePage = () => {
   }
   const handleClick = () => {
     setBookmark((current) => !current);
-    if (bookmark === false){
-      updateBookmark(bookmarkCount+1)
-      setImg(bookmarkImg2)
+    if (bookmark === false) {
+      updateBookmark(bookmarkCount + 1);
+      setImg(bookmarkImg2);
+    } else {
+      updateBookmark(bookmarkCount - 1);
+      setImg(bookmarkImg);
     }
-    else{
-      updateBookmark(bookmarkCount-1)
-      setImg(bookmarkImg)
-    }
-    
-      console.log(bookmark);
-  };
 
+    console.log(bookmark);
+  };
 
   if (recipe) {
     return (
       <body>
         {/* <div className="entire-page"> */}
-{/* RECIPE HEADER */}
+        {/* RECIPE HEADER */}
         <div className="recipe-title-bookmark">
           <h1 className="recipe-header-page main_header">{recipe.title}</h1>
 
@@ -93,7 +96,7 @@ const RecipePage = () => {
             </figure>
           </div>
         </div>
-{/* RECIPE BODY */}
+        {/* RECIPE BODY */}
         <p>Recipe created by {recipe.user}</p>
         <h2>
           ${cost.total} Total / ${cost.perServing} per serving, Serving size:{" "}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./searchbar.css"
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
+import "./searchbar.css";
+import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 
 function SearchBar({ placeholder, data }) {
@@ -48,7 +48,11 @@ function SearchBar({ placeholder, data }) {
         <div className="dataResult">
           {filteredData.slice(0, 15).map((value, key) => {
             return (
-              <Link className="dataItem" to= {`/pages/${value._id}`}  onClick= {clearInput}>
+              <Link
+                className="dataItem"
+                to={`/pages/${value._id}`}
+                onClick={clearInput}
+              >
                 <p>{value.title} </p>
               </Link>
             );

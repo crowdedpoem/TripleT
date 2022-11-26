@@ -1,11 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "backend.js",
+  "main": "index.js",
   "scripts": {
-    "test": "prettier --check .",
-    "dev": "nodemon backend.js",
-    "start": "node backend.js"
+    "test": "prettier --check . && jest",
+    "dev": "nodemon backend_with_db.js",
+    "start": "node backend_with_db.js"
   },
   "author": "",
   "license": "ISC",

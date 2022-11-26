@@ -3,7 +3,6 @@ import Card from "react-bootstrap/Card";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./RecipeCard.css";
 
-
 function RecipeCardBody(props) {
   // <TableBody populateCard = {props.populateCard} />
 
@@ -32,15 +31,17 @@ function RecipeCard(props) {
   if (props) {
     const url = props.passdata.urlSource;
     return (
-      <Card className = "food" style={{ backgroundImage: `url(${url})` }}>
+      <Card className="food" style={{ backgroundImage: `url(${url})` }}>
         <RecipeCardBody passdata={props.passdata} />
         {/* <Button onClick = { () => navigate("/page", {ID : id})} variant="primary"> See Recipe </Button> */}
-        <button onClick={() => navigate(`/pages/${props.passdata._id}`)} variant="primary">
+        <button
+          onClick={() => navigate(`/pages/${props.passdata._id}`)}
+          variant="primary"
+        >
           {" "}
           See Recipe{" "}
         </button>
       </Card>
-
     );
   }
 }

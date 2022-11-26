@@ -3,50 +3,42 @@ import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import CardGroup from "react-bootstrap/CardGroup";
 import SearchBar from "./searchBar";
-import "./home.css"
+import "./home.css";
 function Home() {
+  const [recipes_list, setRecipe] = useState([]);
+  useEffect(() => {
+    fetchAll().then((result) => {
+      if (result) setRecipe(result);
+    });
+  }, []);
 
-
-    const [recipes_list, setRecipe] = useState([]);
-    useEffect(() => {
-      fetchAll().then((result) => {
-        if (result) setRecipe(result);
-      });
-    }, []);
-
-
-    async function fetchAll() {
-        try {
-          const response = await axios.get("http://localhost:5000/recipes");
-          return response.data.recipes_list;
-        } catch (error) {
-          //We're not handling errors. Just logging into the console.
-          console.log(error);
-          return false;
-        }
-      }
-    
-    function populateCards() {
-        const cards = recipes_list.map( (recipe, index) => {
-          console.log(`index : ${index}: ${recipe.title}`)
-          if (index <= 3)
-            return <RecipeCard passdata={recipe} />
-        } );  
-        return cards;
-      }
-    
-    return (
-      <div className="main-container">
-
-          <br/>
-        <div className="cardgroup-container">
-          <CardGroup>
-          {populateCards()}
-          </CardGroup>
-        </div>
-      </div>
-    );
+  async function fetchAll() {
+    try {
+      const response = await axios.get("http://localhost:5000/recipes");
+      return response.data.recipes_list;
+    } catch (error) {
+      //We're not handling errors. Just logging into the console.
+      console.log(error);
+      return false;
+    }
   }
 
+  function populateCards() {
+    const cards = recipes_list.map((recipe, index) => {
+      console.log(`index : ${index}: ${recipe.title}`);
+      if (index <= 3) return <RecipeCard passdata={recipe} />;
+    });
+    return cards;
+  }
 
-  export default Home;
+  return (
+    <div className="main-container">
+      <br />
+      <div className="cardgroup-container">
+        <CardGroup>{populateCards()}</CardGroup>
+      </div>
+    </div>
+  );
+}
+
+export default Home;
