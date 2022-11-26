@@ -35,7 +35,17 @@ async function findRecipeById(id) {
     return undefined;
   }
 }
-
+async function updateRecipeByID(id, requestBody) {
+  try {
+    const result = await recipeModel.findById(id);
+    // console.log(result);
+    const updatedRecipe = await result.updateOne(requestBody);
+    return updatedRecipe;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
 async function addRecipe(recipe) {
   try {
     const recipeToAdd = new recipeModel(recipe);
@@ -72,3 +82,4 @@ exports.findRecipeByIngredient = findRecipeByIngredient;
 exports.findRecipeByTitleAndIngredient = findRecipeByTitleAndIngredient;
 exports.findRecipeById = findRecipeById;
 exports.deleteRecipeById = deleteRecipeById;
+exports.updateRecipeByID = updateRecipeByID;

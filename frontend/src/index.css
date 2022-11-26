@@ -163,7 +163,7 @@ img {
  * 1. Change the font styles in all browsers.
  * 2. Remove the margin in Firefox and Safari.
  */
-button,
+
 input,
 optgroup,
 select,
@@ -243,7 +243,6 @@ fieldset {
  *    `fieldset` elements in all browsers.
  */
 legend {
-  box-sizing: border-box;
   /* 1 */
   color: inherit;
   /* 2 */
@@ -277,7 +276,6 @@ textarea {
  */
 [type='checkbox'],
 [type='radio'] {
-  box-sizing: border-box;
   /* 1 */
   padding: 0;
   /* 2 */
@@ -352,9 +350,6 @@ template {
   display: none;
 }
 
-html {
-  box-sizing: border-box;
-}
 
 *,
 *::before,

@@ -3,8 +3,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./RecipePage.css";
-import bookmarkImg from "./pngegg.png";
-import bookmarkImg2 from "./Project (20221116020253).png"
+import bookmarkImg from "../images/pngegg.png";
+import bookmarkImg2 from "../images/Project (20221116020253).png"
 
 const RecipePage = () => {
   const [recipe, setRecipe] = useState([]);
@@ -16,6 +16,8 @@ const RecipePage = () => {
   const [bookmark, setBookmark] = useState(false);
   const [img, setImg] = useState(bookmarkImg)
   const [bookmarkCount, setBookmarkCount] = useState()
+
+  
   useEffect(() => {
     fetchByID(id).then((result) => {
       if (result) {
@@ -24,9 +26,10 @@ const RecipePage = () => {
         setSteps(result.steps);
         setCost(result.cost);
         setTime(result.totalTime);
+        setBookmarkCount(result.bookmarkCount)
       }
     });
-  }, []);
+  }, [], id);
   async function fetchByID(id) {
     try {
       const response = await axios.get("http://localhost:5000/recipes/" + id);
@@ -37,34 +40,19 @@ const RecipePage = () => {
       return false;
     }
   }
-  async function incrementBookmarkCount(id){
-    try {
 
-      const response = await axios.put("http://localhost:5000/recipes/" + id, );
-      response.data.recipes_list.bookmarkCount +=1
-      return response.data.recipes_list
-    } catch (error) {
-      //We're not handling errors. Just logging into the console.
-      console.log(error);
-      return false;
-    }
-  }
-  async function decrementBookmarkCount(id){
-    try {
-      const response = await axios.get("http://localhost:5000/recipes/" + id);
-      response.data.recipes_list.bookmarkCount -=1
-      return response.data.recipes_list
-    } catch (error) {
-      //We're not handling errors. Just logging into the console.
-      console.log(error);
-      return false;
-    }
+
+  const bookmarkBody = (count)=>{
+    return ({
+      "bookmarkCount":{count}
+    })
   }
 
-
-  async function updateRecipe(recipe){
+  async function updateBookmark(number){
     try {
-      const response = await axios.put("http://localhost:5000/recipes", recipe);
+      console.log(bookmarkBody(number))
+      const response = await axios.put("http://localhost:5000/recipes" + id, bookmarkBody(number));
+      
       return response;
     } catch (error) {
       console.log(error);
@@ -74,11 +62,11 @@ const RecipePage = () => {
   const handleClick = () => {
     setBookmark((current) => !current);
     if (bookmark === false){
-      // setLikes((likes) => likes + 1) 
+      updateBookmark(bookmarkCount+1)
       setImg(bookmarkImg2)
     }
     else{
-      // setLikes((likes) => likes - 1)
+      updateBookmark(bookmarkCount-1)
       setImg(bookmarkImg)
     }
     

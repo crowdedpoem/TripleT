@@ -82,6 +82,23 @@ app.get("/recipes/:id", async (req, res) => {
  });
  
  
+ app.put("/recipes/:id", async(req, res) =>{
+  const id = req.params["id"];
+  console.log("called")
+  const check = await recipeServices.findRecipeById(id);
+  if(check !== undefined && check.length != 0) {
+    const result = await recipeServices.updateRecipeByID(id, req.body);
+    if (result === undefined)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send({ recipes_list: result });
+  }
+  } else{
+    res.status(404).end
+  }
+ })
+ 
+ 
  app.get('/recipes', async(req, res) => {
    const ingredient = req.query['ingredient']; //or req.params.id
    const title = req.query['title'];

@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./RecipeCard.css";
@@ -36,10 +35,10 @@ function RecipeCard(props) {
       <Card className = "food" style={{ backgroundImage: `url(${url})` }}>
         <RecipeCardBody passdata={props.passdata} />
         {/* <Button onClick = { () => navigate("/page", {ID : id})} variant="primary"> See Recipe </Button> */}
-        <Button onClick={() => navigate(`/pages/${props.passdata._id}`)} variant="primary">
+        <button onClick={() => navigate(`/pages/${props.passdata._id}`)} variant="primary">
           {" "}
           See Recipe{" "}
-        </Button>
+        </button>
       </Card>
 
     );
