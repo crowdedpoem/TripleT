@@ -38,20 +38,17 @@ async function findFoodById(id){
     }
 }
 
-// function genID(){
-//     var S4 = function() {
-//         return (((1+Math.random())*0x10000)|0).toString(6).substring(1);
-//      };
-//      return (S4());
-// }
-
 async function addFood(food){
     // foodModel is a Model, a subclass of mongoose.Model
     const foodModel = getDbConnection().model("Food", FoodSchema);
     try{
+
         // you can use a model to create new documents using 'new' and
         // passing the JSON content of the document
         const foodToAdd = new foodModel(food)
+        var name = food["title"]
+        console.log("name is " + name)
+
         const savedFood = await foodToAdd.save()
         return savedFood
 
