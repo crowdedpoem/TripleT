@@ -17,7 +17,7 @@ const FoodSchema = new mongoose.Schema(
       trim: false,
     },
   },
-  { collection: "food_list" }
+  { collection: "food_list" },
 );
 
 module.exports = FoodSchema;

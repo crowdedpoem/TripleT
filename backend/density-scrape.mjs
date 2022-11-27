@@ -8,7 +8,7 @@ async function scrape(food) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(
-    "https://www.aqua-calc.com/page/density-table/substance/" + food
+    "https://www.aqua-calc.com/page/density-table/substance/" + food,
   );
 
   const [el] = await page.$x('//*[@id="form_id_density-table"]/ul[1]/li[1]');

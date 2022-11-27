@@ -80,7 +80,7 @@ const RecipeSchema = new mongoose.Schema(
   },
   //will need to add user that the recipe belongs to
   //add in amount of favorites/likes
-  { collection: "recipes_list" }
+  { collection: "recipes_list" },
 );
 
 const Recipe = mongoose.model("Recipe", RecipeSchema);
