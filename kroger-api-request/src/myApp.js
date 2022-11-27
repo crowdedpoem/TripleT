@@ -1,10 +1,8 @@
 import { useState } from "react";
 import "./app.css";
-const tokenFunction = require('./token-service.js');
-const productFunction = require('./product.js');
-const locationFunction = require('./location.js');
-
-
+const tokenFunction = require("./token-service.js");
+const productFunction = require("./product.js");
+const locationFunction = require("./location.js");
 
 function App() {
   const [item, setItem] = useState("");
@@ -12,35 +10,47 @@ function App() {
   const [zipCode, setZipCode] = useState("");
   const [message, setMessage] = useState("");
   let accessToken = "";
-  
 
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // got access token
-      let tokenBody = 'grant_type=client_credentials&scope=product.compact';
+      let tokenBody = "grant_type=client_credentials&scope=product.compact";
       let res = await tokenFunction.get(tokenBody);
       accessToken = res.access_token;
 
       // use the token to do location search near the zipcode
-      let locationRes = await locationFunction.getLocations(zipCode, accessToken);
+      let locationRes = await locationFunction.getLocations(
+        zipCode,
+        accessToken
+      );
       let locationId = locationRes.data[0].locationId;
 
       // ues the token to do product detail search
-      let productRes = await productFunction.getProducts(item, accessToken, locationId);
+      let productRes = await productFunction.getProducts(
+        item,
+        accessToken,
+        locationId
+      );
       // console.log(productRes);
       let price = productRes.data[0].items[0].price.regular;
-      let unit =  productRes.data[0].items[0].size;
+      let unit = productRes.data[0].items[0].size;
 
-      alert("The price of " + quantity + " " + item + "(" + unit +") is " + price * quantity);
+      alert(
+        "The price of " +
+          quantity +
+          " " +
+          item +
+          "(" +
+          unit +
+          ") is " +
+          price * quantity
+      );
 
-
-
-    setItem("");
-    setQuantity("");
-    setZipCode("");
-    setMessage("API request successfully");
-
+      setItem("");
+      setQuantity("");
+      setZipCode("");
+      setMessage("API request successfully");
     } catch (err) {
       console.log(err);
     }

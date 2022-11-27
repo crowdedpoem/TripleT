@@ -8,19 +8,18 @@ function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
-  const handleKeyDown = event => {
-    console.log('User pressed: ', event.key);
+  const handleKeyDown = (event) => {
+    console.log("User pressed: ", event.key);
 
     // console.log(message);
 
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       // 👇️ your logic here
-      console.log('Enter key pressed ✅');
-      console.log(`The word they searched for was ${wordEntered}`)
-      Navigate("/")
+      console.log("Enter key pressed ✅");
+      console.log(`The word they searched for was ${wordEntered}`);
+      Navigate("/");
     }
   };
-
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;

@@ -1,11 +1,9 @@
 .main-container {
   width: 97%;
 }
-.cardgroup-container{
+.cardgroup-container {
   display: flex;
-    width:97%;
-
-  
+  width: 97%;
 }
 #root {
   width: 100%;

@@ -7,9 +7,12 @@ function SearchResults(props) {
   const [filteredList, setFilteredList] = useState([]);
   useEffect(() => {
     fetchAll().then((result) => {
-      if (result) 
-      {
-        setFilteredList(result.find(element=>(element.name.string.split(" ").includes(props))))
+      if (result) {
+        setFilteredList(
+          result.find((element) =>
+            element.name.string.split(" ").includes(props)
+          )
+        );
       }
     });
   }, []);
@@ -26,8 +29,8 @@ function SearchResults(props) {
   }
 
   function populateCards() {
-    const cards = filteredList.map(recipe => {
-        return <RecipeCard passdata={recipe} />;
+    const cards = filteredList.map((recipe) => {
+      return <RecipeCard passdata={recipe} />;
     });
     return cards;
   }

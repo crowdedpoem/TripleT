@@ -5,7 +5,7 @@ import "./RecipeCard.css";
 
 function RecipeCardBody(props) {
   // <TableBody populateCard = {props.populateCard} />
-  
+
   const recipe = props.passdata;
   return (
     <>

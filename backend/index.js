@@ -12,26 +12,25 @@ const app = express();
 import cors from "cors";
 const port = 5000;
 
-
 //TEMPLATE POST REQUEST
-// { 
+// {
 //   "title": "waffle fries",
 //   "servings": 3,
 //   "blurb": "crispy fries",
 //   "totalTime":{
 //     "active": 5,
-//     "cook": 15 
+//     "cook": 15
 //   },
-//   "ingredients": 
+//   "ingredients":
 //   [
 //      {
 //      "name": "potato",
-//      "amount": 2, 
+//      "amount": 2,
 //      "substitute":"spaghetti"
 //      },
 //      {
 //      "name": "salt",
-//      "amount": 2, 
+//      "amount": 2,
 //      "substitute":"spaghetti"
 //      }
 //   ],

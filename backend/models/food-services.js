@@ -63,4 +63,3 @@ export async function findFoodByPrice(price) {
   const foodModel = getDbConnection().model("Food", FoodSchema);
   return await foodModel.find({ price: price });
 }
-

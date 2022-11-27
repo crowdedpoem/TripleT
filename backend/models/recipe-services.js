@@ -31,7 +31,7 @@ export async function getRecipe(title, ingredient) {
   return result;
 }
 
-export  async function findRecipeById(id) {
+export async function findRecipeById(id) {
   try {
     console.log(await Recipe.findById(id));
     return await Recipe.findById(id);
@@ -82,7 +82,7 @@ function standardize(num, unit) {
   return [num * mult[unit], base[unit]];
 }
 
-export  async function getPrice(item, stanInput, zipCode) {
+export async function getPrice(item, stanInput, zipCode) {
   console.log("get price has " + item);
   try {
     // got access token
@@ -177,5 +177,3 @@ export async function findRecipeByIngredient(ingredient) {
 export async function findRecipeByTitleAndIngredient(title, ingredient) {
   return await Recipe.find({ title: title, ingredient: ingredient });
 }
-
-
