@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./navbar.css";
 import logo from "../images/RecipeBuddyLogo.png";
 import axios from "axios";
-import SearchBar from "./searchBar";
+import SearchBar from "./SearchBar";
 import React, { useState, useEffect } from "react";
 function NavigationBar() {
   const [recipes_list, setRecipe] = useState([]);

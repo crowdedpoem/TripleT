@@ -17,22 +17,18 @@ const RecipePage = () => {
   const [img, setImg] = useState(bookmarkImg);
   const [bookmarkCount, setBookmarkCount] = useState();
 
-  useEffect(
-    () => {
-      fetchByID(id).then((result) => {
-        if (result) {
-          setRecipe(result);
-          setIngredient(result.ingredients);
-          setSteps(result.steps);
-          setCost(result.cost);
-          setTime(result.totalTime);
-          setBookmarkCount(result.bookmarkCount);
-        }
-      });
-    },
-    [],
-    id
-  );
+  useEffect(() => {
+    fetchByID(id).then((result) => {
+      if (result) {
+        setRecipe(result);
+        setIngredient(result.ingredients);
+        setSteps(result.steps);
+        setCost(result.cost);
+        setTime(result.totalTime);
+        setBookmarkCount(result.bookmarkCount);
+      }
+    });
+  }, []);
   async function fetchByID(id) {
     try {
       const response = await axios.get("http://localhost:5000/recipes/" + id);

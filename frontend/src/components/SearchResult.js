@@ -3,11 +3,14 @@ import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import CardGroup from "react-bootstrap/CardGroup";
 import "./home.css";
-function Home() {
-  const [recipes_list, setRecipe] = useState([]);
+function SearchResults(props) {
+  const [filteredList, setFilteredList] = useState([]);
   useEffect(() => {
     fetchAll().then((result) => {
-      if (result) setRecipe(result);
+      if (result) 
+      {
+        setFilteredList(result.find(element=>(element.name.string.split(" ").includes(props))))
+      }
     });
   }, []);
 
@@ -23,9 +26,8 @@ function Home() {
   }
 
   function populateCards() {
-    const cards = recipes_list.map((recipe, index) => {
-      console.log(`index : ${index}: ${recipe.title}`);
-      if (index <= 3) return <RecipeCard passdata={recipe} />;
+    const cards = filteredList.map(recipe => {
+        return <RecipeCard passdata={recipe} />;
     });
     return cards;
   }
@@ -40,4 +42,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default SearchResults;
