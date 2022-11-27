@@ -17,7 +17,7 @@ mongoose
   )
   .catch((error) => console.log(error));
 
-async function getRecipe(title, ingredient) {
+export async function getRecipe(title, ingredient) {
   let result;
   if (title === undefined && ingredient === undefined) {
     result = await Recipe.find();
@@ -31,7 +31,7 @@ async function getRecipe(title, ingredient) {
   return result;
 }
 
-async function findRecipeById(id) {
+export  async function findRecipeById(id) {
   try {
     console.log(await Recipe.findById(id));
     return await Recipe.findById(id);
@@ -40,7 +40,7 @@ async function findRecipeById(id) {
     return undefined;
   }
 }
-async function updateRecipeByID(id, requestBody) {
+export async function updateRecipeByID(id, requestBody) {
   try {
     const result = await recipeModel.findById(id);
     // console.log(result);
@@ -82,7 +82,7 @@ function standardize(num, unit) {
   return [num * mult[unit], base[unit]];
 }
 
-async function getPrice(item, stanInput, zipCode) {
+export  async function getPrice(item, stanInput, zipCode) {
   console.log("get price has " + item);
   try {
     // got access token
@@ -129,7 +129,7 @@ async function getPrice(item, stanInput, zipCode) {
   }
 }
 
-async function addRecipe(recipe) {
+export async function addRecipe(recipe) {
   const servings = recipe["servings"];
   try {
     let recipeToAdd = new Recipe(recipe);
@@ -162,28 +162,20 @@ async function addRecipe(recipe) {
   }
 }
 
-async function deleteRecipeById(id) {
+export async function deleteRecipeById(id) {
   return await Recipe.findByIdAndDelete(id);
 }
 
-async function findRecipeByTitle(title) {
+export async function findRecipeByTitle(title) {
   return await Recipe.find({ title: title });
 }
 
-async function findRecipeByIngredient(ingredient) {
+export async function findRecipeByIngredient(ingredient) {
   return await Recipe.find({ ingredient: ingredient });
 }
 
-async function findRecipeByTitleAndIngredient(title, ingredient) {
+export async function findRecipeByTitleAndIngredient(title, ingredient) {
   return await Recipe.find({ title: title, ingredient: ingredient });
 }
 
-exports.getRecipe = getRecipe;
-exports.findRecipeByTitle = findRecipeByTitle;
-exports.addRecipe = addRecipe;
-exports.deleteRecipe = deleteRecipeById;
-exports.findRecipeByIngredient = findRecipeByIngredient;
-exports.findRecipeByTitleAndIngredient = findRecipeByTitleAndIngredient;
-exports.findRecipeById = findRecipeById;
-exports.deleteRecipeById = deleteRecipeById;
-exports.updateRecipeByID = updateRecipeByID;
+

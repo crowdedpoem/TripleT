@@ -25,6 +25,8 @@
   background-color: white;
   display: grid;
   place-items: center;
+  display: flex;
+  align-items: start;
 }
 
 input:focus {

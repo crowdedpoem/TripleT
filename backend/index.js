@@ -12,52 +12,34 @@ const app = express();
 import cors from "cors";
 const port = 5000;
 
+
 //TEMPLATE POST REQUEST
-// {
-//   "title": "waffle fries",
+// { 
 //   "title": "waffle fries",
 //   "servings": 3,
 //   "blurb": "crispy fries",
-//   "blurb": "crispy fries",
 //   "totalTime":{
 //     "active": 5,
-//     "cook": 15
-//     "active": 5,
-//     "cook": 15
+//     "cook": 15 
 //   },
-//   "ingredients":
-//   "ingredients":
+//   "ingredients": 
 //   [
 //      {
 //      "name": "potato",
-//      "amount": 2,
+//      "amount": 2, 
 //      "substitute":"spaghetti"
 //      },
 //      {
 //      "name": "salt",
-//      "name": "potato",
-//      "amount": 2,
-//      "substitute":"spaghetti"
-//      },
-//      {
-//      "name": "salt",
-//      "amount": 2,
+//      "amount": 2, 
 //      "substitute":"spaghetti"
 //      }
 //   ],
-//   "steps":
 //   "steps":
 //   ["first boil noodle",
 //   "make cheese sauce",
 //   "eat"
 
-//   ],
-//   "urlSource": "https://www.foodandwine.com/thmb/FERhwFz2hJrCkgtDZmkz_rHaCrA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-hot-dogs-in-every-state-FT-BLOG1020-6e025500cefb480ba986b163792ec790.jpg",
-//   "cost":{
-//       "total": 4.67,
-//       "perServing": 0.68
-//   },
-//   "user":"User"
 //   ],
 //   "urlSource": "https://www.foodandwine.com/thmb/FERhwFz2hJrCkgtDZmkz_rHaCrA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-hot-dogs-in-every-state-FT-BLOG1020-6e025500cefb480ba986b163792ec790.jpg",
 //   "cost":{

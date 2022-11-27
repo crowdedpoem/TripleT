@@ -351,12 +351,6 @@ template {
 }
 
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
 figure {
   margin: 0;
 }
