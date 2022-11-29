@@ -33,7 +33,7 @@ function getDbConnection() {
 }
 
 
-async function getRecipe(title, ingredient) {
+export async function getRecipe(title, ingredient) {
   const RecipeModel = getDbConnection().model("Recipe", Recipe)
   let result;
   if (title === undefined && ingredient === undefined) {
@@ -183,7 +183,7 @@ export async function deleteRecipeById(id) {
   return await Recipe.findByIdAndDelete(id);
 }
 
-async function findRecipeByTitle(title) {
+export async function findRecipeByTitle(title) {
   const RecipeModel = getDbConnection().model("Recipe", Recipe.RecipeSchema)
   return await RecipeModel.find({ title: title });
 }
@@ -196,11 +196,11 @@ export async function findRecipeByTitleAndIngredient(title, ingredient) {
   return await Recipe.find({ title: title, ingredient: ingredient });
 }
 
-export {addRecipe};
-export {getRecipe};
-export {findRecipeById};
-export {findRecipeByTitle};
-export {deleteRecipeById};
-export {findRecipeByIngredient};
-export {findRecipeByTitleAndIngredient};
+// export {addRecipe};
+// export {getRecipe};
+// export {findRecipeById};
+// export {findRecipeByTitle};
+// export {deleteRecipeById};
+// export {findRecipeByIngredient};
+// export {findRecipeByTitleAndIngredient};
 // module.exports={addRecipe, getRecipe, findRecipeById, findRecipeByTitle, deleteRecipeById, findRecipeByIngredient, findRecipeByTitleAndIngredient, setConnection, getDbConnection}

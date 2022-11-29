@@ -1,4 +1,5 @@
 import express from "express";
+// const express = require('express')
 import {
   findRecipeById,
   deleteRecipeById,
@@ -10,7 +11,7 @@ import {
 } from "./models/recipe-services.js";
 const app = express();
 import cors from "cors";
-const port = 5000;
+const port = 4000;
 
 //TEMPLATE POST REQUEST
 // {
@@ -122,16 +123,16 @@ app.get("/recipes", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
 });
-  const id = req.params["id"]; //or req.params.id
-  let result = await findRecipeById(id);
-  if (result === undefined) res.status(404).send("Resource not found.");
-  else {
-    res.send({ recipes_list: result });
-  }
-});
+//   const id = req.params["id"]; //or req.params.id
+//   let result = await findRecipeById(id);
+//   if (result === undefined) res.status(404).send("Resource not found.");
+//   else {
+//     res.send({ recipes_list: result });
+//   }
+// });
 
 
 
@@ -181,6 +182,3 @@ app.get("/recipes", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
