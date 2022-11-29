@@ -65,10 +65,10 @@ function Form(props) {
   }
 
   function addCardIng(event, butID) {
-    console.log(document.getElementById(butID))
-    let killThis = document.getElementById(butID)
-    let parent = killThis.parentNode
-    parent.removeChild(killThis)
+    console.log(document.getElementById(butID));
+    let killThis = document.getElementById(butID);
+    let parent = killThis.parentNode;
+    parent.removeChild(killThis);
     numIngredients++;
     var container = document.getElementById("cards");
     //    var card = container.cloneNode(true)
@@ -128,12 +128,22 @@ function Form(props) {
       false
     );
 
-
     let option = document.createElement("option");
-    option.innerText = "--Select Unit--"
-    select.appendChild(option)
-    let imperial = ["tsp", "tbsp", "fl oz", "cup", "pint", "quart", "gallon", "oz", "pound", "ct"];
-    
+    option.innerText = "--Select Unit--";
+    select.appendChild(option);
+    let imperial = [
+      "tsp",
+      "tbsp",
+      "fl oz",
+      "cup",
+      "pint",
+      "quart",
+      "gallon",
+      "oz",
+      "pound",
+      "ct",
+    ];
+
     for (let type in imperial) {
       option = document.createElement("option");
       option.innerText = imperial[type];
@@ -148,7 +158,7 @@ function Form(props) {
     let button = document.createElement("Button");
     button.innerText = "Add Another";
     button.type = "button";
-    button.id = "button" + numIngredients
+    button.id = "button" + numIngredients;
     button.addEventListener(
       "click",
       function (e) {
@@ -170,21 +180,14 @@ function Form(props) {
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === "title") {
-      setRecipe(
-        { ...recipe, title: value }
-      );
+      setRecipe({ ...recipe, title: value });
     } else if (name === "servings") {
       setRecipe({ ...recipe, servings: value });
-    }
-    else if(name == "blurb"){
-      setRecipe(
-        { ...recipe, blurb: value }
-      );
-    }
-    else if(name == "servings"){
-      setRecipe({...recipe, servings: value})
-    }
-    else if (name.slice(0, 4) == "step") {
+    } else if (name === "blurb") {
+      setRecipe({ ...recipe, blurb: value });
+    } else if (name === "servings") {
+      setRecipe({ ...recipe, servings: value });
+    } else if (name.slice(0, 4) === "step") {
       let spot = name.toString();
       spot = spot.slice(4);
       var temp = recipe["steps"];
@@ -194,79 +197,58 @@ function Form(props) {
         temp.push(value);
       }
 
-      setRecipe(
-        { ...recipe, steps: temp }
-      );
-    }
-    else if(name.slice(0,10) == "ingredient"){
-      let spot = name.slice(10)
-      var temp = recipe['ingredients']
+      setRecipe({ ...recipe, steps: temp });
+    } else if (name.slice(0, 10) === "ingredient") {
+      let spot = name.slice(10);
+      var temp = recipe["ingredients"];
       if (temp.length > spot) {
-        temp[spot]['name'] = value;
-
+        temp[spot]["name"] = value;
       } else {
         let another = {
-          name:value,
-          size:"",
-          unit:"",
-        }
-        temp.push(another);
-      }
-
-      setRecipe(
-        { ...recipe, ingredients: temp }
-      );
-
-    }
-    else if (name.slice(0,4) == "size"){
-      let spot = name.slice(4)
-      var temp = recipe['ingredients']
-      if (temp.length > spot) {
-        temp[spot]['size'] = value;
-
-      } else {
-        let another = {
-          name:"",
-          size: value,
-          unit:"",
-        }
-        temp.push(another);
-      }
-      setRecipe(
-        { ...recipe, ingredients: temp }
-      );
-
-    }
-    else if (name.slice(0,4) == "unit"){
-      let spot = name.slice(4)
-      var temp = recipe['ingredients']
-      if (temp.length > spot) {
-        temp[spot]['unit'] = value;
-
-      } else {
-        let another = {
-          name:"",
+          name: value,
           size: "",
-          unit:value,
-        }
+          unit: "",
+        };
         temp.push(another);
       }
-    }
-    else if (name == "activeTime"){
-      let temp = recipe
-      temp.totalTime.activeTime = value
-      setRecipe(
-        temp
-      );
-    }
-    else if(name == "cookTime"){
-      let temp = recipe
-      temp.totalTime.cookTime = value
-      setRecipe(
-        temp
-      );
-    }
-    else {
+
+      setRecipe({ ...recipe, ingredients: temp });
+    } else if (name.slice(0, 4) === "size") {
+      let spot = name.slice(4);
+      var temp = recipe["ingredients"];
+      if (temp.length > spot) {
+        temp[spot]["size"] = value;
+      } else {
+        let another = {
+          name: "",
+          size: value,
+          unit: "",
+        };
+        temp.push(another);
+      }
+      setRecipe({ ...recipe, ingredients: temp });
+    } else if (name.slice(0, 4) === "unit") {
+      let spot = name.slice(4);
+      var temp = recipe["ingredients"];
+      if (temp.length > spot) {
+        temp[spot]["unit"] = value;
+      } else {
+        let another = {
+          name: "",
+          size: "",
+          unit: value,
+        };
+        temp.push(another);
+      }
+    } else if (name === "activeTime") {
+      let temp = recipe;
+      temp.totalTime.activeTime = value;
+      setRecipe(temp);
+    } else if (name === "cookTime") {
+      let temp = recipe;
+      temp.totalTime.cookTime = value;
+      setRecipe(temp);
+    } else {
       console.log("could not find " + name);
     }
   }
@@ -306,7 +288,8 @@ function Form(props) {
         name="cookTime"
         id="cookTime"
         value={recipe.cookTime}
-        onChange={handleChange} />
+        onChange={handleChange}
+      />
 
       <label htmlFor="activeTime">Active Time</label>
       <input
@@ -314,7 +297,8 @@ function Form(props) {
         name="activeTime"
         id="activeTime"
         value={recipe.activeTime}
-        onChange={handleChange} />
+        onChange={handleChange}
+      />
 
       <div id="cards">
         <Card style={{ width: "22rem" }} id="cIng">
@@ -328,7 +312,7 @@ function Form(props) {
               onChange={handleChange}
             />
 
-            <label>Size</label> 
+            <label>Size</label>
             <input
               type="text"
               name="size0"
@@ -342,14 +326,18 @@ function Form(props) {
               <option value="tbsp">tablespoon</option>
               <option value="fl oz">fl oz</option>
               <option value="cup">cup</option>
-              <option value = "pint">pint</option>
+              <option value="pint">pint</option>
               <option value="quart">quart</option>
-              <option value = "gallon">gallon</option>
-              <option value = "oz">oz</option>
-              <option value = "lb">pounds</option>
-              <option value = "ct">count</option>
+              <option value="gallon">gallon</option>
+              <option value="oz">oz</option>
+              <option value="lb">pounds</option>
+              <option value="ct">count</option>
             </select>
-            <Button id="firstBut" variant="primary" onClick={e => addCardIng(e, "firstBut")}>
+            <Button
+              id="firstBut"
+              variant="primary"
+              onClick={(e) => addCardIng(e, "firstBut")}
+            >
               Add Another Ingredient
             </Button>
           </Card.Body>

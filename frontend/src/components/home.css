@@ -1,0 +1,10 @@
+.main-container {
+  width: 97%;
+}
+.cardgroup-container {
+  display: flex;
+  width: 97%;
+}
+#root {
+  width: 100%;
+}
