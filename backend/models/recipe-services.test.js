@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
-const {Recipe, RecipeSchema} = require("./recipe.js");
+
+// import mongoose from 'mongoose'
+const RecipeSchema = require("./recipe.js");
 const recipeServices = require("./recipe-services.js");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-
 
 let mongoServer;
 let conn;

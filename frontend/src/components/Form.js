@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-
 function Form(props) {
   var numIngredients = 0;
   var numSteps = 0;
@@ -12,7 +11,11 @@ function Form(props) {
     blurb: "",
     servings: "",
     servings: "",
-    price: "",
+    cost: {
+      total: "",
+      perServing: "",
+    },
+
     img: "",
     totalTime: {
       cookTime: "",
@@ -90,8 +93,6 @@ function Form(props) {
     let label1 = document.createElement("label");
     label1.htmlFor = "input" + (numIngredients + 1);
     label1.innerText = "Name";
-
-
 
     let input = document.createElement("input");
     input.innerText = "Name";
@@ -259,9 +260,8 @@ function Form(props) {
 
   return (
     <form>
-
-     {/* testing env */}
-      <input name= "img" type="file"></input>
+      {/* testing env */}
+      <input name="img" type="file"></input>
       {/* testing env */}
       <label htmlFor="title">Title</label>
       <input

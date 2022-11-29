@@ -1,6 +1,6 @@
-import express from "express";
-// const express = require('express')
-import {
+// import express from "express";
+const express = require('express')
+const {
   findRecipeById,
   deleteRecipeById,
   findRecipeByTitle,
@@ -8,9 +8,10 @@ import {
   findRecipeByTitleAndIngredient,
   addRecipe,
   getRecipe,
-} from "./models/recipe-services.js";
+} = require( "./models/recipe-services.js");
 const app = express();
-import cors from "cors";
+// import cors from "cors";
+const cors = require('cors')
 const port = 4000;
 
 //TEMPLATE POST REQUEST

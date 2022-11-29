@@ -1,5 +1,5 @@
-// const fetch = require('node-fetch')
-import fetch from "node-fetch";
+const fetch = require('node-fetch')
+// import fetch from "node-fetch";
 // Parameters imported from .env environment variables
 const clientId =
   "recipebuddy-78ea0d8d713a1397c62af41d256f22472044874818385584697";
@@ -44,5 +44,5 @@ async function get(body) {
   return await tokenResponse.json();
 }
 
-export default get;
-// module.exports = {get}
+// export default get;
+exports.get = get

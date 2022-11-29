@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://api.kroger.com";
-import fetch from "node-fetch";
-// const fetch = require('node-fetch')
+// import fetch from "node-fetch";
+const fetch = require('node-fetch')
 
 // Creates location request and display returned data on click
 
@@ -23,6 +23,6 @@ async function getLocations(zipCode, access_token) {
   return locationResponse.json();
 }
 
-// exports.getLocations = getLocations;
-export default getLocations;
+exports.getLocations = getLocations;
+// export default getLocations;
 // module.exports = {getLocations}
