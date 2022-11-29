@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+// const puppeteer = require('puppeteer')
 
 async function scrape(food) {
   while (food.indexOf(" ") != -1) {
@@ -26,3 +27,4 @@ async function scrape(food) {
 }
 
 export default scrape;
+// module.exports = {scrape}

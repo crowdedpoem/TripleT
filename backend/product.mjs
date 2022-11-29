@@ -1,5 +1,6 @@
 const API_BASE_URL = "https://api.kroger.com";
 import fetch from "node-fetch";
+// const fetch = require('node-fetch')
 
 // Product request
 async function getProducts(term, accessToken, locationId) {
@@ -33,3 +34,4 @@ async function getProducts(term, accessToken, locationId) {
 
 // exports.getProducts = getProducts;
 export default getProducts;
+// module.exports = {getProducts}

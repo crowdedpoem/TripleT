@@ -1,26 +1,43 @@
-import mongoose from "mongoose";
-import Recipe from "./recipe.js";
-import get from "../token-service.mjs";
-import productFunction from "../product.mjs";
-import locationFunction from "../location.mjs";
-import scrape from "../density-scrape.mjs";
+
+// const Recipe = require('./recipe.js')
+// const get = require('../token-service.mjs')
+// const productFunction = require('../product.mjs')
+// const locationFunction = require('../location.mjs') 
+// const scrape = require('../density-scrape.mjs')
+// const mongoose = require('mongoose')
+import Recipe from './recipe.js';
+import get from '../token-service.mjs'
+import productFunction from '../product.mjs'
+import locationFunction from '../location.mjs'
+import scrape from '../density-scrape.mjs'
+import mongoose from 'mongoose'
+
+let dbConnection;
+
+function setConnection(newConn){
+  dbConnection = newConn;
+  return dbConnection;
+}
 
 mongoose.set("debug", true);
+// refactor to create a connectino using function
+function getDbConnection() {
+  if (!dbConnection) {
+    dbConnection = mongoose
+  .createConnection("mongodb+srv://TripleT:%21RecipeBuddy%21@recipe.m0n81de.mongodb.net/test", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  }
+  return dbConnection;
+}
 
-mongoose
-  .connect(
-    "mongodb+srv://TripleT:%21RecipeBuddy%21@recipe.m0n81de.mongodb.net/test",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
-  )
-  .catch((error) => console.log(error));
 
-export async function getRecipe(title, ingredient) {
+async function getRecipe(title, ingredient) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe)
   let result;
   if (title === undefined && ingredient === undefined) {
-    result = await Recipe.find();
+    result = await RecipeModel.find();
   } else if (title && !ingredient) {
     result = await findRecipeByTitle(title);
   } else if (ingredient && !title) {
@@ -166,8 +183,9 @@ export async function deleteRecipeById(id) {
   return await Recipe.findByIdAndDelete(id);
 }
 
-export async function findRecipeByTitle(title) {
-  return await Recipe.find({ title: title });
+async function findRecipeByTitle(title) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe.RecipeSchema)
+  return await RecipeModel.find({ title: title });
 }
 
 export async function findRecipeByIngredient(ingredient) {
@@ -177,3 +195,12 @@ export async function findRecipeByIngredient(ingredient) {
 export async function findRecipeByTitleAndIngredient(title, ingredient) {
   return await Recipe.find({ title: title, ingredient: ingredient });
 }
+
+export {addRecipe};
+export {getRecipe};
+export {findRecipeById};
+export {findRecipeByTitle};
+export {deleteRecipeById};
+export {findRecipeByIngredient};
+export {findRecipeByTitleAndIngredient};
+// module.exports={addRecipe, getRecipe, findRecipeById, findRecipeByTitle, deleteRecipeById, findRecipeByIngredient, findRecipeByTitleAndIngredient, setConnection, getDbConnection}

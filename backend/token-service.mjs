@@ -45,3 +45,4 @@ async function get(body) {
 }
 
 export default get;
+// module.exports = {get}
