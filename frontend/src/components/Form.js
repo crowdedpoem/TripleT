@@ -3,6 +3,17 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 
+const multer = require('multer')
+const Storage = multer.diskStorage({
+  destination:'uploads',
+  filename:(req, file, cb)=>{
+    cb(null, file.originalname)
+  }
+});
+const upload = multer({
+  storage:Storage
+}).single('testImage')
+
 function Form(props) {
   var numIngredients = 0;
   var numSteps = 0;

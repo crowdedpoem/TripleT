@@ -23,19 +23,18 @@ jobs:
           node-version: "18.x"
 
       - name: npm install, build, and test
-        working-directory: ./backend
         run: |
           npm install
           npm run build --if-present
           npm run test --if-present
-        
+        working-directory: backend
           
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: ./backend
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,4 +56,4 @@ jobs:
           app-name: "RecipeBuddy"
           slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_25F89C61A1EF46E38C4CB88A3B6A3B07 }}
-          package: $(System.DefaultWorkingDirectory)/backend
+          package: backend
