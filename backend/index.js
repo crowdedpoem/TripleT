@@ -126,6 +126,10 @@ function initial() {
   });
 }
 
+// routes
+require('./routes/auth.routes')(app);
+require('./routes/user.routes')(app);
+
 // GET BY RECIPE NAME
 app.get("/recipes/:id", async (req, res) => {
   const id = req.params["id"]; //or req.params.id
