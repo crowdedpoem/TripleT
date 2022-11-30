@@ -59,7 +59,11 @@ export async function findFoodByName(name) {
   return await foodModel.find({ name: name });
 }
 
-export async function findFoodByPrice(price) {
+async function findFoodByPrice(price) {
   const foodModel = getDbConnection().model("Food", FoodSchema);
   return await foodModel.find({ price: price });
 }
+
+exports.getFood = getFood;
+exports.addFood = addFood;
+exports.findFoodById = findFoodById;

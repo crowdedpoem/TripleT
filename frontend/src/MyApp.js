@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/navbar";
 import RecipePage from "./components/RecipePage";
 import Home from "./components/home";
-import SearchResults from "./components/SearchResult";
 import Form from "./components/Form";
 import "./MyApp.css";
 

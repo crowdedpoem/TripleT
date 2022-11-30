@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose')
+// import mongoose from 'mongoose'
 
 const RecipeSchema = new mongoose.Schema(
   {
@@ -71,7 +72,7 @@ const RecipeSchema = new mongoose.Schema(
     },
     user: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
     bookmarkCount: {
@@ -83,6 +84,8 @@ const RecipeSchema = new mongoose.Schema(
   { collection: "recipes_list" },
 );
 
-const Recipe = mongoose.model("Recipe", RecipeSchema);
-// module.exports = Recipe;
-export default Recipe;
+// const Recipe = mongoose.model("Recipe", RecipeSchema);
+// check how recipe js export is used, need to create mongoose model
+// getconnection.model
+module.exports = RecipeSchema;
+// export default Recipe;
