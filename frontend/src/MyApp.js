@@ -3,6 +3,7 @@ import NavigationBar from "./components/navbar";
 import RecipePage from "./components/RecipePage";
 import Home from "./components/home";
 import Form from "./components/Form";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./MyApp.css";
 
 function MyApp() {
