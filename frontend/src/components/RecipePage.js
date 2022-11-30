@@ -18,6 +18,7 @@ const RecipePage = () => {
   const [bookmarkCount, setBookmarkCount] = useState();
 
   useEffect(() => {
+    
     fetchByID(id).then((result) => {
       if (result) {
         setRecipe(result);
@@ -28,7 +29,7 @@ const RecipePage = () => {
         setBookmarkCount(result.bookmarkCount);
       }
     });
-  }, []);
+  }, [id]);
   async function fetchByID(id) {
     try {
       const response = await axios.get("http://localhost:5000/recipes/" + id);
