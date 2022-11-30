@@ -4,23 +4,31 @@ import get from "../token-service.mjs";
 import productFunction from "../product.mjs";
 import locationFunction from "../location.mjs";
 import scrape from "../density-scrape.mjs";
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config();
+let dbConnection;
 
-mongoose.set("debug", true);
-
-mongoose
-  .connect(
-    "mongodb+srv://TripleT:%21RecipeBuddy%21@recipe.m0n81de.mongodb.net/test",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
-  )
-  .catch((error) => console.log(error));
+ export function setConnection(newConn){
+    dbConnection = newConn;
+    return dbConnection;
+  }
+  
+  function getDbConnection() {
+    if (!dbConnection) {
+      dbConnection = mongoose.createConnection(process.env.MONGODB_URI,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+    }
+    return dbConnection;
+  }
 
 export async function getRecipe(title, ingredient) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
   let result;
   if (title === undefined && ingredient === undefined) {
-    result = await Recipe.find();
+    result = await RecipeModel.find();
   } else if (title && !ingredient) {
     result = await findRecipeByTitle(title);
   } else if (ingredient && !title) {
@@ -32,17 +40,19 @@ export async function getRecipe(title, ingredient) {
 }
 
 export async function findRecipeById(id) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
+
   try {
-    console.log(await Recipe.findById(id));
-    return await Recipe.findById(id);
+    return await RecipeModel.findById(id);
   } catch (error) {
     console.log(error);
     return undefined;
   }
 }
 export async function updateRecipeByID(id, requestBody) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
   try {
-    const result = await recipeModel.findById(id);
+    const result = await RecipeModel.findById(id);
     // console.log(result);
     const updatedRecipe = await result.updateOne(requestBody);
     return updatedRecipe;
@@ -131,8 +141,10 @@ export async function getPrice(item, stanInput, zipCode) {
 
 export async function addRecipe(recipe) {
   const servings = recipe["servings"];
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
+
   try {
-    let recipeToAdd = new Recipe(recipe);
+    let recipeToAdd = new RecipeModel(recipe);
     // zip code that works: 93401
     let totalPrice = 0;
     console.log("here is ingredients: " + recipe.ingredients);
@@ -163,17 +175,25 @@ export async function addRecipe(recipe) {
 }
 
 export async function deleteRecipeById(id) {
-  return await Recipe.findByIdAndDelete(id);
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
+
+  return await RecipeModel.findByIdAndDelete(id);
 }
 
 export async function findRecipeByTitle(title) {
-  return await Recipe.find({ title: title });
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
+
+  return await RecipeModel.find({ title: title });
 }
 
 export async function findRecipeByIngredient(ingredient) {
-  return await Recipe.find({ ingredient: ingredient });
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
+
+  return await RecipeModel.find({ ingredient: ingredient });
 }
 
 export async function findRecipeByTitleAndIngredient(title, ingredient) {
-  return await Recipe.find({ title: title, ingredient: ingredient });
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
+
+  return await RecipeModel.find({ title: title, ingredient: ingredient });
 }

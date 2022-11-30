@@ -69,7 +69,8 @@ app.post("/recipes", async (req, res) => {
   const response = await addRecipe(recipeToAdd);
   if (response === false) {
     res.status(500).end();
-  } else res.status(201).end();
+  } 
+  else res.status(200).end();
 });
 
 app.delete("/recipes/:id", async (req, res) => {

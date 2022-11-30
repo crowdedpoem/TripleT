@@ -4,6 +4,7 @@
 .cardgroup-container {
   display: flex;
   width: 97%;
+  flex-wrap: wrap;
 }
 #root {
   width: 100%;

@@ -52,3 +52,7 @@
 .cardgroup-container {
   width: 100%;
 }
+
+.complete-card {
+  width: 33%;
+}

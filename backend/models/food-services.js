@@ -13,7 +13,7 @@ function getDbConnection() {
   return dbConnection;
 }
 
-export async function getFood(name, price) {
+ async function getFood(name, price) {
   const foodModel = getDbConnection().model("Food", FoodSchema);
   let result;
   if (name === undefined && price === undefined) {
@@ -26,7 +26,7 @@ export async function getFood(name, price) {
   return result;
 }
 
-export async function findFoodById(id) {
+ async function findFoodById(id) {
   const foodModel = getDbConnection().model("Food", FoodSchema);
   try {
     return await foodModel.findById(id);
@@ -36,7 +36,7 @@ export async function findFoodById(id) {
   }
 }
 
-export async function addFood(food) {
+ async function addFood(food) {
   // foodModel is a Model, a subclass of mongoose.Model
   const foodModel = getDbConnection().model("Food", FoodSchema);
   try {
@@ -54,12 +54,18 @@ export async function addFood(food) {
   }
 }
 
-export async function findFoodByName(name) {
+ async function findFoodByName(name) {
   const foodModel = getDbConnection().model("Food", FoodSchema);
   return await foodModel.find({ name: name });
 }
 
-export async function findFoodByPrice(price) {
+ async function findFoodByPrice(price) {
   const foodModel = getDbConnection().model("Food", FoodSchema);
   return await foodModel.find({ price: price });
 }
+
+module.exports = getDbConnection;
+module.exports = getFood;
+module.exports = findFoodById;
+module.exports = addFood;
+module.exports = findFoodByName;

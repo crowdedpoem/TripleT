@@ -16,7 +16,7 @@ function MyApp() {
         <Route path="/" element={<Home />} />
         <Route path="pages/:id" element={<RecipePage />} />
         <Route path="/Input" element={<Form />} />
-        <Route path="/search/:id" element={<RecipePage />} />
+        <Route path="/search/:id" element={<SearchResults />} />
       </Routes>
     </div>
   );

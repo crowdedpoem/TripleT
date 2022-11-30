@@ -74,9 +74,6 @@ const RecipeSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    bookmarkCount: {
-      type: Number,
-    },
   },
   //will need to add user that the recipe belongs to
   //add in amount of favorites/likes
