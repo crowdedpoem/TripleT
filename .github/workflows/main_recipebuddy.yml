@@ -57,4 +57,4 @@ jobs:
           app-name: "RecipeBuddy"
           slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_25F89C61A1EF46E38C4CB88A3B6A3B07 }}
-          package: /backend
+          package: backend
