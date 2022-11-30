@@ -1,9 +1,28 @@
+![Continuous Integration](https://github.com/crowdedpoem/TripleT/actions/workflows/node.js.yml/badge.svg)
+
+![Azure Deployment Status](https://github.com/crowdedpoem/TripleT/actions/workflows/main_recipebuddy.yml/badge.svg)
+
 # TripleT
 
 RecipeBuddy - CSC307 Group Software Project
-link to figma storyboard - https://www.figma.com/file/nt4PjEe9kM2o5M5rqGjrHr/RecipeBuddy?node-id=2%3A878
+We wanted to build an app that helps people save and share recipes with eachother. Additionally, when people cook at home they don't know the price of the meal. These are all the issues RecipeBuddy solves. RecipeBuddy is a digital recipe book where everyone can connect and view eachother's recipes. Futher, whenever someone inputs a recipe, the app will calculate the cost for the defined amount of each ingredient (given the cost per weight or cost per volume sold by Kroger Groceries). With this, the user can see the total cost of the meal and price per serving of their recipe. It is great for people who want to budget and be inspired to cook at home rather than eat out!
 
-Code linter/ style checker : Prettier
+UPDATE [link]() to demo video
+
+[link](https://miro.com/welcomeonboard/ckRZN2VaUGo1R3pXTlBvOERTNkpoSmVNM0dwRkZkQnA2UXpUZmRWZ0pkRTlhZktzMHdXTDNQeEc1bkNBcEo4YnwzNDU4NzY0NTM3MDI1NDI2NzA1fDI=?share_link_id=288963627115) to UML diagrams NEED TO ADD SCRAPING API AND REMOVE FOOD DB
+
+[link](https://recipebuddy.azurewebsites.net) to Azure deployment
+
+[link](https://www.figma.com/file/nt4PjEe9kM2o5M5rqGjrHr/RecipeBuddy?node-id=2%3A878) to UI prototype 
+
+UPDATE code coverage report (with date and time)
+
+## Setup Frontend
+
+## Setup Backend
+
+## Code linter & style checker : Prettier
+NEED TO WALK THROUGH HOW TO INSTALL, TEAM STYLEGUIDE AND USE LOCALLY
 
 **Editor integration**
 https://prettier.io/docs/en/editors.html
