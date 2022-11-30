@@ -10,7 +10,6 @@ function Form(props) {
     title: "",
     blurb: "",
     servings: "",
-    servings: "",
     cost: {
       total: "",
       perServing: "",
@@ -184,6 +183,7 @@ function Form(props) {
 
   function handleChange(event) {
     const { name, value } = event.target;
+    var temp;
     if (name === "title") {
       setRecipe({ ...recipe, title: value });
     } else if (name === "servings") {
@@ -195,7 +195,7 @@ function Form(props) {
     } else if (name.slice(0, 4) === "step") {
       let spot = name.toString();
       spot = spot.slice(4);
-      var temp = recipe["steps"];
+      temp = recipe["steps"];
       if (temp.length > spot) {
         temp[spot] = value;
       } else {
@@ -205,7 +205,7 @@ function Form(props) {
       setRecipe({ ...recipe, steps: temp });
     } else if (name.slice(0, 10) === "ingredient") {
       let spot = name.slice(10);
-      var temp = recipe["ingredients"];
+      temp = recipe["ingredients"];
       if (temp.length > spot) {
         temp[spot]["name"] = value;
       } else {
@@ -220,7 +220,7 @@ function Form(props) {
       setRecipe({ ...recipe, ingredients: temp });
     } else if (name.slice(0, 4) === "size") {
       let spot = name.slice(4);
-      var temp = recipe["ingredients"];
+      temp = recipe["ingredients"];
       if (temp.length > spot) {
         temp[spot]["size"] = value;
       } else {
@@ -234,7 +234,7 @@ function Form(props) {
       setRecipe({ ...recipe, ingredients: temp });
     } else if (name.slice(0, 4) === "unit") {
       let spot = name.slice(4);
-      var temp = recipe["ingredients"];
+      temp = recipe["ingredients"];
       if (temp.length > spot) {
         temp[spot]["unit"] = value;
       } else {

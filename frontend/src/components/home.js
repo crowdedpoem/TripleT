@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
-import CardGroup from "react-bootstrap/CardGroup";
 import "./home.css";
 function Home() {
   const [recipes_list, setRecipe] = useState([]);
@@ -26,6 +25,7 @@ function Home() {
     const cards = recipes_list.map((recipe, index) => {
       console.log(`index : ${index}: ${recipe.title}`);
       if (index <= 4) return <RecipeCard passdata={recipe} />;
+      else return null;
     });
     return cards;
   }
