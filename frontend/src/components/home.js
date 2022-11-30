@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import "./home.css";
+
 function Home() {
   const [recipes_list, setRecipe] = useState([]);
   useEffect(() => {

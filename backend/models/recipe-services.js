@@ -1,10 +1,13 @@
 
 const Recipe = require('./recipe.js')
-const get = require('../token-service.js')
+const tokGet = require('../token-service.js')
 const productFunction = require('../product.js')
 const locationFunction = require('../location.js') 
 const scrape = require('../density-scrape.js')
 const mongoose = require('mongoose')
+
+const RecipeSchema = require('./recipe.js')
+
 // import Recipe from './recipe.js';
 // import get from '../token-service.mjs'
 // import productFunction from '../product.mjs'
@@ -104,14 +107,14 @@ async function getPrice(item, stanInput, zipCode) {
   try {
     // got access token
     let tokenBody = "grant_type=client_credentials&scope=product.compact";
-    let res = await get(tokenBody);
+    let res = await tokGet.get(tokenBody);
     let accessToken = res.access_token;
     // use the token to do location search near the zipcode
-    let locationRes = await locationFunction(zipCode, accessToken);
+    let locationRes = await locationFunction.getLocations(zipCode, accessToken);
     let locationId = locationRes.data[0].locationId;
 
     // ues the token to do product detail search
-    let productRes = await productFunction(item, accessToken, locationId);
+    let productRes = await productFunction.getProducts(item, accessToken, locationId);
 
     let price = productRes.data[0].items[0].price.regular;
     let unit = productRes.data[0].items[0].size;
@@ -137,7 +140,7 @@ async function getPrice(item, stanInput, zipCode) {
       // azure should look like api with endpoints
       // frontend makes calls to azure url not local 
       console.log("need density conversion for " + item);
-      let ozToCup = await scrape(item);
+      let ozToCup = await scrape.scrape(item);
       const ozToTsp = ozToCup / 48;
       console.log("density oz to cup is " + ozToCup);
       if (stanKroger[1] == "oz") {
@@ -152,9 +155,11 @@ async function getPrice(item, stanInput, zipCode) {
 }
 
 async function addRecipe(recipe) {
+  const model = getDbConnection().model("Recipe", Recipe)
   const servings = recipe["servings"];
   try {
-    let recipeToAdd = new Recipe(recipe);
+    // let model = mongoose.model("recipe", Recipe)
+    let recipeToAdd = new model(recipe);
     // zip code that works: 93401
     let totalPrice = 0;
     console.log("here is ingredients: " + recipe.ingredients);

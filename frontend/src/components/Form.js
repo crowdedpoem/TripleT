@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import axios from "axios";
 
 function Form(props) {
   var numIngredients = 0;
@@ -26,8 +27,21 @@ function Form(props) {
 
   // user 1 to many recipes
   // many recipes to many ingredients
+  async function makePostCall(person){
+    try {
+       const response = await axios.post('http://localhost:5000/recipes', person);
+       return response;
+    }
+    catch (error) {
+       console.log(error);
+       return false;
+    }
+ }
+
+
   function submitForm() {
-    props.handleSubmit(recipe);
+    makePostCall(props.recipe)
+    // props.handleSubmit(recipe);
     // setrecipe({title: '', servings: '',
     //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
     // });
@@ -186,7 +200,11 @@ function Form(props) {
     var temp;
     if (name === "title") {
       setRecipe({ ...recipe, title: value });
-    } else if (name === "servings") {
+    } 
+    else if (name == "testImage"){
+      setRecipe({...recipe, img: value})
+    }
+    else if (name === "servings") {
       setRecipe({ ...recipe, servings: value });
     } else if (name === "blurb") {
       setRecipe({ ...recipe, blurb: value });
@@ -261,7 +279,7 @@ function Form(props) {
   return (
     <form>
       {/* testing env */}
-      <input name="img" type="file"></input>
+      <input name="testImage" type="file"></input>
       {/* testing env */}
       <label htmlFor="title">Title</label>
       <input

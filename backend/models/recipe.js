@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-// import mongoose from 'mongoose'
 
 const RecipeSchema = new mongoose.Schema(
   {
@@ -65,6 +64,10 @@ const RecipeSchema = new mongoose.Schema(
       type: String,
       required: false,
       trim: false,
+    },
+    image: {
+      data: Buffer,
+      contentType: String
     },
     cost: {
       total: Number,

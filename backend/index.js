@@ -12,7 +12,20 @@ const {
 const app = express();
 // import cors from "cors";
 const cors = require('cors')
-const port = 4000;
+const port = 5000;
+
+const multer = require('multer')
+const Storage = multer.diskStorage({
+  destination:'uploads',
+  filename:(req, file, cb)=>{
+    cb(null, file.originalname)
+  }
+});
+const upload = multer({
+  storage:Storage
+}).single('testImage')
+
+
 
 //TEMPLATE POST REQUEST
 // {
@@ -53,6 +66,25 @@ const port = 4000;
 //Check with https://jsonlint.com/
 app.use(cors());
 app.use(express.json());
+
+app.post('/upload', (req, res)=> {
+  upload(res,req, (err) => {
+    if(err){
+      console.log(err)
+    } else{
+      let recipeModel = mongoose.model("Recipe", RecipeSchema)
+      const newImage = new recipeModel({
+        title: req.body.name,
+        image:{
+          data: req.file.filename,
+          contentType: 'image/png'
+        }
+      })
+      newImage.save()
+      .then(() => res.send('successfully uploadeded')).catch(err=>console.log(err)) //10:56
+    }
+  })
+})
 
 // GET BY RECIPE NAME
 app.get("/recipes/:id", async (req, res) => {
@@ -97,30 +129,6 @@ app.put("/recipes/:id", async (req, res) => {
     }
   } else {
     res.status(404).end;
-  }
-});
-
-app.get("/recipes", async (req, res) => {
-  const ingredient = req.query["ingredient"]; //or req.params.id
-  const title = req.query["title"];
-  let result;
-  if (title === undefined && ingredient === undefined) {
-    result = await getRecipe(title, ingredient);
-  }
-  if (title && !ingredient) {
-    result = await findRecipeByTitle(title);
-  }
-  if (ingredient && !title) {
-    result = await findRecipeByIngredient(ingredient);
-  }
-  if (title !== undefined && ingredient !== undefined) {
-    await findRecipeByTitleAndIngredient(title, ingredient);
-  }
-  if (result === undefined || result.length == 0)
-    res.status(404).send("Resource not found.");
-  else {
-    result = { recipes_list: result };
-    res.send(result);
   }
 });
 
