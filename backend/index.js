@@ -11,8 +11,10 @@ const {
 } = require( "./models/recipe-services.js");
 const app = express();
 // import cors from "cors";
-const cors = require('cors')
-const port = 4000;
+const cors = require('cors');
+const cookieSession = require("cookie-session");
+
+const port = 5000;
 
 //TEMPLATE POST REQUEST
 // {
@@ -53,6 +55,76 @@ const port = 4000;
 //Check with https://jsonlint.com/
 app.use(cors());
 app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  cookieSession({
+    name: "recipebuddy-session",
+    secret: "COOKIE_SECRET", // should use as secret environment variable
+    httpOnly: true
+  })
+);
+
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to recipe buddy application." });
+});
+
+const db = require("./models");
+const Role = db.role;
+
+db.mongoose
+  .connect("mongodb+srv://TripleT:%21RecipeBuddy%21@recipe.m0n81de.mongodb.net/test", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Successfully connect to MongoDB.");
+    initial();
+  })
+  .catch(err => {
+    console.error("Connection error", err);
+    process.exit();
+  });
+
+
+function initial() {
+  Role.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new Role({
+        name: "user"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'user' to roles collection");
+      });
+
+      new Role({
+        name: "moderator"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'moderator' to roles collection");
+      });
+
+      new Role({
+        name: "admin"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'admin' to roles collection");
+      });
+    }
+  });
+}
 
 // GET BY RECIPE NAME
 app.get("/recipes/:id", async (req, res) => {
