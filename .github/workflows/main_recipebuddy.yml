@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main
+      - azure
   workflow_dispatch:
 
 jobs:
@@ -32,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: ./backend
 
   deploy:
     runs-on: ubuntu-latest
