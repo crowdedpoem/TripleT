@@ -12,6 +12,7 @@ const RecipePage = () => {
   const [steps, setSteps] = useState([]);
   const [cost, setCost] = useState([]);
   const [time, setTime] = useState([]);
+  const [user, setUser] = useState([]);
   const { id } = useParams();
 
   const [totalPrice, setTotalPrice] = useState();
@@ -24,6 +25,7 @@ const RecipePage = () => {
         setSteps(result.steps);
         setCost(result.price);
         setTime(result.totalTime);
+        setUser(result.user);
         const total = result.price * result.servings;
         setTotalPrice(total);
       }
@@ -112,7 +114,7 @@ const RecipePage = () => {
                     <p>
                       Recipe created by{" "}
                       <div className="text--purple bigger-text">
-                        @ {recipe.user}
+                        @ {user}
                       </div>
                     </p>
                     This recipe has a serving size of {recipe.servings}!

@@ -229,13 +229,17 @@ function Form() {
   }
 
   function handleChange(event) {
+    if(recipe.user == ""){
+      console.log("handle change is fixign user")
+      const currentUser = AuthService.getCurrentUser();
+      console.log(currentUser.username);
+      setRecipe({ ...recipe, user: currentUser.username });
+    }
     const { name, value } = event.target;
     var temp;
     if (name === "title") {
       setRecipe({ ...recipe, title: value });
-      const currentUser = AuthService.getCurrentUser();
-      console.log(currentUser.username);
-      setRecipe({ ...recipe, user: currentUser.username });
+      
 
     } else if (name === "servings") {
       setRecipe({ ...recipe, servings: value });
