@@ -39,28 +39,35 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
 - move terminal to `TripleT/frontend` and run `$ npm install`
 - to run frontend locally, navigate to frontend folder, then src and run `$ npm start`
 
-## Code linter & style checker : Prettier
+## Style Check/Linter
 
-[**Editor integration**](https://prettier.io/docs/en/editors.html)
+  RecipeBuddy uses the AirBnB style guide found [here](https://github.com/airbnb/javascript) 
 
-**Command-line**
+- **Editor integration**
+  Editor integration can be found [here](https://prettier.io/docs/en/editors.html)
 
-If you prefer to use command-line interface, navigate to your root directory and input
-<code> npm install -g prettier</code>
-Once packages have been added, you may run prettier locally using
-<code> prettier /filename</code> to run prettier on a specific file or
-<code> prettier --write .</code> to run prettier on all files at root
+- **Command-line**
 
-If you recive the error message on Windows 8.0+
+  If you prefer to use command-line interface, navigate to your root directory and input
+  <code> npm install -g prettier</code>
+  Once packages have been added, you may run prettier locally using
+  <code> prettier /filename</code> to run prettier on a specific file or
+  <code> prettier --write .</code> to run prettier on all files at root
 
-<code>Management_Install.ps1 cannot be loaded because the execution of scripts is disabled on this system. </code>
+-If you recive the error message on Windows 8.0+
 
-As an Administrator, you can set the execution policy by typing this into your PowerShell window:
+  <code>Management_Install.ps1 cannot be loaded because the execution of scripts is disabled on this system. </code>
 
-<code>Set-ExecutionPolicy RemoteSigned </code>
+  As an Administrator, you can set the execution policy by typing this into your PowerShell window:
 
-For more information, see Using the [Set-ExecutionPolicy Cmdlet](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3).
+  <code>Set-ExecutionPolicy RemoteSigned </code>
 
-When you are done, you can set the policy back to its default value with:
+  For more information, see Using the [Set-ExecutionPolicy Cmdlet](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3).
 
-<code>Set-ExecutionPolicy Restricted</code>
+  When you are done, you can set the policy back to its default value with:
+
+  <code>Set-ExecutionPolicy Restricted</code>
+  
+  ## License
+
+(The MIT License)
