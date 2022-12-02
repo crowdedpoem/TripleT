@@ -66,6 +66,9 @@ function NavigationBar() {
               <Link to="/Input" className="nav_link">
                 Create Recipe
               </Link>
+              <Link to="/about" className="nav_link">
+                About
+              </Link>
               {/* <Link to="/register" className="nav_link">
                 Signup
               </Link>
