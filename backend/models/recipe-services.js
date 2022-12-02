@@ -183,9 +183,10 @@ async function addRecipe(recipe) {
       totalPrice += addThis;
     }
     if (servings > 0) {
-      recipeToAdd["price"] = totalPrice / servings;
+      recipeToAdd["price"] =  Math.ceil(totalPrice / servings * 100) / 100;
+      
     } else {
-      recipeToAdd["price"] = totalPrice;
+      recipeToAdd["price"] = Math.ceil(totalPrice * 100);
     }
 
     const savedRecipe = await recipeToAdd.save();
