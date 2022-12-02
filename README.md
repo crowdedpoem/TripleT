@@ -4,29 +4,53 @@
 
 # TripleT
 
-RecipeBuddy - CSC307 Group Software Project
+**RecipeBuddy - CSC307 Group Software Project**
+
 We wanted to build an app that helps people save and share recipes with eachother. Additionally, when people cook at home they don't know the price of the meal. These are all the issues RecipeBuddy solves. RecipeBuddy is a digital recipe book where everyone can connect and view eachother's recipes. Futher, whenever someone inputs a recipe, the app will calculate the cost for the defined amount of each ingredient (given the cost per weight or cost per volume sold by Kroger Groceries). With this, the user can see the total cost of the meal and price per serving of their recipe. It is great for people who want to budget and be inspired to cook at home rather than eat out!
 
-UPDATE [link]() to demo video
+UPDATE [Demo video]() 
 
-[link](https://miro.com/welcomeonboard/ckRZN2VaUGo1R3pXTlBvOERTNkpoSmVNM0dwRkZkQnA2UXpUZmRWZ0pkRTlhZktzMHdXTDNQeEc1bkNBcEo4YnwzNDU4NzY0NTM3MDI1NDI2NzA1fDI=?share_link_id=288963627115) to UML diagrams NEED TO ADD SCRAPING API AND REMOVE FOOD DB
+[UML diagram](https://miro.com/welcomeonboard/ckRZN2VaUGo1R3pXTlBvOERTNkpoSmVNM0dwRkZkQnA2UXpUZmRWZ0pkRTlhZktzMHdXTDNQeEc1bkNBcEo4YnwzNDU4NzY0NTM3MDI1NDI2NzA1fDI=?share_link_id=288963627115) PLEASE CONFIRM UPDATED UML IS ACCURATE
 
-[link](https://recipebuddy.azurewebsites.net) to Azure deployment
+[Azure deployment](https://recipebuddy.azurewebsites.net/recipes)
 
-[link](https://www.figma.com/file/nt4PjEe9kM2o5M5rqGjrHr/RecipeBuddy?node-id=2%3A878) to UI prototype 
+[UI prototype](https://www.figma.com/file/nt4PjEe9kM2o5M5rqGjrHr/RecipeBuddy?node-id=2%3A878)
 
 UPDATE code coverage report (with date and time)
 
-## Setup Frontend
+## Setup Project Environment
 
-## Setup Backend
+For app to work properly set up in the following order: MongoDB Cloud -> Backend -> Frontend
+
+### Setup Mongo DB
+- [Intall on Windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/Links)
+- install MongoDB Compass
+- Open MongoDB Compass and connect using DB URL in your `.env` file
+
+### Setup Backend
+- move terminal to `TripleT/backend` and run `$ npm install`
+- to run backend, navigate to backend folder and run `$ npx nodemon index.js`
+- to test backend using jest, run `$ npm test`
+
+### Setup Frontend
+- move terminal to `TripleT/frontend` and run `$ npm install`
+- to run frontend locally, navigate to frontend folder and run `$ npm start`
+
 
 ## Code linter & style checker : Prettier
-NEED TO WALK THROUGH HOW TO INSTALL, TEAM STYLEGUIDE AND USE LOCALLY
 
+### How to Install Prettier
 **Editor integration**
 https://prettier.io/docs/en/editors.html
 
 **Command-line**
 If you prefer to use command-line interface, type in the command
 <code> npm install --save-dev --save-exact prettier </code>
+
+NEED TO WALK THROUGH ON TEAM STYLEGUIDE AND HOW TO USE LOCALLY
+
+### Team Style Guide
+
+### Running Prettier Locally
+
+

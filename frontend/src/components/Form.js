@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import AuthService from "../services/auth.service";
+import axios from 'axios'
 
 function Form(props) {
   var numIngredients = 0;
@@ -30,13 +31,25 @@ function Form(props) {
   // many recipes to many ingredients
   function submitForm() {
     const currentUser = AuthService.getCurrentUser()
-    console.log(currentUser)
-    setRecipe({...recipe, user: currentUser.id} )
-    props.handleSubmit(recipe);
+    console.log(currentUser.username)
+    setRecipe({...recipe, user: currentUser.username} )
+    console.log(recipe)
+    makePostCall(recipe)
     // setrecipe({title: '', servings: '',
     //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
     // });
   }
+
+  async function makePostCall(person){
+    try {
+       const response = await axios.post('http://localhost:5000/recipes', person);
+       return response;
+    }
+    catch (error) {
+       console.log(error);
+       return false;
+    }
+ }
 
   function addStep() {
     // Generate a dynamic number of inputs
