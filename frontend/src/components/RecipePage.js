@@ -118,7 +118,7 @@ const RecipePage = () => {
                         @ {recipe.user}
                       </div>
                     </p>
-                    This recipe serves {recipe.servings}!
+                    This recipe has a serving size of {recipe.servings}!
                   </div>
                   <h2 className="text--purple recipe-header-page main_header">
                     Stats
