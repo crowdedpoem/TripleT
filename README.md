@@ -54,7 +54,7 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
   <code> prettier /filename</code> to run prettier on a specific file or
   <code> prettier --write .</code> to run prettier on all files at root
 
-- If you recive the error message on Windows 8.0+
+> If you recive the error message on Windows 8.0+
 
   <code>Management_Install.ps1 cannot be loaded because the execution of scripts is disabled on this system. </code>
 
