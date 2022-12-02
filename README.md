@@ -68,6 +68,6 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
 
   <code>Set-ExecutionPolicy Restricted</code>
   
-  ## License
+## License
 
   [MIT License](https://choosealicense.com/licenses/mit/)
