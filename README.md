@@ -24,10 +24,10 @@ UPDATE code coverage report (with date and time)
 ## Code linter & style checker : Prettier
 NEED TO WALK THROUGH HOW TO INSTALL, TEAM STYLEGUIDE AND USE LOCALLY
 
-**Editor integration**
-https://prettier.io/docs/en/editors.html
+[**Editor integration**](https://prettier.io/docs/en/editors.html)
 
 **Command-line**
+
 If you prefer to use command-line interface, navigate to your root directory and input
 <code> npm install -g prettier</code>
 Once packages have been added, you may run prettier locally using 
