@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import AuthService from "../services/auth.service";
+import AuthService from "../services/auth.service.js";
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
@@ -187,13 +187,13 @@ function Form() {
     let imperial = [
       "tsp",
       "tbsp",
-      "fl oz",
+      "floz",
       "cup",
       "pint",
       "quart",
       "gallon",
       "oz",
-      "pound",
+      "lb",
       "ct",
     ];
 
@@ -389,13 +389,13 @@ function Form() {
               <option>--Select Unit--</option>
               <option value="tsp">teaspoon</option>
               <option value="tbsp">tablespoon</option>
-              <option value="fl oz">fl oz</option>
+              <option value="floz">fl oz</option>
               <option value="cup">cup</option>
               <option value="pint">pint</option>
               <option value="quart">quart</option>
               <option value="gallon">gallon</option>
               <option value="oz">oz</option>
-              <option value="lb">pounds</option>
+              <option value="lb">lb</option>
               <option value="ct">count</option>
             </select>
             <Button

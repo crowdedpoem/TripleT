@@ -174,7 +174,7 @@ async function addRecipe(recipe) {
       console.log(recipe.ingredients[ing].name + " is " + JSON.stringify(recipe.ingredients[ing]))
       let name = recipe.ingredients[ing].name;
       let unit = recipe.ingredients[ing].unit;
-      let amount = recipe.ingredients[ing].amount;
+      let amount = recipe.ingredients[ing].size;
       let base = standardize(amount, unit);
       console.log(unit )
       console.log(amount)
