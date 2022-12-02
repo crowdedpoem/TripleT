@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 
-function Form(props) {
+function Form() {
   var numIngredients = 0;
   var numSteps = 0;
   const cloudinaryRef = useRef();
@@ -66,6 +66,7 @@ function Form(props) {
       return false;
     }
   }
+
   // user 1 to many recipes
   // many recipes to many ingredients
   function submitForm() {
@@ -79,18 +80,6 @@ function Form(props) {
     // });
   }
 
-  async function makePostCall(person) {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/recipes",
-        person,
-      );
-      return response;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
 
   function addStep() {
     // Generate a dynamic number of inputs
@@ -323,7 +312,7 @@ function Form(props) {
         <h3>Loading...</h3>
       ) : (
         <>
-          <img src={url} style={{ width: "300px" }} />
+          <img src={url} style={{ width: "300px" }} alt = "image uploaded" />
         </>
       )}
       <Button onClick={() => widgetRef.current.open()}>Upload an Image!</Button>
