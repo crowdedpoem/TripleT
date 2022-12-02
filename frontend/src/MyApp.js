@@ -12,7 +12,6 @@ import Form from "./components/Form";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./MyApp.css";
 import SearchResults from "./components/SearchResult";
-import ImageUpload from "./components/img_upload";
 function MyApp() {
   return (
     <div className="container-main">
@@ -24,7 +23,6 @@ function MyApp() {
         <Route path="pages/:id" element={<RecipePage />} />
         <Route path="/Input" element={<Form />} />
         <Route path="/search/:id" element={<SearchResults />} />
-        <Route path="/img" element={<ImageUpload />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />

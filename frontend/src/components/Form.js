@@ -50,7 +50,7 @@ function Form() {
         // console.log(`This is url ${url}`);
       },
     );
-  }, []);
+  }, [recipe]);
 
   async function makePostCall(recipe) {
     console.log(recipe.totalTime);
@@ -312,7 +312,7 @@ function Form() {
         <h3>Loading...</h3>
       ) : (
         <>
-          <img src={url} style={{ width: "300px" }} alt = "image uploaded" />
+          <img src={url} style={{ width: "300px" }} alt = "asset uploaded" />
         </>
       )}
       <Button onClick={() => widgetRef.current.open()}>Upload an Image!</Button>

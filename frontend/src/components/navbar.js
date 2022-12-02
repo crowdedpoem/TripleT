@@ -62,9 +62,7 @@ function NavigationBar() {
               <Link to="/" className="nav_link">
                 Home
               </Link>
-              <Link to="/img" className="nav_link">
-                Image Upload
-              </Link>
+
               <Link to="/Input" className="nav_link">
                 Create Recipe
               </Link>

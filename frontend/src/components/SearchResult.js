@@ -32,6 +32,9 @@ function SearchResults() {
       if (recipe.title.indexOf(id) > -1) {
         return <RecipeCard passdata={recipe} />;
       }
+      else{
+        return null
+      }
     });
     return cards;
   }

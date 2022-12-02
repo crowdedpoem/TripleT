@@ -3,8 +3,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./RecipePage.css";
-import bookmarkImg from "../images/pngegg.png";
-import bookmarkImg2 from "../images/Project (20221116020253).png";
+// import bookmarkImg from "../images/pngegg.png";
+// import bookmarkImg2 from "../images/Project (20221116020253).png";
 
 const RecipePage = () => {
   const [recipe, setRecipe] = useState([]);
@@ -13,9 +13,7 @@ const RecipePage = () => {
   const [cost, setCost] = useState([]);
   const [time, setTime] = useState([]);
   const { id } = useParams();
-  const [bookmark, setBookmark] = useState(false);
-  const [img, setImg] = useState(bookmarkImg);
-  const [bookmarkCount, setBookmarkCount] = useState();
+
   const [totalPrice, setTotalPrice] = useState();
   useEffect(() => {
     fetchByID(id).then((result) => {
@@ -26,7 +24,6 @@ const RecipePage = () => {
         setSteps(result.steps);
         setCost(result.price);
         setTime(result.totalTime);
-        setBookmarkCount(result.bookmarkCount);
         const total = result.price * result.servings;
         setTotalPrice(total);
       }
@@ -43,38 +40,38 @@ const RecipePage = () => {
     }
   }
 
-  const bookmarkBody = (count) => {
-    return {
-      bookmarkCount: { count },
-    };
-  };
+  // const bookmarkBody = (count) => {
+  //   return {
+  //     bookmarkCount: { count },
+  //   };
+  // };
 
-  async function updateBookmark(number) {
-    try {
-      console.log(bookmarkBody(number));
-      const response = await axios.put(
-        "http://localhost:5000/recipes" + id,
-        bookmarkBody(number),
-      );
+  // async function updateBookmark(number) {
+  //   try {
+  //     console.log(bookmarkBody(number));
+  //     const response = await axios.put(
+  //       "http://localhost:5000/recipes" + id,
+  //       bookmarkBody(number),
+  //     );
 
-      return response;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
-  const handleClick = () => {
-    setBookmark((current) => !current);
-    if (bookmark === false) {
-      updateBookmark(bookmarkCount + 1);
-      setImg(bookmarkImg2);
-    } else {
-      updateBookmark(bookmarkCount - 1);
-      setImg(bookmarkImg);
-    }
+  //     return response;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return false;
+  //   }
+  // }
+  // const handleClick = () => {
+  //   setBookmark((current) => !current);
+  //   if (bookmark === false) {
+  //     updateBookmark(bookmarkCount + 1);
+  //     setImg(bookmarkImg2);
+  //   } else {
+  //     updateBookmark(bookmarkCount - 1);
+  //     setImg(bookmarkImg);
+  //   }
 
-    console.log(bookmark);
-  };
+  //   console.log(bookmark);
+  // };
 
   if (recipe) {
     return (
