@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import AuthService from "../services/auth.service";
+import axios from 'axios'
 
 function Form(props) {
   var numIngredients = 0;
@@ -22,16 +24,32 @@ function Form(props) {
     },
     ingredients: [],
     steps: [],
+    user: ""
   });
 
   // user 1 to many recipes
   // many recipes to many ingredients
   function submitForm() {
-    props.handleSubmit(recipe);
+    const currentUser = AuthService.getCurrentUser()
+    console.log(currentUser.username)
+    setRecipe({...recipe, user: currentUser.username} )
+    console.log(recipe)
+    makePostCall(recipe)
     // setrecipe({title: '', servings: '',
     //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
     // });
   }
+
+  async function makePostCall(person){
+    try {
+       const response = await axios.post('http://localhost:5000/recipes', person);
+       return response;
+    }
+    catch (error) {
+       console.log(error);
+       return false;
+    }
+ }
 
   function addStep() {
     // Generate a dynamic number of inputs
@@ -260,9 +278,6 @@ function Form(props) {
 
   return (
     <form>
-      {/* testing env */}
-      <input name="img" type="file"></input>
-      {/* testing env */}
       <label htmlFor="title">Title</label>
       <input
         type="text"
