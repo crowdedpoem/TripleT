@@ -29,23 +29,23 @@ https://prettier.io/docs/en/editors.html
 
 **Command-line**
 If you prefer to use command-line interface, navigate to your root directory and input
-<code> npm install -g prettier </code>
+<code> npm install -g prettier</code>
 Once packages have been added, you may run prettier locally using 
-<code> prettier /filename </code> to run prettier on a specific file or
-<code> prettier --write . </code> to run prettier on all files at root
+<code> prettier /filename</code> to run prettier on a specific file or
+<code> prettier --write .</code> to run prettier on all files at root
 
 If you recive the error message on Windows 8.0+
 
-<code>Management_Install.ps1 cannot be loaded because the execution of scripts is disabled on this system.
+<code>Management_Install.ps1 cannot be loaded because the execution of scripts is disabled on this system. </code>
 
 
 As an Administrator, you can set the execution policy by typing this into your PowerShell window:
 
-<code>Set-ExecutionPolicy RemoteSigned
+<code>Set-ExecutionPolicy RemoteSigned </code>
 
 For more information, see Using the Set-ExecutionPolicy Cmdlet.
 
 When you are done, you can set the policy back to its default value with:
 
-<code>Set-ExecutionPolicy Restricted
+<code>Set-ExecutionPolicy Restricted</code>
 
