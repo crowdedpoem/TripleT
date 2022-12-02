@@ -54,7 +54,7 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
   <code> prettier /filename</code> to run prettier on a specific file or
   <code> prettier --write .</code> to run prettier on all files at root
 
--If you recive the error message on Windows 8.0+
+- If you recive the error message on Windows 8.0+
 
   <code>Management_Install.ps1 cannot be loaded because the execution of scripts is disabled on this system. </code>
 
@@ -62,7 +62,7 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
 
   <code>Set-ExecutionPolicy RemoteSigned </code>
 
-  For more information, see Using the [Set-ExecutionPolicy Cmdlet](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3).
+  For more information, see Using the [Set-ExecutionPolicy Cmdlet](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-  executionpolicy?view=powershell-7.3).
 
   When you are done, you can set the policy back to its default value with:
 
@@ -70,4 +70,4 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
   
   ## License
 
-(The MIT License)
+  [MIT License](https://choosealicense.com/licenses/mit/)
