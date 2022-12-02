@@ -9,6 +9,7 @@ import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import Home from "./components/home";
 import Form from "./components/Form";
+import About from "./components/about";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./MyApp.css";
 import SearchResults from "./components/SearchResult";
@@ -29,6 +30,8 @@ function MyApp() {
         <Route path="/:id" element={<BoardUser />} />
         <Route path="/mod" element={<BoardModerator />} />
         <Route path="/admin" element={<BoardAdmin />} />
+        <Route path="/about" element={<About />} />
+
       </Routes>
     </div>
   );
