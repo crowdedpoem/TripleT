@@ -52,9 +52,9 @@ function Form() {
     );
   }, [recipe]);
 
-  async function makePostCall(recipe) {
+  async function makePostCall() {
     console.log(recipe.totalTime);
-    console.log(recipe);
+    console.log("make post call gets this" + recipe);
     try {
       const response = await axios.post(
         "http://localhost:5000/recipes",

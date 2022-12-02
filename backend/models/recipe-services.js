@@ -164,6 +164,7 @@ async function getPrice(item, stanInput, zipCode) {
 
 
 async function addRecipe(recipe) {
+  console.log(recipe.user)
   const model = getDbConnection().model("Recipe", Recipe)
   const servings = recipe["servings"];
   let totalPrice = 0;
