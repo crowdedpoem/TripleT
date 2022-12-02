@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require("node-fetch");
 // import fetch from "node-fetch";
 // Parameters imported from .env environment variables
 const clientId =
@@ -45,4 +45,4 @@ async function get(body) {
 }
 
 // export default get;
-exports.get = get
+exports.get = get;

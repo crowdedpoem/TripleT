@@ -3,16 +3,15 @@ import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import CardGroup from "react-bootstrap/CardGroup";
 import "./home.css";
-function SearchResults(props) {
+import { useParams } from "react-router-dom";
+
+function SearchResults() {
   const [filteredList, setFilteredList] = useState([]);
+  const { id } = useParams();
   useEffect(() => {
     fetchAll().then((result) => {
       if (result) {
-        setFilteredList(
-          result.find((element) =>
-            element.name.string.split(" ").includes(props)
-          )
-        );
+        setFilteredList(result);
       }
     });
   }, []);
@@ -30,7 +29,9 @@ function SearchResults(props) {
 
   function populateCards() {
     const cards = filteredList.map((recipe) => {
-      return <RecipeCard passdata={recipe} />;
+      if (recipe.title.indexOf(id) > -1) {
+        return <RecipeCard passdata={recipe} />;
+      }
     });
     return cards;
   }

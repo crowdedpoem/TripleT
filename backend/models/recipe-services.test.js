@@ -37,31 +37,27 @@ beforeEach(async () => {
     servings: 3,
     blurb: "best hotdog",
     totalTime: {
-        active: 1,
-        cook: 1
+      active: 1,
+      cook: 1,
     },
     ingredients: [
-        {
-            name: "hotdog",
-            amount: 2
-        },
-        {
-            name: "bun",
-            amount: 2
-        }
+      {
+        name: "hotdog",
+        amount: 2,
+      },
+      {
+        name: "bun",
+        amount: 2,
+      },
     ],
-    steps: [
-        "first boil noodle",
-        "make cheese sauce",
-        "eat"
-    ],
-    urlSource: "https://playswellwithbutter.com/wp-content/uploads/2022/05/Grilled-Hot-Dogs-How-to-Grill-Hot-Dogs-38.jpg",
+    steps: ["first boil noodle", "make cheese sauce", "eat"],
+    urlSource:
+      "https://playswellwithbutter.com/wp-content/uploads/2022/05/Grilled-Hot-Dogs-How-to-Grill-Hot-Dogs-38.jpg",
     cost: {
-        total: 6.67,
-        perServing: 1.48
-    }
-
-};
+      total: 6.67,
+      perServing: 1.48,
+    },
+  };
   let result = new recipeModel(dummyRecipe);
   await result.save();
 
@@ -70,29 +66,25 @@ beforeEach(async () => {
     servings: 3,
     blurb: "crispy fries",
     totalTime: {
-        active: 5,
-        cook: 15
+      active: 5,
+      cook: 15,
     },
     ingredients: [
-        {
-            name: "potato",
-            amount: 2
-        },
-        {
-            name: "salt",
-            amount: 2
-        }
+      {
+        name: "potato",
+        amount: 2,
+      },
+      {
+        name: "salt",
+        amount: 2,
+      },
     ],
-    steps: [
-        "make waffle batter",
-        "fry waffles",
-        "eat"
-    ],
+    steps: ["make waffle batter", "fry waffles", "eat"],
     urlSource: "https://data.thefeedfeed.com/recommended/post_4483926.jpeg",
     cost: {
-        total: 4.67,
-        perServing: 0.68
-    }
+      total: 4.67,
+      perServing: 0.68,
+    },
   };
   result = new recipeModel(dummyRecipe);
   await result.save();
@@ -102,39 +94,36 @@ beforeEach(async () => {
     servings: 3,
     blurb: "yum",
     totalTime: {
-        active: 2,
-        cook: 60
+      active: 2,
+      cook: 60,
     },
     ingredients: [
-        {
-            name: "rice",
-            amount: 2
-        },
-        {
-            name: "chicken",
-            amount: 3
-        }
+      {
+        name: "rice",
+        amount: 2,
+      },
+      {
+        name: "chicken",
+        amount: 3,
+      },
     ],
-    steps: [
-        "cook rice",
-        "fry chicken",
-        "eat"
-    ],
-    urlSource: "https://itsallgoodvegan.com/wp-content/uploads/2020/05/IMG_4689.jpg",
+    steps: ["cook rice", "fry chicken", "eat"],
+    urlSource:
+      "https://itsallgoodvegan.com/wp-content/uploads/2020/05/IMG_4689.jpg",
     cost: {
-        total: 4.67,
-        perServing: 0.68
-    }
+      total: 4.67,
+      perServing: 0.68,
+    },
   };
   result = new recipeModel(dummyRecipe);
   await result.save();
 
-//   dummyRecipe = {
-//     name: "Pepe Guardiola",
-//     job: "Soccer coach",
-//   };
-//   result = new recipeModel(dummyRecipe);
-//   await result.save();
+  //   dummyRecipe = {
+  //     name: "Pepe Guardiola",
+  //     job: "Soccer coach",
+  //   };
+  //   result = new recipeModel(dummyRecipe);
+  //   await result.save();
 });
 
 afterEach(async () => {

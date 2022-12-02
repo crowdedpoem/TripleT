@@ -1,5 +1,5 @@
 // import express from "express";
-const express = require('express')
+const express = require("express");
 const {
   findRecipeById,
   deleteRecipeById,
@@ -8,11 +8,11 @@ const {
   findRecipeByTitleAndIngredient,
   addRecipe,
   getRecipe,
-} = require( "./models/recipe-services.js");
+} = require("./models/recipe-services.js");
 const app = express();
 // import cors from "cors";
-const cors = require('cors')
-const port = 4000;
+const cors = require("cors");
+const port = 5000;
 
 //TEMPLATE POST REQUEST
 // {
@@ -86,8 +86,9 @@ app.delete("/recipes/:id", async (req, res) => {
 });
 
 app.put("/recipes/:id", async (req, res) => {
+  console.log("put was called");
+  console.log(`response body was ${res}`);
   const id = req.params["id"];
-  console.log("called");
   const check = await recipeServices.findRecipeById(id);
   if (check !== undefined && check.length != 0) {
     const result = await recipeServices.updateRecipeByID(id, req.body);
@@ -135,9 +136,6 @@ app.listen(process.env.PORT || port, () => {
 //   }
 // });
 
-
-
-
 app.post("/recipes", async (req, res) => {
   //id generator
   console.log(req.body);
@@ -158,28 +156,3 @@ app.delete("/recipes/:id", async (req, res) => {
     res.status(404).end();
   }
 });
-
-app.get("/recipes", async (req, res) => {
-  const ingredient = req.query["ingredient"]; //or req.params.id
-  const title = req.query["title"];
-  let result;
-  if (title === undefined && ingredient === undefined) {
-    result = await getRecipe(title, ingredient);
-  }
-  if (title && !ingredient) {
-    result = await findRecipeByTitle(title);
-  }
-  if (ingredient && !title) {
-    result = await findRecipeByIngredient(ingredient);
-  }
-  if (title !== undefined && ingredient !== undefined) {
-    await findRecipeByTitleAndIngredient(title, ingredient);
-  }
-  if (result === undefined || result.length == 0)
-    res.status(404).send("Resource not found.");
-  else {
-    result = { recipes_list: result };
-    res.send(result);
-  }
-});
-

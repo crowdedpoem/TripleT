@@ -16,17 +16,19 @@ const RecipePage = () => {
   const [bookmark, setBookmark] = useState(false);
   const [img, setImg] = useState(bookmarkImg);
   const [bookmarkCount, setBookmarkCount] = useState();
-
+  const [totalPrice, setTotalPrice] = useState();
   useEffect(() => {
-    
     fetchByID(id).then((result) => {
       if (result) {
+        console.log(result);
         setRecipe(result);
         setIngredient(result.ingredients);
         setSteps(result.steps);
-        setCost(result.cost);
+        setCost(result.price);
         setTime(result.totalTime);
         setBookmarkCount(result.bookmarkCount);
+        const total = result.price * result.servings;
+        setTotalPrice(total);
       }
     });
   }, [id]);
@@ -52,7 +54,7 @@ const RecipePage = () => {
       console.log(bookmarkBody(number));
       const response = await axios.put(
         "http://localhost:5000/recipes" + id,
-        bookmarkBody(number)
+        bookmarkBody(number),
       );
 
       return response;
@@ -77,11 +79,11 @@ const RecipePage = () => {
   if (recipe) {
     return (
       <body>
-        {/* <div className="entire-page"> */}
-        {/* RECIPE HEADER */}
-        <div className="recipe-title-bookmark">
-          <h1 className="recipe-header-page main_header">{recipe.title}</h1>
-
+        <div className="entire-page">
+          {/* RECIPE HEADER */}
+          <div className="recipe-title-bookmark">
+            <h1 className="recipe-header-page main_header">{recipe.title}</h1>
+            {/* 
           <div className="bookmark">
             <figure className="bookmark__img--wrapper">
               <img
@@ -91,56 +93,81 @@ const RecipePage = () => {
                 className="bookmark__img"
               />
             </figure>
+          </div> */}
           </div>
-        </div>
-        {/* RECIPE BODY */}
-        <p>Recipe created by {recipe.user}</p>
-        <h2>
-          ${cost.total} Total / ${cost.perServing} per serving, Serving size:{" "}
-          {recipe.servings}
-        </h2>
-        <div className="recipe-page-first">
-          <img src={recipe.urlSource} alt={recipe.title} className="big-img" />
-          <div className="recipe-desc-ingr">
-            <p className="card-desc-page">
-              {recipe.blurb}
-              <br />
-              <br />
-              Time
-              <ul>
-                <li>Active: {time.active} minutes</li>
-                <li>Cook: {time.cook} minutes</li>
-              </ul>
-            </p>
-
-            <div className="ingredients">
-              <div className="ingredient-body">
-                <h2 className="text--purple recipe-header-page main_header">
-                  Ingredients
-                </h2>
-                <ul>
-                  {ingredients.map((ingredient) => (
-                    <li>
-                      {ingredient.name} {ingredient.amount} units, Substitute:{" "}
-                      {ingredient.substitute}
-                    </li>
-                  ))}
-                </ul>
+          {/* RECIPE BODY */}
+          <div className="recipe-page-first">
+            <img
+              src={recipe.urlSource}
+              alt={recipe.title}
+              className="big-img"
+            />
+            <div className="recipe-desc-ingr">
+              <div className="time-desc-wrapper">
+                <div className="card-desc-page">
+                  <h2 className="text--purple recipe-header-page main_header">
+                    About
+                  </h2>
+                  <div className="about-body">
+                    {recipe.blurb}
+                    <br />
+                    <br />
+                    <p>
+                      Recipe created by{" "}
+                      <div className="text--purple bigger-text">
+                        @ {recipe.user}
+                      </div>
+                    </p>
+                    This recipe serves {recipe.servings}!
+                  </div>
+                  <h2 className="text--purple recipe-header-page main_header">
+                    Stats
+                  </h2>
+                  <div className="stats">
+                    <div className="time">
+                      <h4>Time</h4>
+                      <ul>
+                        <li>Active: {time.active} minutes</li>
+                        <li>Cook: {time.cook} minutes</li>
+                      </ul>
+                    </div>
+                    <div className="cost">
+                      <h4>Cost</h4>
+                      <ul>
+                        <li>Total: {totalPrice}</li>
+                        <li>Per serving: {cost}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <div></div>
+            </div>
+            <div className="ingredients">
+              <h2 className="text--purple recipe-header-page main_header">
+                Ingredients
+              </h2>
+              <ul className="ingredients-list">
+                {ingredients.map((ingredient) => (
+                  <li>
+                    {ingredient.size} {ingredient.unit} of {ingredient.name}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
+          <div className="instructions">
+            <h2 className="text--purple main_header recipe-header-page">
+              Instructions
+            </h2>
+            <ol className="instructions-list">
+              {steps.map((step) => (
+                <li>{step}</li>
+              ))}
+            </ol>
+          </div>
+          {/* end of instructions div */}
         </div>
-        <div className="instructions">
-          <h2 className="text--purple main_header recipe-header-page">
-            Instructions
-          </h2>
-          <ol>
-            {steps.map((step) => (
-              <li>{step}</li>
-            ))}
-          </ol>
-        </div>
-        {/* </div> */}
       </body>
 
       // <body>

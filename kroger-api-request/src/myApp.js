@@ -22,7 +22,7 @@ function App() {
       // use the token to do location search near the zipcode
       let locationRes = await locationFunction.getLocations(
         zipCode,
-        accessToken
+        accessToken,
       );
       let locationId = locationRes.data[0].locationId;
 
@@ -30,7 +30,7 @@ function App() {
       let productRes = await productFunction.getProducts(
         item,
         accessToken,
-        locationId
+        locationId,
       );
       // console.log(productRes);
       let price = productRes.data[0].items[0].price.regular;
@@ -44,7 +44,7 @@ function App() {
           "(" +
           unit +
           ") is " +
-          price * quantity
+          price * quantity,
       );
 
       setItem("");

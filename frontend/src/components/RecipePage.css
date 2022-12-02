@@ -21,46 +21,59 @@ h1 {
 
 /* RECIPE PAGES */
 .entire-page {
-  margin-top: 5%;
-  margin-left: 5%;
+  width: 85%;
+  padding-right: 20px;
 }
 .recipe-page-first {
   display: flex;
-  width: 85%;
-}
-.recipe-desc-ingr {
   width: 100%;
+  background-color: aliceblue;
   border-radius: 25px;
-  background-color: grey;
+}
+
+.instructions {
+  width: 100%;
 }
 .big-img {
-  border-radius: 25px;
+  margin-top: 25px;
+  border-radius: 10px;
   width: 600px;
   height: 600px;
   border: 5px solid black;
-  margin-right: 10px;
 }
-
-.card-desc-page {
+.bigger-text {
+  font-size: 20px;
+}
+/* .card-desc-page {
   padding: 3%;
   width: 100%;
   height: 20%;
   margin-left: 20px;
   color: white;
+} */
+.stats {
+  display: flex;
+  margin-left: 10px;
 }
-
 .ingredients {
   width: 100%;
-  margin-top: 20px;
+
   height: 410px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
-.ingredient-body {
+.about-body {
+  margin-left: 10px;
+}
+.ingredients-list,
+.instructions-list {
+  margin-left: 25px;
+}
+/* .ingredient-body {
   color: white;
   margin-top: 2%;
   line-height: 30px;
-}
+} */
 
 /* INSTRUCTIONS on RECIPE PAGE*/
 
@@ -79,7 +92,7 @@ h1 {
   padding: 1% 1%;
   margin-bottom: 40px;
   border-radius: 15px;
-  width: 85%;
+  width: 100%;
   color: white;
   text-decoration-color: white;
 }

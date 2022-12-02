@@ -8,5 +8,5 @@ ReactDOM.render(
   <BrowserRouter>
     <MyApp />
   </BrowserRouter>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
