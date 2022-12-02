@@ -1,3 +1,3 @@
 module.exports = {
-    secret: "recipebuddy-secret-key"
-  };
+  secret: "recipebuddy-secret-key",
+};

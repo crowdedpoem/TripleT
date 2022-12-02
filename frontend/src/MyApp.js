@@ -11,7 +11,7 @@ import Home from "./components/home";
 import Form from "./components/Form";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./MyApp.css";
-
+import SearchResults from "./components/SearchResult";
 function MyApp() {
   return (
     <div className="container-main">
@@ -19,17 +19,16 @@ function MyApp() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="pages/:id" element={<RecipePage />} />
         <Route path="/Input" element={<Form />} />
-        <Route path="/search/:id" element={<RecipePage />} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/user" element={<BoardUser/>} />
-        <Route path="/mod" element={<BoardModerator/>} />
-        <Route path="/admin" element={<BoardAdmin/>} />
-
+        <Route path="/search/:id" element={<SearchResults />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/:id" element={<BoardUser />} />
+        <Route path="/mod" element={<BoardModerator />} />
+        <Route path="/admin" element={<BoardAdmin />} />
       </Routes>
     </div>
   );

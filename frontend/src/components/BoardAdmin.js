@@ -19,7 +19,7 @@ const BoardAdmin = () => {
           error.toString();
 
         setContent(_content);
-        }
+      },
     );
   }, []);
 

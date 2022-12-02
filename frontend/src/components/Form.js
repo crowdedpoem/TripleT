@@ -1,55 +1,84 @@
-import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import AuthService from "../services/auth.service";
-import axios from 'axios'
+import axios from "axios";
+import React, { useEffect, useRef } from "react";
+import { useState } from "react";
 
-function Form(props) {
+function Form() {
   var numIngredients = 0;
   var numSteps = 0;
-
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState([]);
   const [recipe, setRecipe] = useState({
     title: "",
     blurb: "",
     servings: "",
-    cost: {
-      total: "",
-      perServing: "",
-    },
-
-    img: "",
+    urlSource: "",
     totalTime: {
-      cookTime: "",
-      activeTime: "",
+      cook: "",
+      active: "",
     },
     ingredients: [],
     steps: [],
-    user: ""
+    user: "",
   });
+
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: "dype2qwpo",
+        uploadPreset: "recipeImages",
+      },
+      function (error, result) {
+        if (result.event === "success") {
+          setLoading(true);
+          const urlSave = result.info.secure_url;
+          setUrl(urlSave);
+          setRecipe({ ...recipe, urlSource: urlSave });
+          console.log(urlSave);
+        }
+
+        if (result.event === "close") {
+          setLoading(false);
+        }
+
+        // setUrl(result.info.secure_url);
+        // console.log(`This is url ${url}`);
+      },
+    );
+  }, [recipe]);
+
+  async function makePostCall(recipe) {
+    console.log(recipe.totalTime);
+    console.log(recipe);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/recipes",
+        recipe,
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 
   // user 1 to many recipes
   // many recipes to many ingredients
   function submitForm() {
-    const currentUser = AuthService.getCurrentUser()
-    console.log(currentUser.username)
-    setRecipe({...recipe, user: currentUser.username} )
-    console.log(recipe)
-    makePostCall(recipe)
+    const currentUser = AuthService.getCurrentUser();
+    console.log(currentUser.username);
+    setRecipe({ ...recipe, user: currentUser.username });
+    console.log(recipe);
+    makePostCall(recipe);
     // setrecipe({title: '', servings: '',
     //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
     // });
   }
-
-  async function makePostCall(person){
-    try {
-       const response = await axios.post('http://localhost:5000/recipes', person);
-       return response;
-    }
-    catch (error) {
-       console.log(error);
-       return false;
-    }
- }
 
   function addStep() {
     // Generate a dynamic number of inputs
@@ -77,7 +106,7 @@ function Form(props) {
       function (e) {
         handleChange(e);
       },
-      false
+      false,
     );
 
     container.appendChild(input);
@@ -122,7 +151,7 @@ function Form(props) {
       function (e) {
         handleChange(e);
       },
-      false
+      false,
     );
 
     let label2 = document.createElement("label");
@@ -138,7 +167,7 @@ function Form(props) {
       function (e) {
         handleChange(e);
       },
-      false
+      false,
     );
     let select = document.createElement("select");
     select.name = "unit" + numIngredients;
@@ -147,7 +176,7 @@ function Form(props) {
       function (e) {
         handleChange(e);
       },
-      false
+      false,
     );
 
     let option = document.createElement("option");
@@ -186,7 +215,7 @@ function Form(props) {
       function (e) {
         addCardIng(e, button.id);
       },
-      false
+      false,
     );
     button.class = "btn btn-primary";
 
@@ -265,11 +294,11 @@ function Form(props) {
       }
     } else if (name === "activeTime") {
       let temp = recipe;
-      temp.totalTime.activeTime = value;
+      temp.totalTime.active = value;
       setRecipe(temp);
     } else if (name === "cookTime") {
       let temp = recipe;
-      temp.totalTime.cookTime = value;
+      temp.totalTime.cook = value;
       setRecipe(temp);
     } else {
       console.log("could not find " + name);
@@ -278,6 +307,17 @@ function Form(props) {
 
   return (
     <form>
+      {loading ? (
+        <h3>Loading...</h3>
+      ) : url ? (
+        <>
+          <img src={url} style={{ width: "300px" }} alt="upload" />
+        </>
+      ) : (
+        <h3>Upload Image here</h3>
+      )}
+      <Button onClick={() => widgetRef.current.open()}>Upload an Image!</Button>
+
       <label htmlFor="title">Title</label>
       <input
         type="text"
@@ -310,7 +350,7 @@ function Form(props) {
         type="text"
         name="cookTime"
         id="cookTime"
-        value={recipe.cookTime}
+        value={recipe.cook}
         onChange={handleChange}
       />
 
@@ -319,7 +359,7 @@ function Form(props) {
         type="text"
         name="activeTime"
         id="activeTime"
-        value={recipe.activeTime}
+        value={recipe.active}
         onChange={handleChange}
       />
 

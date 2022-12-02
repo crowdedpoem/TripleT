@@ -3,6 +3,7 @@
 }
 .cardgroup-container {
   display: flex;
+  flex-wrap: wrap;
   width: 97%;
 }
 #root {

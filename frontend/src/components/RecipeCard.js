@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./RecipeCard.css";
 
 function RecipeCardBody(props) {
@@ -49,4 +49,3 @@ function RecipeCard(props) {
 
 export default RecipeCard;
 // exports.RecipeCard = RecipeCard;
-

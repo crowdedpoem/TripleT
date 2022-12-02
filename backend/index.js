@@ -1,5 +1,5 @@
 // import express from "express";
-const express = require('express')
+const express = require("express");
 const {
   findRecipeById,
   deleteRecipeById,
@@ -8,23 +8,20 @@ const {
   findRecipeByTitleAndIngredient,
   addRecipe,
   getRecipe,
-} = require( "./models/recipe-services.js");
+} = require("./models/recipe-services.js");
 const app = express();
 // import cors from "cors";
-const cors = require('cors');
+const cors = require("cors");
 const cookieSession = require("cookie-session");
 
 const port = 5000;
-
-
 
 //Check with https://jsonlint.com/
 // app.use(cors());
 app.use(express.json());
 
-
 var corsOptions = {
-  origin: "http://localhost:5001"
+  origin: "http://localhost:5001",
 };
 
 app.use(cors(corsOptions));
@@ -36,8 +33,8 @@ app.use(
   cookieSession({
     name: "recipebuddy-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
-    httpOnly: true
-  })
+    httpOnly: true,
+  }),
 );
 
 // simple route
@@ -49,26 +46,28 @@ const db = require("./models");
 const Role = db.role;
 
 db.mongoose
-  .connect("mongodb+srv://TripleT:%21RecipeBuddy%21@recipe.m0n81de.mongodb.net/test", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  .connect(
+    "mongodb+srv://TripleT:%21RecipeBuddy%21@recipe.m0n81de.mongodb.net/test",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+  )
   .then(() => {
     console.log("Successfully connect to MongoDB.");
     initial();
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("Connection error", err);
     process.exit();
   });
-
 
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
-        name: "user"
-      }).save(err => {
+        name: "user",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
@@ -77,8 +76,8 @@ function initial() {
       });
 
       new Role({
-        name: "moderator"
-      }).save(err => {
+        name: "moderator",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
@@ -87,8 +86,8 @@ function initial() {
       });
 
       new Role({
-        name: "admin"
-      }).save(err => {
+        name: "admin",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
@@ -100,8 +99,8 @@ function initial() {
 }
 
 // routes
-require('./routes/auth.routes')(app);
-require('./routes/user.routes')(app);
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
 // GET BY RECIPE NAME
 app.get("/recipes/:id", async (req, res) => {
@@ -135,8 +134,9 @@ app.delete("/recipes/:id", async (req, res) => {
 });
 
 app.put("/recipes/:id", async (req, res) => {
+  console.log("put was called");
+  console.log(`response body was ${res}`);
   const id = req.params["id"];
-  console.log("called");
   const check = await recipeServices.findRecipeById(id);
   if (check !== undefined && check.length != 0) {
     const result = await recipeServices.updateRecipeByID(id, req.body);
@@ -184,9 +184,6 @@ app.listen(process.env.PORT || port, () => {
 //   }
 // });
 
-
-
-
 app.post("/recipes", async (req, res) => {
   //id generator
   console.log(req.body);
@@ -207,28 +204,3 @@ app.delete("/recipes/:id", async (req, res) => {
     res.status(404).end();
   }
 });
-
-app.get("/recipes", async (req, res) => {
-  const ingredient = req.query["ingredient"]; //or req.params.id
-  const title = req.query["title"];
-  let result;
-  if (title === undefined && ingredient === undefined) {
-    result = await getRecipe(title, ingredient);
-  }
-  if (title && !ingredient) {
-    result = await findRecipeByTitle(title);
-  }
-  if (ingredient && !title) {
-    result = await findRecipeByIngredient(ingredient);
-  }
-  if (title !== undefined && ingredient !== undefined) {
-    await findRecipeByTitleAndIngredient(title, ingredient);
-  }
-  if (result === undefined || result.length == 0)
-    res.status(404).send("Resource not found.");
-  else {
-    result = { recipes_list: result };
-    res.send(result);
-  }
-});
-

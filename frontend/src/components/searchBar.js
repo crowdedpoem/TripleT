@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "./searchbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
-
+  let navigate = useNavigate();
   const handleKeyDown = (event) => {
     console.log("User pressed: ", event.key);
 
@@ -17,7 +17,11 @@ function SearchBar({ placeholder, data }) {
       // 👇️ your logic here
       console.log("Enter key pressed ✅");
       console.log(`The word they searched for was ${wordEntered}`);
-      Navigate("/");
+      if (wordEntered === "") {
+        navigate("/");
+      } else {
+        navigate(`/search/${wordEntered}`);
+      }
     }
   };
 

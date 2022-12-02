@@ -39,7 +39,7 @@ exports.signup = (req, res) => {
 
             res.send({ message: "User was registered successfully!" });
           });
-        }
+        },
       );
     } else {
       Role.findOne({ name: "user" }, (err, role) => {
@@ -79,7 +79,7 @@ exports.signin = (req, res) => {
 
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
-        user.password
+        user.password,
       );
 
       if (!passwordIsValid) {
@@ -103,7 +103,7 @@ exports.signin = (req, res) => {
         username: user.username,
         email: user.email,
         roles: authorities,
-        accessToken: token
+        accessToken: token,
       });
     });
 };

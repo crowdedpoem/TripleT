@@ -95,7 +95,7 @@ const Register = () => {
 
           setMessage(resMessage);
           setSuccessful(false);
-        }
+        },
       );
     }
   };
@@ -157,7 +157,9 @@ const Register = () => {
           {message && (
             <div className="form-group">
               <div
-                className={ successful ? "alert alert-success" : "alert alert-danger" }
+                className={
+                  successful ? "alert alert-success" : "alert alert-danger"
+                }
                 role="alert"
               >
                 {message}

@@ -24,7 +24,7 @@ function Home() {
   function populateCards() {
     const cards = recipes_list.map((recipe, index) => {
       console.log(`index : ${index}: ${recipe.title}`);
-      if (index <= 2) return <RecipeCard passdata={recipe} />;
+      if (index <= 4) return <RecipeCard passdata={recipe} />;
       else return null;
     });
     return cards;
@@ -33,6 +33,7 @@ function Home() {
   return (
     <div className="main-container">
       <br />
+      <h2>Explore some new recipes!</h2>
       <div className="cardgroup-container">{populateCards()}</div>
     </div>
   );
