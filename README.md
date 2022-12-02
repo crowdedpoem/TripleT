@@ -2,10 +2,6 @@
 
 ![Azure Deployment Status](https://github.com/crowdedpoem/TripleT/actions/workflows/main_recipebuddy.yml/badge.svg)
 
-![Continuous Integration](https://github.com/crowdedpoem/TripleT/actions/workflows/node.js.yml/badge.svg)
-
-![Azure Deployment Status](https://github.com/crowdedpoem/TripleT/actions/workflows/main_recipebuddy.yml/badge.svg)
-
 # TripleT
 
 **RecipeBuddy - CSC307 Group Software Project**
