@@ -43,7 +43,7 @@ As an Administrator, you can set the execution policy by typing this into your P
 
 <code>Set-ExecutionPolicy RemoteSigned </code>
 
-For more information, see Using the Set-ExecutionPolicy Cmdlet.
+For more information, see Using the [Set-ExecutionPolicy Cmdlet](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3).
 
 When you are done, you can set the policy back to its default value with:
 
