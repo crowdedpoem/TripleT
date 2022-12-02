@@ -44,6 +44,7 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
   RecipeBuddy uses the AirBnB style guide found [here](https://github.com/airbnb/javascript) 
 
 - **Editor integration**
+  
   Editor integration can be found [here](https://prettier.io/docs/en/editors.html)
 
 - **Command-line**
