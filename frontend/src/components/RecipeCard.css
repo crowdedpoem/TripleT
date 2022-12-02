@@ -25,6 +25,10 @@
   opacity: 1;
   transition: all 0.25s ease-in;
 }
+.complete-card{
+  flex: 0 0 33.333333%;
+
+}
 .card-group {
   width: 100%;
   display: flex;
