@@ -71,9 +71,7 @@ function Form() {
   // user 1 to many recipes
   // many recipes to many ingredients
   function submitForm() {
-    const currentUser = AuthService.getCurrentUser();
-    console.log(currentUser.username);
-    setRecipe({ ...recipe, user: currentUser.username });
+    
     console.log(recipe);
     makePostCall(recipe);
     // setrecipe({title: '', servings: '',
@@ -235,6 +233,10 @@ function Form() {
     var temp;
     if (name === "title") {
       setRecipe({ ...recipe, title: value });
+      const currentUser = AuthService.getCurrentUser();
+      console.log(currentUser.username);
+      setRecipe({ ...recipe, user: currentUser.username });
+
     } else if (name === "servings") {
       setRecipe({ ...recipe, servings: value });
     } else if (name === "blurb") {
