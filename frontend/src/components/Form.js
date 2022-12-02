@@ -80,7 +80,6 @@ function Form() {
     // });
   }
 
-
   function addStep() {
     // Generate a dynamic number of inputs
     numSteps++;
@@ -310,10 +309,12 @@ function Form() {
     <form>
       {loading ? (
         <h3>Loading...</h3>
-      ) : (
+      ) : url ? (
         <>
-          <img src={url} style={{ width: "300px" }} alt = "asset uploaded" />
+          <img src={url} style={{ width: "300px" }} alt="upload" />
         </>
+      ) : (
+        <h3>Upload Image here</h3>
       )}
       <Button onClick={() => widgetRef.current.open()}>Upload an Image!</Button>
 

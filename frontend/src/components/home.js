@@ -33,6 +33,7 @@ function Home() {
   return (
     <div className="main-container">
       <br />
+      <h2>Explore some new recipes!</h2>
       <div className="cardgroup-container">{populateCards()}</div>
     </div>
   );
