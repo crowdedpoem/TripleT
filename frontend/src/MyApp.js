@@ -20,18 +20,17 @@ function MyApp() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="pages/:id" element={<RecipePage />} />
         <Route path="/Input" element={<Form />} />
         <Route path="/search/:id" element={<SearchResults />} />
         <Route path="/img" element={<ImageUpload />} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/user" element={<BoardUser/>} />
-        <Route path="/mod" element={<BoardModerator/>} />
-        <Route path="/admin" element={<BoardAdmin/>} />
-
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/user" element={<BoardUser />} />
+        <Route path="/mod" element={<BoardModerator />} />
+        <Route path="/admin" element={<BoardAdmin />} />
       </Routes>
     </div>
   );

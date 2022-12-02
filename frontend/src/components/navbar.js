@@ -25,7 +25,7 @@ function NavigationBar() {
   const logOut = () => {
     AuthService.logout();
   };
-  
+
   useEffect(() => {
     fetchAll().then((result) => {
       if (result) setRecipe(result);
@@ -59,7 +59,6 @@ function NavigationBar() {
           </Link>
           <div className="links-and-search">
             <div className="link-container">
-              
               <Link to="/" className="nav_link">
                 Home
               </Link>
@@ -77,54 +76,54 @@ function NavigationBar() {
               </Link> */}
 
               {showModeratorBoard && (
-            <li className="nav-item">
-              <Link to={"/mod"} className="nav-link">
-                Moderator Board
-              </Link>
-            </li>
-          )}
+                <li className="nav-item">
+                  <Link to={"/mod"} className="nav-link">
+                    Moderator Board
+                  </Link>
+                </li>
+              )}
 
-          {showAdminBoard && (
-            <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
-                Admin Board
-              </Link>
-            </li>
-          )}
+              {showAdminBoard && (
+                <li className="nav-item">
+                  <Link to={"/admin"} className="nav-link">
+                    Admin Board
+                  </Link>
+                </li>
+              )}
 
-          {currentUser && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
-              </Link>
-            </li>
-          )}
-          </div>
+              {currentUser && (
+                <li className="nav-item">
+                  <Link to={"/user"} className="nav-link">
+                    User
+                  </Link>
+                </li>
+              )}
+            </div>
 
-          {currentUser ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                LogOut
-              </a>
-            </li>
-          </div>
-        ) : (
-          <div className="navbar-nav ml-auto">
-              <Link to={"/login"} className="nav-link">
-                Login
-              </Link>
+            {currentUser ? (
+              <div className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link to={"/profile"} className="nav-link">
+                    {currentUser.username}
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <a href="/login" className="nav-link" onClick={logOut}>
+                    LogOut
+                  </a>
+                </li>
+              </div>
+            ) : (
+              <div className="navbar-nav ml-auto">
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>
 
-              <Link to={"/register"} className="nav-link">
-                Sign Up
-              </Link>
-          </div>
-        )}
+                <Link to={"/register"} className="nav-link">
+                  Sign Up
+                </Link>
+              </div>
+            )}
             {/* <SearchBar placeholder="Find a recipe!" data = {recipes_list} /> */}
           </div>
         </nav>

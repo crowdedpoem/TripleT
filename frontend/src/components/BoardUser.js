@@ -19,7 +19,7 @@ const BoardUser = () => {
           error.toString();
 
         setContent(_content);
-        }
+      },
     );
   }, []);
 

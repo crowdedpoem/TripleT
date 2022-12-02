@@ -163,10 +163,9 @@ async function getPrice(item, stanInput, zipCode) {
 }
 
 async function addRecipe(recipe) {
-  const RecipeModel = getDbConnection().model("Recipe", Recipe)
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
   const servings = recipe["servings"];
   try {
-
     let recipeToAdd = new RecipeModel(recipe);
     // zip code that works: 93401
     let totalPrice = 0;

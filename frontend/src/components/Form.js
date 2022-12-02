@@ -23,7 +23,7 @@ function Form(props) {
     },
     ingredients: [],
     steps: [],
-    user: ""
+    user: "",
   });
 
   useEffect(() => {
@@ -69,26 +69,28 @@ function Form(props) {
   // user 1 to many recipes
   // many recipes to many ingredients
   function submitForm() {
-    const currentUser = AuthService.getCurrentUser()
-    console.log(currentUser.username)
-    setRecipe({...recipe, user: currentUser.username} )
-    console.log(recipe)
-    makePostCall(recipe)
+    const currentUser = AuthService.getCurrentUser();
+    console.log(currentUser.username);
+    setRecipe({ ...recipe, user: currentUser.username });
+    console.log(recipe);
+    makePostCall(recipe);
     // setrecipe({title: '', servings: '',
     //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
     // });
   }
 
-  async function makePostCall(person){
+  async function makePostCall(person) {
     try {
-       const response = await axios.post('http://localhost:5000/recipes', person);
-       return response;
+      const response = await axios.post(
+        "http://localhost:5000/recipes",
+        person,
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return false;
     }
-    catch (error) {
-       console.log(error);
-       return false;
-    }
- }
+  }
 
   function addStep() {
     // Generate a dynamic number of inputs

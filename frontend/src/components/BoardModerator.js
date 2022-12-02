@@ -19,7 +19,7 @@ const BoardModerator = () => {
           error.toString();
 
         setContent(_content);
-      }
+      },
     );
   }, []);
 
