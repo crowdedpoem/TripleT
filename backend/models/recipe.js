@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const RecipeSchema = new mongoose.Schema(
   {
@@ -67,7 +67,7 @@ const RecipeSchema = new mongoose.Schema(
     },
     image: {
       data: Buffer,
-      contentType: String
+      contentType: String,
     },
     cost: {
       total: Number,

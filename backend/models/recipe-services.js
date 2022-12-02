@@ -1,12 +1,11 @@
-
-const Recipe = require('./recipe.js')
-const tokGet = require('../token-service.js')
-const productFunction = require('../product.js')
-const locationFunction = require('../location.js') 
-const scrape = require('../density-scrape.js')
-const mongoose = require('mongoose')
+const Recipe = require("./recipe.js");
+const tokGet = require("../token-service.js");
+const productFunction = require("../product.js");
+const locationFunction = require("../location.js");
+const scrape = require("../density-scrape.js");
+const mongoose = require("mongoose");
 // const env = require('.env')
-const RecipeSchema = require('./recipe.js')
+const RecipeSchema = require("./recipe.js");
 
 // import Recipe from './recipe.js';
 // import get from '../token-service.mjs'
@@ -17,7 +16,7 @@ const RecipeSchema = require('./recipe.js')
 
 let dbConnection;
 
-function setConnection(newConn){
+function setConnection(newConn) {
   dbConnection = newConn;
   return dbConnection;
 }
@@ -30,18 +29,19 @@ function getDbConnection() {
   if (!dbConnection) {
     //TODO here is mongo db key
 
-    dbConnection = mongoose
-  .createConnection("mongodb+srv://TripleT:%21RecipeBuddy%21@recipe.m0n81de.mongodb.net/test", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+    dbConnection = mongoose.createConnection(
+      "mongodb+srv://TripleT:%21RecipeBuddy%21@recipe.m0n81de.mongodb.net/test",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+    );
   }
   return dbConnection;
 }
 
-
 async function getRecipe(title, ingredient) {
-  const RecipeModel = getDbConnection().model("Recipe", Recipe)
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
   let result;
   if (title === undefined && ingredient === undefined) {
     result = await RecipeModel.find();
@@ -56,9 +56,10 @@ async function getRecipe(title, ingredient) {
 }
 
 async function findRecipeById(id) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe);
   try {
-    console.log(await Recipe.findById(id));
-    return await Recipe.findById(id);
+    console.log(await RecipeModel.findById(id));
+    return await RecipeModel.findById(id);
   } catch (error) {
     console.log(error);
     return undefined;
@@ -77,7 +78,7 @@ async function updateRecipeByID(id, requestBody) {
 }
 
 function standardize(num, unit) {
-  console.log("before standardizing " + num + " " + unit)
+  console.log("before standardizing " + num + " " + unit);
   var mult = {
     tsp: "1",
     tbsp: "3",
@@ -121,9 +122,13 @@ async function getPrice(item, stanInput, zipCode) {
     let locationId = locationRes.data[0].locationId;
 
     // ues the token to do product detail search
-    let productRes = await productFunction.getProducts(item, accessToken, locationId);
+    let productRes = await productFunction.getProducts(
+      item,
+      accessToken,
+      locationId,
+    );
 
-    console.log(productRes.data[0].items[0])
+    console.log(productRes.data[0].items[0]);
     let price = productRes.data[0].items[0].price.regular;
     let unit = productRes.data[0].items[0].size;
 
@@ -132,8 +137,8 @@ async function getPrice(item, stanInput, zipCode) {
 
     let stanKroger = standardize(amount, unitVal);
     console.log("The price of |" + unit + "| == " + price);
-    console.log( stanKroger);
-    console.log( stanInput);
+    console.log(stanKroger);
+    console.log(stanInput);
     // let rate = price / (amount * mult[unitVal]);
     if (stanInput[1] == stanKroger[1]) {
       let rate = (price / stanKroger[0]) * stanInput[0];
@@ -146,7 +151,7 @@ async function getPrice(item, stanInput, zipCode) {
       //try to run test case for getprice(), see if github runs
       // scrape and api are apart of models
       // azure should look like api with endpoints
-      // frontend makes calls to azure url not local 
+      // frontend makes calls to azure url not local
       console.log("need density conversion for " + item);
       let ozToCup = await scrape.scrape(item);
       const ozToTsp = ozToCup / 48;
@@ -162,24 +167,27 @@ async function getPrice(item, stanInput, zipCode) {
   }
 }
 
-
 async function addRecipe(recipe) {
-  console.log(recipe.user)
-  const model = getDbConnection().model("Recipe", Recipe)
+  console.log(recipe.user);
+  const model = getDbConnection().model("Recipe", Recipe);
   const servings = recipe["servings"];
   let totalPrice = 0;
   try {
     let recipeToAdd = new model(recipe);
-    
+
     for (let ing in recipe.ingredients) {
-      console.log(recipe.ingredients[ing].name + " is " + JSON.stringify(recipe.ingredients[ing]))
+      console.log(
+        recipe.ingredients[ing].name +
+          " is " +
+          JSON.stringify(recipe.ingredients[ing]),
+      );
       let name = recipe.ingredients[ing].name;
       let unit = recipe.ingredients[ing].unit;
       let amount = recipe.ingredients[ing].size;
       let base = standardize(amount, unit);
-      console.log(unit )
-      console.log(amount)
-      console.log("base is " + base)
+      console.log(unit);
+      console.log(amount);
+      console.log("base is " + base);
       let addThis = await getPrice(name, base, "93401");
       totalPrice += addThis;
     }
@@ -200,21 +208,33 @@ async function deleteRecipeById(id) {
   return await Recipe.findByIdAndDelete(id);
 }
 
- async function findRecipeByTitle(title) {
-  const RecipeModel = getDbConnection().model("Recipe", Recipe.RecipeSchema)
+async function findRecipeByTitle(title) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe.RecipeSchema);
   return await RecipeModel.find({ title: title });
 }
 
- async function findRecipeByIngredient(ingredient) {
-  const RecipeModel = getDbConnection().model("Recipe", Recipe.RecipeSchema)
+async function findRecipeByIngredient(ingredient) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe.RecipeSchema);
   return await RecipeModel.find({ ingredient: ingredient });
 }
 
- async function findRecipeByTitleAndIngredient(title, ingredient) {
-  const RecipeModel = getDbConnection().model("Recipe", Recipe.RecipeSchema)
+async function findRecipeByTitleAndIngredient(title, ingredient) {
+  const RecipeModel = getDbConnection().model("Recipe", Recipe.RecipeSchema);
   return await RecipeModel.find({ title: title, ingredient: ingredient });
 }
 
 //TODO env file mongo db
 
-module.exports={addRecipe, getRecipe, findRecipeById, findRecipeByTitle, deleteRecipeById, findRecipeByIngredient, findRecipeByTitleAndIngredient, setConnection, getDbConnection, standardize, getPrice}
+module.exports = {
+  addRecipe,
+  getRecipe,
+  findRecipeById,
+  findRecipeByTitle,
+  deleteRecipeById,
+  findRecipeByIngredient,
+  findRecipeByTitleAndIngredient,
+  setConnection,
+  getDbConnection,
+  standardize,
+  getPrice,
+};

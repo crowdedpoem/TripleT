@@ -19,7 +19,7 @@ const RecipePage = () => {
   useEffect(() => {
     fetchByID(id).then((result) => {
       if (result) {
-        console.log("fetching user " +result.user);
+        console.log("fetching user " + result.user);
         setRecipe(result);
         setIngredient(result.ingredients);
         setSteps(result.steps);
@@ -113,9 +113,7 @@ const RecipePage = () => {
                     <br />
                     <p>
                       Recipe created by{" "}
-                      <div className="text--purple bigger-text">
-                        @ {user}
-                      </div>
+                      <div className="text--purple bigger-text">@ {user}</div>
                     </p>
                     This recipe has a serving size of {recipe.servings}!
                   </div>

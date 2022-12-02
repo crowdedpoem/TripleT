@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 
-function Form() {
+const Form = () => {
   var numIngredients = 0;
   var numSteps = 0;
   const cloudinaryRef = useRef();
@@ -24,7 +24,6 @@ function Form() {
     },
     ingredients: [],
     steps: [],
-    
   });
 
   useEffect(() => {
@@ -61,7 +60,7 @@ function Form() {
         "http://localhost:5000/recipes",
         recipe,
       );
-      alert("successfully sent recipe!")
+      alert("successfully sent recipe!");
       return response;
     } catch (error) {
       console.log(error);
@@ -72,7 +71,6 @@ function Form() {
   // user 1 to many recipes
   // many recipes to many ingredients
   function submitForm() {
-    
     console.log(recipe);
     makePostCall(recipe);
     // setrecipe({title: '', servings: '',
@@ -82,10 +80,10 @@ function Form() {
 
   function addStep() {
     // Generate a dynamic number of inputs
-    
+
     // Get the element where the inputs will be added to
     var container = document.getElementById("steps");
-    numSteps = (container.children.length / 3)
+    numSteps = container.children.length / 3;
     var but = container.lastChild;
     container.removeChild(container.lastChild);
 
@@ -146,7 +144,7 @@ function Form() {
     input.type = "text";
     input.className = "another-name";
     input.name = "ingredient" + numIngredients;
-  
+
     input.addEventListener(
       "change",
       function (e) {
@@ -230,22 +228,20 @@ function Form() {
   }
 
   function handleChange(event) {
-    if(recipe.user == ""){
-      console.log("handle change is fixign user")
+    if (recipe.user === "") {
+      console.log("handle change is fixign user");
       const currentUser = AuthService.getCurrentUser();
       console.log(currentUser.username);
-      let another = recipe
-      let name = currentUser.username
-      another['user'] = name
-      setRecipe(another)
+      let another = recipe;
+      let name = String(currentUser.username);
+      another["user"] = name;
+      setRecipe(another);
       // setRecipe({ ...recipe, user: currentUser.username });
     }
     const { name, value } = event.target;
     var temp;
     if (name === "title") {
       setRecipe({ ...recipe, title: value });
-      
-
     } else if (name === "servings") {
       setRecipe({ ...recipe, servings: value });
     } else if (name === "blurb") {
@@ -430,6 +426,6 @@ function Form() {
       <input type="button" value="Submit" onClick={submitForm} />
     </form>
   );
-}
+};
 
 export default Form;
