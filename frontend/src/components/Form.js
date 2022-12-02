@@ -13,6 +13,7 @@ function Form() {
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState([]);
   const [recipe, setRecipe] = useState({
+    user: "",
     title: "",
     blurb: "",
     servings: "",
@@ -23,7 +24,7 @@ function Form() {
     },
     ingredients: [],
     steps: [],
-    user: "",
+    
   });
 
   useEffect(() => {
@@ -233,7 +234,11 @@ function Form() {
       console.log("handle change is fixign user")
       const currentUser = AuthService.getCurrentUser();
       console.log(currentUser.username);
-      setRecipe({ ...recipe, user: currentUser.username });
+      let another = recipe
+      let name = currentUser.username
+      another['user'] = name
+      setRecipe(another)
+      // setRecipe({ ...recipe, user: currentUser.username });
     }
     const { name, value } = event.target;
     var temp;

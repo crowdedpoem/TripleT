@@ -19,7 +19,7 @@ const RecipePage = () => {
   useEffect(() => {
     fetchByID(id).then((result) => {
       if (result) {
-        console.log(result);
+        console.log("fetching user " +result.user);
         setRecipe(result);
         setIngredient(result.ingredients);
         setSteps(result.steps);
