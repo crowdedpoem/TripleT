@@ -60,6 +60,7 @@ function Form() {
         "http://localhost:5000/recipes",
         recipe,
       );
+      alert("successfully sent recipe!")
       return response;
     } catch (error) {
       console.log(error);
@@ -82,9 +83,10 @@ function Form() {
 
   function addStep() {
     // Generate a dynamic number of inputs
-    numSteps++;
+    
     // Get the element where the inputs will be added to
     var container = document.getElementById("steps");
+    numSteps = (container.children.length / 3)
     var but = container.lastChild;
     container.removeChild(container.lastChild);
 
@@ -145,7 +147,7 @@ function Form() {
     input.type = "text";
     input.className = "another-name";
     input.name = "ingredient" + numIngredients;
-    input.value = recipe.ingredients;
+  
     input.addEventListener(
       "change",
       function (e) {
