@@ -2,6 +2,10 @@
 
 ![Azure Deployment Status](https://github.com/crowdedpoem/TripleT/actions/workflows/main_recipebuddy.yml/badge.svg)
 
+![Continuous Integration](https://github.com/crowdedpoem/TripleT/actions/workflows/node.js.yml/badge.svg)
+
+![Azure Deployment Status](https://github.com/crowdedpoem/TripleT/actions/workflows/main_recipebuddy.yml/badge.svg)
+
 # TripleT
 
 **RecipeBuddy - CSC307 Group Software Project**
@@ -36,6 +40,7 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
 - move terminal to `TripleT/frontend` and run `$ npm install`
 - to run frontend locally, navigate to frontend folder, then src and run `$ npm start`
 
+## Code linter & style checker : Prettier
 ## Code linter & style checker : Prettier
 
 [**Editor integration**](https://prettier.io/docs/en/editors.html)

@@ -1,5 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import AuthService from "../services/auth.service";
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
@@ -22,6 +23,7 @@ function Form(props) {
     },
     ingredients: [],
     steps: [],
+    user: ""
   });
 
   useEffect(() => {
@@ -67,12 +69,26 @@ function Form(props) {
   // user 1 to many recipes
   // many recipes to many ingredients
   function submitForm() {
-    makePostCall(recipe);
-    // props.handleSubmit(recipe);
+    const currentUser = AuthService.getCurrentUser()
+    console.log(currentUser.username)
+    setRecipe({...recipe, user: currentUser.username} )
+    console.log(recipe)
+    makePostCall(recipe)
     // setrecipe({title: '', servings: '',
     //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
     // });
   }
+
+  async function makePostCall(person){
+    try {
+       const response = await axios.post('http://localhost:5000/recipes', person);
+       return response;
+    }
+    catch (error) {
+       console.log(error);
+       return false;
+    }
+ }
 
   function addStep() {
     // Generate a dynamic number of inputs

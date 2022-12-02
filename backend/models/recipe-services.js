@@ -163,11 +163,11 @@ async function getPrice(item, stanInput, zipCode) {
 }
 
 async function addRecipe(recipe) {
-  const model = getDbConnection().model("Recipe", Recipe);
+  const RecipeModel = getDbConnection().model("Recipe", Recipe)
   const servings = recipe["servings"];
   try {
-    // let model = mongoose.model("recipe", Recipe)
-    let recipeToAdd = new model(recipe);
+
+    let recipeToAdd = new RecipeModel(recipe);
     // zip code that works: 93401
     let totalPrice = 0;
     console.log("here is ingredients: " + recipe.ingredients);
