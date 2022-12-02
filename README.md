@@ -41,8 +41,6 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
 
 ## Code linter & style checker : Prettier
 
-## Code linter & style checker : Prettier
-
 [**Editor integration**](https://prettier.io/docs/en/editors.html)
 
 **Command-line**
