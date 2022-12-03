@@ -18,7 +18,9 @@ We wanted to build an app that helps people save and share recipes with eachothe
 
 [Sequence Diagram for the sign up process](https://user-images.githubusercontent.com/63368928/205413257-05a28c36-e2f0-42c8-ad34-82e8c4ac6a28.png)
 
-UPDATE code coverage report (with date and time)
+code coverage report (with date and time)
+![image](https://user-images.githubusercontent.com/32045248/205421162-cfdeb4ba-a63a-41ce-b843-a632f8de232e.png)
+
 
 ## Setup Project Environment
 
