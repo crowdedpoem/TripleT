@@ -8,13 +8,15 @@
 
 We wanted to build an app that helps people save and share recipes with eachother. Additionally, when people cook at home they don't know the price of the meal. These are all the issues RecipeBuddy solves. RecipeBuddy is a digital recipe book where everyone can connect and view eachother's recipes. Futher, whenever someone inputs a recipe, the app will calculate the cost for the defined amount of each ingredient (given the cost per weight or cost per volume sold by Kroger Groceries). With this, the user can see the total cost of the meal and price per serving of their recipe. It is great for people who want to budget and be inspired to cook at home rather than eat out!
 
-UPDATE [Demo video]()
+[Demo video](https://youtu.be/S8AHDqvkqOE)
 
-[UML diagram](https://miro.com/welcomeonboard/ckRZN2VaUGo1R3pXTlBvOERTNkpoSmVNM0dwRkZkQnA2UXpUZmRWZ0pkRTlhZktzMHdXTDNQeEc1bkNBcEo4YnwzNDU4NzY0NTM3MDI1NDI2NzA1fDI=?share_link_id=288963627115) PLEASE CONFIRM UPDATED UML IS ACCURATE
+[UML diagram](https://miro.com/welcomeonboard/ckRZN2VaUGo1R3pXTlBvOERTNkpoSmVNM0dwRkZkQnA2UXpUZmRWZ0pkRTlhZktzMHdXTDNQeEc1bkNBcEo4YnwzNDU4NzY0NTM3MDI1NDI2NzA1fDI=?share_link_id=288963627115)
 
 [Azure deployment](https://recipebuddy.azurewebsites.net/recipes)
 
 [UI prototype](https://www.figma.com/file/nt4PjEe9kM2o5M5rqGjrHr/RecipeBuddy?node-id=2%3A878)
+
+**UPDATE** [Sequence Diagram]()
 
 UPDATE code coverage report (with date and time)
 
