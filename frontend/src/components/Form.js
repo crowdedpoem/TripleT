@@ -39,7 +39,6 @@ const Form = () => {
           const urlSave = result.info.secure_url;
           setUrl(urlSave);
           setRecipe({ ...recipe, urlSource: urlSave });
-          console.log(urlSave);
         }
 
         if (result.event === "close") {
@@ -53,8 +52,6 @@ const Form = () => {
   }, [recipe]);
 
   async function makePostCall() {
-    console.log(recipe.totalTime);
-    console.log("make post call gets this" + recipe);
     try {
       const response = await axios.post(
         "http://localhost:5000/recipes",
@@ -68,14 +65,9 @@ const Form = () => {
     }
   }
 
-  // user 1 to many recipes
-  // many recipes to many ingredients
   function submitForm() {
     console.log(recipe);
     makePostCall(recipe);
-    // setrecipe({title: '', servings: '',
-    //  totalTime: '', activeTime: '', cookTime: '',ingredients: [],steps: []
-    // });
   }
 
   function addStep() {
@@ -87,8 +79,6 @@ const Form = () => {
     var but = container.lastChild;
     container.removeChild(container.lastChild);
 
-    // Append a node with a random text
-    // container.appendChild(document.createTextNode("Member " + (i+1)));
     var lab = document.createElement("label");
     lab.innerHTML = "Step " + (numSteps + 1);
 
@@ -121,8 +111,6 @@ const Form = () => {
     parent.removeChild(killThis);
     numIngredients++;
     var container = document.getElementById("cards");
-    //    var card = container.cloneNode(true)
-    //    container.appendChild(card);
 
     let card = document.createElement("div");
     card.className = "card";
@@ -236,7 +224,6 @@ const Form = () => {
       let name = String(currentUser.username);
       another["user"] = name;
       setRecipe(another);
-      // setRecipe({ ...recipe, user: currentUser.username });
     }
     const { name, value } = event.target;
     var temp;

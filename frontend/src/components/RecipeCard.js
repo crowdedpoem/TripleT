@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "./RecipeCard.css";
 
 function RecipeCardBody(props) {
-  // <TableBody populateCard = {props.populateCard} />
-
   const recipe = props.passdata;
   return (
     <>
@@ -33,7 +31,6 @@ function RecipeCard(props) {
         </Card.Title>
         <Card className="food" style={{ backgroundImage: `url(${url})` }}>
           <RecipeCardBody passdata={props.passdata} />
-          {/* <Button onClick = { () => navigate("/page", {ID : id})} variant="primary"> See Recipe </Button> */}
         </Card>
         <button
           onClick={() => navigate(`/pages/${props.passdata._id}`)}
@@ -48,4 +45,3 @@ function RecipeCard(props) {
 }
 
 export default RecipeCard;
-// exports.RecipeCard = RecipeCard;

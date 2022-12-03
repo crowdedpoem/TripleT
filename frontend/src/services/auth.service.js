@@ -17,14 +17,8 @@ const login = (username, password) => {
       password,
     })
     .then((response) => {
-      // console.log(response);
       if (response.data.accessToken) {
-        //   if (response.data) {
-        // console.log("HIHIHIHI" + response.data);
-        console.log(JSON.stringify(response.data));
         localStorage.setItem("user", JSON.stringify(response.data));
-        // let currentUser = localStorage.getItem("user");
-        // console.log(currentUser);
       }
       console.log("response!!!!" + response.data);
       return response.data;
@@ -37,7 +31,7 @@ const logout = () => {
 
 const getCurrentUser = () => {
   let currentUser = localStorage.getItem("user");
-  // console.log("getCurrentUser" + currentUser);
+
   return JSON.parse(currentUser);
 };
 
