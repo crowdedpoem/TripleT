@@ -93,26 +93,21 @@ function NavigationBar() {
               )}
 
               {currentUser && (
-                <li className="nav-item">
-                  <Link to={`/${currentUser.username}`} className="nav-link">
-                    User
-                  </Link>
-                </li>
+                <Link to={`/${currentUser.username}`} className="nav-link">
+                  User
+                </Link>
               )}
             </div>
 
             {currentUser ? (
               <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
-                    {currentUser.username}
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={logOut}>
-                    LogOut
-                  </a>
-                </li>
+                <Link to={"/profile"} className="nav-link">
+                  {currentUser.username}
+                </Link>
+
+                <Link to={"/login"} className="nav-link" onClick={logOut}>
+                  LogOut
+                </Link>
               </div>
             ) : (
               <div className="navbar-nav ml-auto">

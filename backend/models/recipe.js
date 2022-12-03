@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// import mongoose from 'mongoose'
 
 const RecipeSchema = new mongoose.Schema(
   {
@@ -64,11 +63,23 @@ const RecipeSchema = new mongoose.Schema(
     urlSource: {
       type: String,
       required: false,
+      trim: false,
+    },
+    image: {
+      data: Buffer,
+      contentType: String,
+    },
+    cost: {
+      total: Number,
+      perServing: Number,
     },
     user: {
       type: String,
       required: false,
       trim: true,
+    },
+    bookmarkCount: {
+      type: Number,
     },
   },
   //will need to add user that the recipe belongs to

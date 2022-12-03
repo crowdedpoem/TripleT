@@ -1,11 +1,11 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import AuthService from "../services/auth.service";
+import AuthService from "../services/auth.service.js";
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 
-function Form() {
+const Form = () => {
   var numIngredients = 0;
   var numSteps = 0;
   const cloudinaryRef = useRef();
@@ -13,6 +13,7 @@ function Form() {
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState([]);
   const [recipe, setRecipe] = useState({
+    user: "",
     title: "",
     blurb: "",
     servings: "",
@@ -23,7 +24,6 @@ function Form() {
     },
     ingredients: [],
     steps: [],
-    user: "",
   });
 
   useEffect(() => {
@@ -52,14 +52,15 @@ function Form() {
     );
   }, [recipe]);
 
-  async function makePostCall(recipe) {
+  async function makePostCall() {
     console.log(recipe.totalTime);
-    console.log(recipe);
+    console.log("make post call gets this" + recipe);
     try {
       const response = await axios.post(
         "http://localhost:5000/recipes",
         recipe,
       );
+      alert("successfully sent recipe!");
       return response;
     } catch (error) {
       console.log(error);
@@ -70,9 +71,6 @@ function Form() {
   // user 1 to many recipes
   // many recipes to many ingredients
   function submitForm() {
-    const currentUser = AuthService.getCurrentUser();
-    console.log(currentUser.username);
-    setRecipe({ ...recipe, user: currentUser.username });
     console.log(recipe);
     makePostCall(recipe);
     // setrecipe({title: '', servings: '',
@@ -82,9 +80,10 @@ function Form() {
 
   function addStep() {
     // Generate a dynamic number of inputs
-    numSteps++;
+
     // Get the element where the inputs will be added to
     var container = document.getElementById("steps");
+    numSteps = container.children.length / 3;
     var but = container.lastChild;
     container.removeChild(container.lastChild);
 
@@ -145,7 +144,7 @@ function Form() {
     input.type = "text";
     input.className = "another-name";
     input.name = "ingredient" + numIngredients;
-    input.value = recipe.ingredients;
+
     input.addEventListener(
       "change",
       function (e) {
@@ -185,13 +184,13 @@ function Form() {
     let imperial = [
       "tsp",
       "tbsp",
-      "fl oz",
+      "floz",
       "cup",
       "pint",
       "quart",
       "gallon",
       "oz",
-      "pound",
+      "lb",
       "ct",
     ];
 
@@ -229,6 +228,16 @@ function Form() {
   }
 
   function handleChange(event) {
+    if (recipe.user === "") {
+      console.log("handle change is fixign user");
+      const currentUser = AuthService.getCurrentUser();
+      console.log(currentUser.username);
+      let another = recipe;
+      let name = String(currentUser.username);
+      another["user"] = name;
+      setRecipe(another);
+      // setRecipe({ ...recipe, user: currentUser.username });
+    }
     const { name, value } = event.target;
     var temp;
     if (name === "title") {
@@ -387,13 +396,13 @@ function Form() {
               <option>--Select Unit--</option>
               <option value="tsp">teaspoon</option>
               <option value="tbsp">tablespoon</option>
-              <option value="fl oz">fl oz</option>
+              <option value="floz">fl oz</option>
               <option value="cup">cup</option>
               <option value="pint">pint</option>
               <option value="quart">quart</option>
               <option value="gallon">gallon</option>
               <option value="oz">oz</option>
-              <option value="lb">pounds</option>
+              <option value="lb">lb</option>
               <option value="ct">count</option>
             </select>
             <Button
@@ -417,6 +426,6 @@ function Form() {
       <input type="button" value="Submit" onClick={submitForm} />
     </form>
   );
-}
+};
 
 export default Form;

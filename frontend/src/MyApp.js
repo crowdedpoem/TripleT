@@ -31,7 +31,6 @@ function MyApp() {
         <Route path="/mod" element={<BoardModerator />} />
         <Route path="/admin" element={<BoardAdmin />} />
         <Route path="/about" element={<About />} />
-
       </Routes>
     </div>
   );
