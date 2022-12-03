@@ -69,7 +69,10 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
   - When you are done, you can set the policy back to its default value with:
 
     <code>Set-ExecutionPolicy Restricted</code>
-  
+ 
+Relational diagram for user signup process:
+<img width="780" alt="user signup process" src="https://user-images.githubusercontent.com/63368928/205413257-05a28c36-e2f0-42c8-ad34-82e8c4ac6a28.png">
+
 ## License
 
   [MIT License](https://choosealicense.com/licenses/mit/)
