@@ -9,14 +9,7 @@ function SearchBar({ placeholder, data }) {
   const [wordEntered, setWordEntered] = useState("");
   let navigate = useNavigate();
   const handleKeyDown = (event) => {
-    console.log("User pressed: ", event.key);
-
-    // console.log(message);
-
     if (event.key === "Enter") {
-      // 👇️ your logic here
-      console.log("Enter key pressed ✅");
-      console.log(`The word they searched for was ${wordEntered}`);
       if (wordEntered === "") {
         navigate("/");
       } else {

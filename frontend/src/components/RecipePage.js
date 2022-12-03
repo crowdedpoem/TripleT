@@ -19,7 +19,6 @@ const RecipePage = () => {
   useEffect(() => {
     fetchByID(id).then((result) => {
       if (result) {
-        console.log("fetching user " + result.user);
         setRecipe(result);
         setIngredient(result.ingredients);
         setSteps(result.steps);
@@ -31,6 +30,7 @@ const RecipePage = () => {
       }
     });
   }, [id]);
+
   async function fetchByID(id) {
     try {
       const response = await axios.get("http://localhost:5000/recipes/" + id);
@@ -42,39 +42,6 @@ const RecipePage = () => {
     }
   }
 
-  // const bookmarkBody = (count) => {
-  //   return {
-  //     bookmarkCount: { count },
-  //   };
-  // };
-
-  // async function updateBookmark(number) {
-  //   try {
-  //     console.log(bookmarkBody(number));
-  //     const response = await axios.put(
-  //       "http://localhost:5000/recipes" + id,
-  //       bookmarkBody(number),
-  //     );
-
-  //     return response;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return false;
-  //   }
-  // }
-  // const handleClick = () => {
-  //   setBookmark((current) => !current);
-  //   if (bookmark === false) {
-  //     updateBookmark(bookmarkCount + 1);
-  //     setImg(bookmarkImg2);
-  //   } else {
-  //     updateBookmark(bookmarkCount - 1);
-  //     setImg(bookmarkImg);
-  //   }
-
-  //   console.log(bookmark);
-  // };
-
   if (recipe) {
     return (
       <body>
@@ -82,17 +49,6 @@ const RecipePage = () => {
           {/* RECIPE HEADER */}
           <div className="recipe-title-bookmark">
             <h1 className="recipe-header-page main_header">{recipe.title}</h1>
-            {/* 
-          <div className="bookmark">
-            <figure className="bookmark__img--wrapper">
-              <img
-                onClick={handleClick}
-                src={img}
-                alt="bookmark"
-                className="bookmark__img"
-              />
-            </figure>
-          </div> */}
           </div>
           {/* RECIPE BODY */}
           <div className="recipe-page-first">
@@ -166,18 +122,6 @@ const RecipePage = () => {
           {/* end of instructions div */}
         </div>
       </body>
-
-      // <body>
-      //   <h1>{recipe.title}</h1>
-
-      //   <img src={recipe.urlSource} alt=""/>
-      //   <p>Instructions</p>
-
-      //  <ol>
-      //   {populateInstructions()}
-      //  </ol>
-
-      // </body>
     );
   }
 };

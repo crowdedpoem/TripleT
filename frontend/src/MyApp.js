@@ -10,7 +10,7 @@ import BoardAdmin from "./components/BoardAdmin";
 import Home from "./components/home";
 import Form from "./components/Form";
 import About from "./components/about";
-// import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./MyApp.css";
 import SearchResults from "./components/SearchResult";
 function MyApp() {

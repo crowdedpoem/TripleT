@@ -4,7 +4,7 @@ const RecipeSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: false,
+      required: true,
       trim: true,
     },
     price: {
@@ -66,8 +66,8 @@ const RecipeSchema = new mongoose.Schema(
       trim: false,
     },
     image: {
-      data: Buffer,
-      contentType: String,
+      type: String,
+      required: false,
     },
     cost: {
       total: Number,
@@ -87,8 +87,5 @@ const RecipeSchema = new mongoose.Schema(
   { collection: "recipes_list" },
 );
 
-// const Recipe = mongoose.model("Recipe", RecipeSchema);
 // check how recipe js export is used, need to create mongoose model
-// getconnection.model
 module.exports = RecipeSchema;
-// export default Recipe;

@@ -1,4 +1,3 @@
-// import express from "express";
 const express = require("express");
 const {
   findRecipeById,
@@ -17,7 +16,7 @@ const cookieSession = require("cookie-session");
 const port = 5000;
 
 //Check with https://jsonlint.com/
-// app.use(cors());
+
 app.use(express.json());
 
 var corsOptions = {
@@ -54,7 +53,6 @@ db.mongoose
     },
   )
   .then(() => {
-    console.log("Successfully connect to MongoDB.");
     initial();
   })
   .catch((err) => {
@@ -71,8 +69,6 @@ function initial() {
         if (err) {
           console.log("error", err);
         }
-
-        console.log("added 'user' to roles collection");
       });
 
       new Role({
@@ -81,8 +77,6 @@ function initial() {
         if (err) {
           console.log("error", err);
         }
-
-        console.log("added 'moderator' to roles collection");
       });
 
       new Role({
@@ -91,8 +85,6 @@ function initial() {
         if (err) {
           console.log("error", err);
         }
-
-        console.log("added 'admin' to roles collection");
       });
     }
   });
@@ -114,7 +106,7 @@ app.get("/recipes/:id", async (req, res) => {
 
 app.post("/recipes", async (req, res) => {
   //id generator
-  console.log(req.body);
+
   const recipeToAdd = req.body;
   const response = await addRecipe(recipeToAdd);
   if (response === false) {
@@ -134,8 +126,6 @@ app.delete("/recipes/:id", async (req, res) => {
 });
 
 app.put("/recipes/:id", async (req, res) => {
-  console.log("put was called");
-  console.log(`response body was ${res}`);
   const id = req.params["id"];
   const check = await recipeServices.findRecipeById(id);
   if (check !== undefined && check.length != 0) {
@@ -176,17 +166,9 @@ app.get("/recipes", async (req, res) => {
 app.listen(process.env.PORT || port, () => {
   console.log("REST API is listening.");
 });
-//   const id = req.params["id"]; //or req.params.id
-//   let result = await findRecipeById(id);
-//   if (result === undefined) res.status(404).send("Resource not found.");
-//   else {
-//     res.send({ recipes_list: result });
-//   }
-// });
 
 app.post("/recipes", async (req, res) => {
   //id generator
-  console.log(req.body);
   const recipeToAdd = req.body;
   const response = await addRecipe(recipeToAdd);
   if (response === false) {

@@ -9,11 +9,10 @@ async function getProducts(term, accessToken, locationId) {
 
   // Use locationId as filter (if) selected by user
   let searchByLocation = "";
-  if (locationId) {
-    searchByLocation = `filter.locationId=${locationId}&`;
-  }
+  //TODO add for test below
+  searchByLocation = `filter.locationId=${locationId}&`;
   // Building product URL
-  // let apiBaseUrl = 'https://api.kroger.com';
+  // apiBaseUrl = 'https://api.kroger.com';
   // Version/Endpoint (/v1/products)
   // Query String (?filter.locationId=${locationId}&filter.term=${term})
   let productsUrl = `${API_BASE_URL}/v1/products?${searchByLocation}filter.term=${term}&filter.limit=1`;
@@ -33,5 +32,3 @@ async function getProducts(term, accessToken, locationId) {
 }
 
 exports.getProducts = getProducts;
-// export default getProducts;
-// module.exports = {getProducts}
