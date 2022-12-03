@@ -66,8 +66,8 @@ const RecipeSchema = new mongoose.Schema(
       trim: false,
     },
     image: {
-      data: Buffer,
-      contentType: String,
+      type: String,
+      required: false,
     },
     cost: {
       total: Number,
