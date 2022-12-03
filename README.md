@@ -16,7 +16,7 @@ We wanted to build an app that helps people save and share recipes with eachothe
 
 [UI prototype](https://www.figma.com/file/nt4PjEe9kM2o5M5rqGjrHr/RecipeBuddy?node-id=2%3A878)
 
-**UPDATE** [Sequence Diagram]()
+[Sequence Diagram](https://user-images.githubusercontent.com/63368928/205413257-05a28c36-e2f0-42c8-ad34-82e8c4ac6a28.png)
 
 UPDATE code coverage report (with date and time)
 
