@@ -43,7 +43,7 @@ For app to work properly set up in the following order: MongoDB Cloud -> Backend
 
 ## Style Check/Linter
 
-  RecipeBuddy uses the AirBnB style guide found [here](https://github.com/airbnb/javascript) 
+  RecipeBuddy uses the Mozilla Firefox style guide found [here](https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Writing_style_guide/Code_style_guide/JavaScript) 
 
 - **Editor integration**
   
