@@ -33,4 +33,3 @@ jobs:
       - run: rm -rf node_modules && rm -rf package-lock.json && npm i
       - run: npm install
       - run: npm run build --if-present
-      - run: npm test
